@@ -44,7 +44,7 @@ import {
   
         setMapsEnabled(analyticsEnabled)
       }
-    }, [])
+    }, [cc])
   
     if (!isMounted) {
       return (
