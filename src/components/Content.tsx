@@ -133,7 +133,7 @@ const ContentSection = () => {
           textAlign="left"
           //color="#b57edc"
           name="ContentSectionHeading"
-          defaultValue="Wilkommen! 🙌 "
+          defaultValue="Willkommen! 🙌"
         />
         <Field.Text
           //mb="16"
@@ -210,7 +210,7 @@ const ContentSection = () => {
               <TestimonialText>
                 <Field.Text
                   name="ContentSectionTextTeam2"
-                  defaultValue="Ich kombiniere mein Masterstudium in Elektrotechnik⚡️ und Informationstechnik📡 mit hingebungsvoller Arbeit an Technik jeder Art. Besondere Leidenschaft habe ich für das Programmieren von Cloudsystemen, Websites und der Instandhaltung von Computern. Mit ständiger Faszination betreibe ich Server und Netzwerke. Vereinfachen und effizient machen - das ist mein Credo!💪🚀"
+                  defaultValue="Ich kombiniere mein Masterstudium in Elektrotechnik⚡️ und Informationstechnik📡 mit hingebungsvoller Arbeit an Technik jeder Art. Besondere Leidenschaft habe ich für das Programmieren von Cloudsystemen, Websites und der Instandhaltung von Computern. Mit ständiger Faszination betreibe ich Server und Netzwerke. Vereinfachen und effizient machen - das ist mein Credo! 💪🚀"
                 />
               </TestimonialText>
             </TestimonialContent>
