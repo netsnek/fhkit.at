@@ -13,7 +13,7 @@ export const Logo = (props: any) => {
         ".squarel": {
           fillRule: "evenodd",
           clipRule: "evenodd",
-          fill: "#000000",
+          fill: "#bb2649",
         },
         ".k": {
           fill: "#FFFFFF",
