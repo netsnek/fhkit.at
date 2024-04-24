@@ -20,7 +20,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-jaen`,
       options: {
-        pylonUrl: 'https://pylons.photonq.org/jaen-agent/graphql',
+        //pylonUrl: 'https://pylons.photonq.org/jaen-agent/graphql',
         remote: {
           repository: 'netsnek/fhkit.at'
         },
@@ -47,7 +47,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-jaen-mailpress`,
       options: {
-        pylonUrl: 'https://pylons.photonq.org/mailpress/graphql'
+        //pylonUrl: 'https://pylons.photonq.org/mailpress/graphql'
       }
     }
   ]
