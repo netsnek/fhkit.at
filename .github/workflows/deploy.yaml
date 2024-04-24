@@ -17,7 +17,7 @@ permissions:
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main', 'dev']
   # Allows you to run this workflow from another workflow
   workflow_call:
   # Allows you to run this workflow manually from the Actions tab
@@ -29,7 +29,7 @@ jobs:
     uses: atsnek/jaen/.github/workflows/jaen-deploy.yaml@main
     # https://docs.github.com/en/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
     with:
-      CLOUDFLARE_PROJECT_NAME: 'fhkit'
+      CLOUDFLARE_PROJECT_NAME: 'netsnek'
     secrets:
       GATSBY_MYSHOPIFY_URL: ${{ secrets.GATSBY_MYSHOPIFY_URL }}
       GATSBY_STOREFRONT_API_KEY: ${{ secrets.GATSBY_STOREFRONT_API_KEY }}

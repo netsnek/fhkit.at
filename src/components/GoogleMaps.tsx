@@ -9,7 +9,8 @@ import {
     Heading,
     Link,
     Spinner,
-    Text
+    Text,
+    chakra
   } from '@chakra-ui/react'
   import {useCookieConsentContext} from '@atsnek/jaen'
   import {useEffect, useState} from 'react'
@@ -79,14 +80,12 @@ import {
     }
   
     return (
-      <Box {...props} bg="gray.200">
-        <iframe
+      <Box {...props} bg="gray.200" overflow={"hidden"}>
+        <chakra.iframe
           src={src}
-          width="100%"
-          height="600"
-          style={{
-            border: 1
-          }}
+          w="calc(100% + 4px)"
+          h="600"
+          m="-2px"
         />
       </Box>
     )
