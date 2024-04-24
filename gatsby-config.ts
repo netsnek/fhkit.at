@@ -25,14 +25,14 @@ const config: GatsbyConfig = {
           repository: 'netsnek/fhkit.at'
         },
         zitadel: {
-          organizationId: '263581005107959413',
-          clientId: '263491440007517793@services',
+          organizationId: '260976344454660099',
+          clientId: '252746210698395651@services',
           authority: 'https://accounts.photonq.org',
           redirectUri:
             process.env.NODE_ENV === 'production'
               ? 'https://fhkit.com'
               : 'https://opulent-carnival-pg7v6wp7prhr556-8000.app.github.dev',
-          projectIds: ['263491274097563233']
+          projectIds: ['252746210698330115']
         },
         // sentry: {
         //   org: 'photonq',
