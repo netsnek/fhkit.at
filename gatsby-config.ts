@@ -27,12 +27,11 @@ const config: GatsbyConfig = {
         zitadel: {
           organizationId: '260976344454660099',
           clientId: '252746210698395651@services',
-          authority: 'https://accounts.photonq.org',
+          authority: 'https://accounts.cronit.io',
           redirectUri:
             process.env.NODE_ENV === 'production'
-              ? 'https://fhkit.com'
-              : 'https://opulent-carnival-pg7v6wp7prhr556-8000.app.github.dev',
-          projectIds: ['252746210698330115']
+              ? 'https://fhkit.at'
+              : 'http://localhost:8000'
         },
         // sentry: {
         //   org: 'photonq',
