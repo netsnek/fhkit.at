@@ -10,6 +10,7 @@ import { Button,
   Portal,
 } from '@chakra-ui/react';
   import React from 'react'
+  import {useIntl} from 'react-intl'
   import {Controller, useForm} from 'react-hook-form'
   import {DialogCloseButton} from '../DialogCloseButton'
   import {CheckboxStyled} from './CheckboxStyled'
@@ -49,6 +50,8 @@ import { Button,
     fixedValues,
     defaultValues
   }) => {
+    const intl = useIntl()
+
     const {
       register,
       control,
@@ -107,22 +110,25 @@ import { Button,
                         base: 'md',
                         md: 'lg'
                       }}>
-                      Kontaktieren Sie uns
+                      {intl.formatMessage({id: 'ContactHeading', defaultMessage: 'Kontaktieren Sie uns'})}
                     </Heading>
       
                     <Text size="b2015">
-                      Wir freuen uns über Ihre Nachricht und werden uns
-                      schnellstmöglich bei Ihnen melden.
+                      {intl.formatMessage({
+                        id: 'ContactIntro',
+                        defaultMessage:
+                          'Wir freuen uns über Ihre Nachricht und werden uns schnellstmöglich bei Ihnen melden.'
+                      })}
                     </Text>
       
                     <HStack>
                       <Field.Root required invalid={!!errors.firstName}>
                         <Field.Label htmlFor="firstName" fontSize="sm">
-                          Vorname
+                          {intl.formatMessage({id: 'ContactFirstName', defaultMessage: 'Vorname'})}
                         </Field.Label>
                         <Input
                           id="firstName"
-                          placeholder="Max"
+                          placeholder={intl.formatMessage({id: 'ContactFirstNamePlaceholder', defaultMessage: 'Max'})}
                           {...register('firstName', {
                             required: true
                           })}
@@ -135,11 +141,11 @@ import { Button,
                       </Field.Root>
                       <Field.Root required invalid={!!errors.lastName}>
                         <Field.Label htmlFor="lastName" fontSize="sm">
-                          Nachname
+                          {intl.formatMessage({id: 'ContactLastName', defaultMessage: 'Nachname'})}
                         </Field.Label>
                         <Input
                           id="lastName"
-                          placeholder="Mustermann"
+                          placeholder={intl.formatMessage({id: 'ContactLastNamePlaceholder', defaultMessage: 'Mustermann'})}
                           {...register('lastName', {
                             required: true
                           })}
@@ -154,11 +160,11 @@ import { Button,
                     <HStack>
                       <Field.Root required invalid={!!errors.email}>
                         <Field.Label htmlFor="email" fontSize="sm">
-                          E-Mail
+                          {intl.formatMessage({id: 'ContactEmail', defaultMessage: 'E-Mail'})}
                         </Field.Label>
                         <Input
                           id="email"
-                          placeholder="max.mustermann@example.com"
+                          placeholder={intl.formatMessage({id: 'ContactEmailPlaceholder', defaultMessage: 'max.mustermann@example.com'})}
                           type="email"
                           {...register('email', {
                             required: true
@@ -172,11 +178,11 @@ import { Button,
                       </Field.Root>
                       <Field.Root invalid={!!errors.email}>
                         <Field.Label htmlFor="phone" fontSize="sm">
-                          Telefonnummer
+                          {intl.formatMessage({id: 'ContactPhone', defaultMessage: 'Telefonnummer'})}
                         </Field.Label>
                         <Input
                           id="phone"
-                          placeholder="+43 123 456 789"
+                          placeholder={intl.formatMessage({id: 'ContactPhonePlaceholder', defaultMessage: '+43 123 456 789'})}
                           type="phone"
                           {...register('phone', {
                             required: false
@@ -191,11 +197,11 @@ import { Button,
                     </HStack>
                     <Field.Root required invalid={!!errors.message}>
                       <Field.Label htmlFor="message" fontSize="sm">
-                        Wie können wir Ihnen helfen?
+                        {intl.formatMessage({id: 'ContactMessage', defaultMessage: 'Wie können wir Ihnen helfen?'})}
                       </Field.Label>
                       <Textarea
                         id="message"
-                        placeholder="Nachricht"
+                        placeholder={intl.formatMessage({id: 'ContactMessagePlaceholder', defaultMessage: 'Nachricht'})}
                         defaultValue={defaultValues?.message}
                         {...register('message', {required: true})}
                       />
@@ -219,16 +225,22 @@ import { Button,
                                 base: 'xs',
                                 md: 'sm'
                               }}>
-                              Ich bin damit einverstanden, dass meine Angaben zur
-                              Kontaktaufnahme und für Rückfragen gespeichert werden.
+                              {intl.formatMessage({
+                                id: 'ContactConsent',
+                                defaultMessage:
+                                  'Ich bin damit einverstanden, dass meine Angaben zur Kontaktaufnahme und für Rückfragen gespeichert werden.'
+                              })}
                             </Text>
                           </CheckboxStyled>
                         )}
                         name="agreeToTerms"
                         control={control}
                         rules={{
-                          required:
-                            'Bitte bestätigen Sie die Bedinungen zur Kontaktaufnahme'
+                          required: intl.formatMessage({
+                            id: 'ContactConsentRequired',
+                            defaultMessage:
+                              'Bitte bestätigen Sie die Bedingungen zur Kontaktaufnahme'
+                          })
                         }}
                       />
                       <Field.ErrorText fontSize="sm">
@@ -244,7 +256,7 @@ import { Button,
                     type="submit"
                     //py="7 !important"
                     >
-                    Senden
+                    {intl.formatMessage({id: 'ContactSubmit', defaultMessage: 'Senden'})}
                   </Button>
                 </Dialog.Footer>
               </form>

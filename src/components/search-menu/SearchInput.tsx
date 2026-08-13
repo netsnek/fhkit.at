@@ -8,6 +8,7 @@ import { FocusLock,
   useMenuContext,
 } from '@chakra-ui/react';
 import { useColorModeValue } from 'jaen';
+import { useIntl } from 'react-intl';
 import {
   Dispatch,
   SetStateAction,
@@ -36,6 +37,7 @@ interface SearchInputProps {
  */
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
   ({ setSearchQuery, openFirstLink, styleProps }, ref) => {
+    const intl = useIntl();
     const menu = useMenuContext();
     const menuButton = useMenuButton(
       {
@@ -129,7 +131,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           <Input
             type="text"
             htmlSize={20}
-            placeholder="Search"
+            placeholder={intl.formatMessage({id: 'SearchPlaceholder', defaultMessage: 'Suchen'})}
             borderRadius="md"
             backgroundColor="blackAlpha.50"
             borderColor="topNav.input.borderColor"

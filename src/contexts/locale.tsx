@@ -52,3 +52,23 @@ export const useLocalizeHref = (): ((href: string) => string) => {
     return `/${prefix}${href.startsWith('/') ? href : `/${href}`}`;
   };
 };
+
+/**
+ * Strip a locale prefix off a path, so a route can be recognised whatever
+ * language it is being served in.
+ *
+ * The layout chain decides what to render by comparing the pathname against
+ * literals: `path === '/'` picks the home page's own top bar, and
+ * `['/experiments', '/experiments/'].includes(path)` picks the community
+ * layout. Both are exact, so `/en/` and `/ja/experiments/` matched neither and
+ * every non-German page rendered the wrong chrome.
+ */
+export const stripLocalePrefix = (path: string, prefix: string): string => {
+  if (!prefix) return path;
+
+  if (path === `/${prefix}` || path === `/${prefix}/`) return '/';
+
+  return path.startsWith(`/${prefix}/`)
+    ? path.slice(prefix.length + 1)
+    : path;
+};

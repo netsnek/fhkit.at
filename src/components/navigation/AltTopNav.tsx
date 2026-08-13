@@ -14,6 +14,9 @@ import { Text,
   Heading,
 } from '@chakra-ui/react';
 import { Tooltip } from '../Tooltip';
+import { useIntl } from 'react-intl';
+import LanguageSwitcher from '../LanguageSwitcher';
+import { useLocalizeHref } from '../../contexts/locale';
 import { useColorModeValue } from 'jaen';
 import { FC, useState } from 'react';
 import { useContactModal } from '../../services/contact';
@@ -48,6 +51,8 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
     });
   };
   const { open: isOpen, onOpen, onClose } = useDisclosure();
+  const intl = useIntl();
+  const localizeHref = useLocalizeHref();
   const [hamburgerClass, setHamburgerClass] = useState('');
 
   const openDrawer = () => {
@@ -128,7 +133,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color: 'brand.500'
                 }}
               >
-                <LinkOverlay href="/docs">Unsere Services</LinkOverlay>
+                <LinkOverlay href={localizeHref("/docs")}>{intl.formatMessage({id: 'NavServices', defaultMessage: 'Unsere Services'})}</LinkOverlay>
               </LinkBox>
               <LinkBox
                 gridArea="team"
@@ -146,7 +151,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color: 'brand.500'
                 }}
               >
-                <LinkOverlay href="/docs">Dokumentation</LinkOverlay>
+                <LinkOverlay href={localizeHref("/docs")}>{intl.formatMessage({id: 'NavDocs', defaultMessage: 'Dokumentation'})}</LinkOverlay>
               </LinkBox>
               <LinkBox
                 gridArea="portfolio"
@@ -163,7 +168,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color: 'brand.500'
                 }}
               >
-                <LinkOverlay href="/docs">Unser Portfolio</LinkOverlay>
+                <LinkOverlay href={localizeHref("/docs")}>{intl.formatMessage({id: 'NavPortfolio', defaultMessage: 'Unser Portfolio'})}</LinkOverlay>
               </LinkBox>
               <LinkBox
                 gridArea="blog"
@@ -180,7 +185,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color: 'brand.500'
                 }}
               >
-                <LinkOverlay href="/experiments">Blog</LinkOverlay>
+                <LinkOverlay href={localizeHref("/experiments")}>{intl.formatMessage({id: 'NavBlog', defaultMessage: 'Blog'})}</LinkOverlay>
               </LinkBox>
               <Box
                 gridArea="offices"
@@ -360,9 +365,15 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color="white"
                   display={{ base: 'none', md: 'block' }}
                 >
-                  Jetzt anfragen
+                  {intl.formatMessage({id: 'NavContactCta', defaultMessage: 'Jetzt anfragen'})}
                 </Button>
-                <Tooltip content="Kontakt" aria-label="Kontakt">
+                <LanguageSwitcher
+                  ml={4}
+                  size="sm"
+                  variant="ghost-hover"
+                  color="white"
+                />
+                <Tooltip content={intl.formatMessage({id: 'NavContact', defaultMessage: 'Kontakt'})}>
                   <IconButton
                     ml={4}
                     filter="drop-shadow(1px 2px 2px rgb(0 0 0 / 0.1))"
@@ -371,7 +382,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                       md: 'none'
                     }}
                     size="md"
-                    aria-label="Kontakt"
+                    aria-label={intl.formatMessage({id: 'NavContact', defaultMessage: 'Kontakt'})}
                     onClick={handleOnContactClick}><FaPhoneAlt /></IconButton>
                 </Tooltip>
                 {/* <Button
@@ -403,7 +414,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   borderRadius={'lg'}
                   //variant="ghost"
                   fontWeight={'bold'}
-                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                  aria-label={intl.formatMessage(isOpen ? {id: 'NavCloseMenu', defaultMessage: 'Menü schließen'} : {id: 'NavOpenMenu', defaultMessage: 'Menü öffnen'})}
                   onClick={toggleMobileMenu}
                 /> */}
               </Flex>
@@ -496,9 +507,15 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   color="black"
                   display={{ base: 'none', md: 'block' }}
                 >
-                  Jetzt anfragen
+                  {intl.formatMessage({id: 'NavContactCta', defaultMessage: 'Jetzt anfragen'})}
                 </Button>
-                <Tooltip content="Kontakt" aria-label="Kontakt">
+                <LanguageSwitcher
+                  ml={4}
+                  size="sm"
+                  variant="ghost-hover"
+                  color="white"
+                />
+                <Tooltip content={intl.formatMessage({id: 'NavContact', defaultMessage: 'Kontakt'})}>
                   <IconButton
                     ml={4}
                     filter="drop-shadow(1px 2px 2px rgb(0 0 0 / 0.1))"
@@ -507,7 +524,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                       md: 'none'
                     }}
                     size="md"
-                    aria-label="Kontakt"
+                    aria-label={intl.formatMessage({id: 'NavContact', defaultMessage: 'Kontakt'})}
                     onClick={handleOnContactClick}><FaPhoneAlt /></IconButton>
                 </Tooltip>
                 {/* <Button
@@ -547,7 +564,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
                   borderRadius={'lg'}
                   //variant="ghost"
                   fontWeight={'bold'}
-                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                  aria-label={intl.formatMessage(isOpen ? {id: 'NavCloseMenu', defaultMessage: 'Menü schließen'} : {id: 'NavOpenMenu', defaultMessage: 'Menü öffnen'})}
                   onClick={toggleMobileMenu}
                   bg={'white'}
                   color={'black'}

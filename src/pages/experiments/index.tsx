@@ -4,6 +4,7 @@ import { PageConfig, PageProps } from 'jaen';
 import { Box, Heading, SimpleGrid, Stack, VStack } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import { useQuery } from 'snek-query/react-hooks';
 import PostCard from '../../components/post/PostCard';
 import PostCardSkeleton from '../../components/post/PostCardSkeleton';
@@ -12,6 +13,7 @@ import PostList from '../../components/post/PostList';
 export const POST_FETCH_LIMIT = 3;
 
 const IndexPage: React.FC<PageProps> = () => {
+  const intl = useIntl();
   const { data, isSafe, refetch } = useQuery(sq);
 
   return (
@@ -42,7 +44,7 @@ const IndexPage: React.FC<PageProps> = () => {
             borderRadius="full"
           >
             <Heading as="h1" size="lg" color="shared.text.default">
-              Featured Experiments
+              {intl.formatMessage({id: 'BlogFeatured', defaultMessage: 'Ausgewählte Beiträge'})}
             </Heading>
           </Box>
           {/* 
@@ -93,7 +95,7 @@ const IndexPage: React.FC<PageProps> = () => {
       </Box>
       <Stack py={10} px={3} w="full">
         <Heading as="h2" size="md">
-          Latest Experiments
+          {intl.formatMessage({id: 'BlogLatest', defaultMessage: 'Neueste Beiträge'})}
         </Heading>
 
         <PostList />
@@ -129,4 +131,4 @@ export const query = graphql`
   }
 `;
 
-export { Head } from 'jaen';
+export { Head } from '../../components/Head';

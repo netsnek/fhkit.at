@@ -15,6 +15,7 @@ import {
   useRef
 } from 'react';
 import TbSearch from '../icons/tabler/TbSearch';
+import { useIntl } from 'react-intl';
 
 interface ISearchModalProps {
   defaultQuery?: string;
@@ -37,6 +38,7 @@ const SearchModal: FC<ISearchModalProps> = ({
   handleNavigate,
   openActiveItem
 }) => {
+  const intl = useIntl();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -82,7 +84,7 @@ const SearchModal: FC<ISearchModalProps> = ({
                 startElementProps={{ pointerEvents: 'none' }}>
                 <Input
                   ref={inputRef}
-                  placeholder="Search"
+                  placeholder={intl.formatMessage({id: 'SearchPlaceholder', defaultMessage: 'Suchen'})}
                   size="sm"
                   borderRadius="lg"
                   onValueChange={e => {
