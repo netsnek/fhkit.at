@@ -9,7 +9,7 @@ import {
   AspectRatio,
   chakra
 } from '@chakra-ui/react'
-import {Field} from '@atsnek/jaen'
+import {Field} from 'jaen'
 
 const Associates = () => {
   // Sample list of your links and icons, assuming you will replace these with your actual data

@@ -1,4 +1,4 @@
-import { PageConfig } from '@atsnek/jaen';
+import { PageConfig } from 'jaen';
 import { PageProps, graphql } from 'gatsby';
 import * as React from 'react';
 import MdxEditor from '../components/mdx-editor/MdxEditor';
@@ -47,4 +47,4 @@ export const query = graphql`
   }
 `;
 
-export { Head } from '@atsnek/jaen';
+export { Head } from 'jaen';

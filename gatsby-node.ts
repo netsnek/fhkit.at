@@ -1,4 +1,4 @@
-import { PageConfig } from '@atsnek/jaen';
+import { PageConfig } from 'jaen';
 import { GatsbyNode } from 'gatsby';
 import path from 'path';
 import fs from 'fs';
@@ -10,7 +10,30 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@/clients': path.resolve(__dirname, 'src/clients')
+        '@/clients': path.resolve(__dirname, 'src/clients'),
+        /**
+         * jaen and its plugins arrive as `link:` dependencies, so each one
+         * resolves these from its own node_modules unless they are pinned
+         * here. Two copies of any of them is a silent, hard-to-read failure
+         * rather than an error:
+         *
+         *   next-themes       two providers, and the colour mode stops
+         *                     switching, because jaen writes the class on
+         *                     <html> through a context the site is not in.
+         *   @chakra-ui/react  two systems, two token blocks, and `asChild`
+         *                     stops recognising components across the seam.
+         *   @emotion/react    two caches, so styles insert in an order
+         *                     neither half agreed on.
+         *   react/react-dom   two renderers, and hooks throw on sight.
+         */
+        'next-themes': path.resolve(__dirname, 'node_modules/next-themes'),
+        '@chakra-ui/react': path.resolve(
+          __dirname,
+          'node_modules/@chakra-ui/react'
+        ),
+        '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
+        react: path.resolve(__dirname, 'node_modules/react'),
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom')
       }
     }
   });

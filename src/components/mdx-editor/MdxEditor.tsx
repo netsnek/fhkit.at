@@ -17,8 +17,8 @@ import { FC } from 'react';
 
 // Insertable custom components (via Jaen)
 
-import { useAuth, useContentManagement, usePageContext } from '@atsnek/jaen';
-import { MdxField, MdxFieldProps } from '@atsnek/jaen-fields-mdx';
+import { useAuth, useContentManagement, usePageContext } from 'jaen';
+import { MdxField, MdxFieldProps } from 'jaen-fields-mdx';
 import { EditIcon, SettingsIcon } from '@chakra-ui/icons';
 import { Link } from 'gatsby-plugin-jaen';
 

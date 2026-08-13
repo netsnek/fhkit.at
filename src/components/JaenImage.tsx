@@ -1,6 +1,5 @@
-import { Field } from '@atsnek/jaen';
-import { JaenFieldProps } from '@atsnek/jaen/dist/connectors/connect-field';
-import { ImageFieldProps } from '@atsnek/jaen/dist/fields/ImageField';
+import { Field } from 'jaen';
+import { ImageFieldProps } from 'jaen';
 import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
 
@@ -13,7 +12,7 @@ interface IImageProps {
 /**
  * Component for displaying an jaen image
  */
-export const JaenImage: FC<IImageProps & JaenFieldProps & ImageFieldProps> = ({
+export const JaenImage: FC<IImageProps & ImageFieldProps> = ({
   name,
   defaultValue,
   alt,

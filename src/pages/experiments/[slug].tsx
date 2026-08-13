@@ -4,7 +4,7 @@ import {
   osg,
   useAuth,
   useNotificationsContext
-} from '@atsnek/jaen';
+} from 'jaen';
 import {
   AspectRatio,
   Avatar,
@@ -553,4 +553,4 @@ export const query = graphql`
   }
 `;
 
-export { Head } from '@atsnek/jaen';
+export { Head } from 'jaen';

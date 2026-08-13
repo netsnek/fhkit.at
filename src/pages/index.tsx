@@ -1,4 +1,4 @@
-import { PageConfig, PageProps } from '@atsnek/jaen';
+import { PageConfig, PageProps } from 'jaen';
 import { Global } from '@emotion/react';
 
 import { graphql } from 'gatsby';
@@ -21,7 +21,7 @@ import {
   TestimonialHeading,
   TestimonialText
 } from '../components/Testimonials';
-import { Field } from '@atsnek/jaen';
+import { Field } from 'jaen';
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -210,4 +210,4 @@ export const query = graphql`
   }
 `;
 
-export { Head } from '@atsnek/jaen';
+export { Head } from 'jaen';

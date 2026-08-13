@@ -7,7 +7,7 @@ import {
   GridItem,
   Grid
 } from '@chakra-ui/react'
-import { Field } from '@atsnek/jaen'
+import { Field } from 'jaen'
 
 const Services = () => {
   return (

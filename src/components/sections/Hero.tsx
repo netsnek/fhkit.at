@@ -17,7 +17,7 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import {useContactModal} from '../../services/contact'
-import {Field} from '@atsnek/jaen'
+import {Field} from 'jaen'
 import {FaGithub} from '@react-icons/all-files/fa/FaGithub'
 import {FaLinkedin} from '@react-icons/all-files/fa/FaLinkedin'
 import {FaTelegram} from '@react-icons/all-files/fa/FaTelegram'

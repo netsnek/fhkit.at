@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import { Link } from 'gatsby-plugin-jaen';
-import { Field } from '@atsnek/jaen';
+import { Field } from 'jaen';
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
 import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';

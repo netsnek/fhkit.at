@@ -9,8 +9,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { Field } from '@atsnek/jaen';
-import { TextFieldProps } from '@atsnek/jaen/dist/fields/TextField/TextField';
+import { Field } from 'jaen';
+import { TextFieldProps } from 'jaen';
 import { Link } from 'gatsby-plugin-jaen';
 import SectionTitle from '../SectionTitle';
 

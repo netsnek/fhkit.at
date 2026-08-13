@@ -1,4 +1,4 @@
-import {useJaenPageIndex, usePageContext} from '@atsnek/jaen'
+import {useJaenPageIndex, usePageContext} from 'jaen'
 import {useMemo} from 'react'
 
 export const useNewsPages = (options?: {unlimited?: boolean}) => {

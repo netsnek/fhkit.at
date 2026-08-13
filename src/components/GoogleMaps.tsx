@@ -12,7 +12,7 @@ import {
     Text,
     chakra
   } from '@chakra-ui/react'
-  import {useCookieConsentContext} from '@atsnek/jaen'
+  import {useCookieConsentContext} from 'jaen'
   import {useEffect, useState} from 'react'
   // import {useCookieConsent} from '@jaenjs/jaen'
   

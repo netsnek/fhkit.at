@@ -1,4 +1,4 @@
-import { LayoutProps } from '@atsnek/jaen';
+import { LayoutProps } from 'jaen';
 import { useLocation } from '@reach/router';
 import { CMSManagement } from 'gatsby-plugin-jaen';
 import AppLayout from '../../components/AppLayout';

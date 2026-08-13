@@ -1,16 +1,25 @@
 import { useToast } from "@chakra-ui/react";
-import { sq } from 'gatsby-jaen-mailpress';
+import { sendTemplateMail } from "gatsby-jaen-emailwerk";
 import React, { useMemo } from "react";
 import { RouteComponentProps } from "@reach/router";
-import { asEnumKey, doNotConvertToString } from "snek-query";
 
 import {
   ContactFormValues,
   ContactModal,
 } from "../components/ContactModal/ContactModal";
-import { useAuth } from "@atsnek/jaen";
+import { useAuth } from "jaen";
 import { useQueryRouter } from "../hooks/use-query-router";
-import { navigate } from "gatsby";
+
+/**
+ * The emailwerk template the form posts to.
+ *
+ * TODO: replace with fhkit.at's own template id once it exists. This is
+ * netsnek.com's "Contact" template, which means an inquiry sent from here
+ * currently lands in netsnek's inbox and the confirmation carries netsnek's
+ * branding. It is here so the form is exercisable end to end during
+ * development; see docs/emailwerk-setup.md for what has to be created.
+ */
+const CONTACT_TEMPLATE_ID = 'cmsmguuxh0038rb2pgsrpzhur';
 
 export interface ContactModalContextProps {
   onOpen: (args?: { meta?: Record<string, any> }) => void;
@@ -77,28 +86,28 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
   };
 
   const onSubmit = async (data: ContactFormValues): Promise<void> => {
+    // The "Contact" template on emailwerk, flagged isPublic, so this posts
+    // anonymously when there is no CMS session and emailwerk takes its public
+    // branch. Recipients come from the template's stored envelope server-side
+    // and cannot be passed from here at all; `replyTo` is the only override an
+    // anonymous caller is allowed, and it is also the address emailwerk
+    // delivers the linked confirmation template to. Sending that confirmation
+    // from here would deliver it twice.
+    const result = await sendTemplateMail(CONTACT_TEMPLATE_ID, {
+      envelope: {
+        replyTo: data.email
+      },
+      values: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone || '',
+        message: data.message,
+        invokedOnUrl: meta?.url
+      }
+    });
 
-    console.log(data, meta);
-
-    const [_, errors] = await sq.mutate(m =>
-      m.sendTemplateMail({
-        envelope: {
-          replyTo: data.email
-        },
-
-        id: '6a685727-92a4-4aec-a05c-2d3a261f297d',
-        values: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          message: data.message,
-          invokedOnUrl: meta?.url
-        }
-      })
-    )
-
-    if (errors) {
+    if (!result.ok) {
       // Deutsch
       toast({
         title: "Fehler",
