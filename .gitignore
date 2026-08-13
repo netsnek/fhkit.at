@@ -9,3 +9,7 @@ node_modules
 src/.DS_Store
 
 .vscode/tasks.json
+
+# build artefacts kept out of the tree
+public/
+.cache/

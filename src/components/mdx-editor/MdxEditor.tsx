@@ -29,7 +29,6 @@ import DocsIndex from '../main-content/docs-index/components/DocsIndex';
 import Filesystem from '../main-content/filesystem/components/Filesystem';
 import IconCard from '../main-content/icon-card/components/IconCard';
 import ImageCard from '../main-content/image-card/components/ImageCard';
-import { QASMPlayground } from '../main-content/qasm-playground/components/qasm-playground';
 import JaenImage from '../JaenImage';
 
 interface IMdxEditorProps {
@@ -55,29 +54,13 @@ export const mdxEditorComponents: MdxFieldProps['components'] = {
   // MISC
   code: ({
     className,
-    playground,
     ...props
   }: {
-    playground?: boolean;
     className?: string;
     children?: string;
     headerText?: string;
-    withoutSimulate?: boolean;
-    withoutTranslate?: boolean;
   }) => {
-    console.log('code pprops', className, playground, props);
     const lang = className?.replace('language-', '') || 'text';
-
-    if (playground) {
-      return (
-        <QASMPlayground
-          children={props.children}
-          wrapWithPre={false}
-          withoutSimulate={props.withoutSimulate}
-          withoutTranslate={props.withoutTranslate}
-        />
-      );
-    }
 
     return (
       <CodeSnippet
@@ -88,17 +71,6 @@ export const mdxEditorComponents: MdxFieldProps['components'] = {
     );
   },
   // CUSTOM COMPONENTS
-  QASMPlayground: props => {
-    console.log('props', props);
-
-    return (
-      <QASMPlayground
-        children={props.children}
-        withoutTranslate={props.withoutTranslate}
-        withoutSimulate={props.withoutSimulate}
-      />
-    );
-  },
   Filesystem: props => <Filesystem structure={props.structure} />,
   ImageCard: props => (
     <ImageCard

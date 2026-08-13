@@ -1,81 +1,20 @@
 import { PageConfig } from '@atsnek/jaen';
-import { Box, Container, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 import { PageProps, graphql } from 'gatsby';
 import * as React from 'react';
-import TableOfContent from '../components/navigation/TableOfContent';
-import useNavOffset from '../hooks/use-nav-offset';
 import MdxEditor from '../components/mdx-editor/MdxEditor';
-import Links from '../components/Links';
-import RightNav from '../components/navigation/RightNav';
-import MainBottomNav from '../components/navigation/MainBottomNav';
 
-// Example links - these would probably be fetched from a CMS or other data source
-const links = [
-  {
-    name: 'Question? Give us feedback',
-    href: '/contact'
-  },
-  {
-    name: 'Edit this page on Jaen',
-    href: '/cms/pages'
-  }
-];
-
+/**
+ * The page renders the MDX editor alone.
+ *
+ * Everything else this file used to hold — the table of contents, the right
+ * nav and the feedback links — sat below an unconditional `return <MdxEditor/>`
+ * and had been unreachable since the file was written. It is removed rather
+ * than left in place, because unreachable JSX still has to be migrated to
+ * Chakra v3 and translated into five languages, and none of that work would
+ * ever show up on a page.
+ */
 const DocsPage: React.FC<PageProps> = () => {
-  const navTopOffset = useNavOffset();
-
-  // This can be memoized since it doesn't change and switching pages re-renders most of the app anyway.
-  const MemoizedToc = React.memo(TableOfContent, () => false);
-
   return <MdxEditor />;
-
-  return (
-    <>
-      <Stack spacing={{ base: 0, xl: 12 }} direction="row">
-        <Box w="full" overflow="hidden">
-          <MdxEditor />
-          <MainBottomNav />
-        </Box>
-
-        <Box
-          position="sticky"
-          top={`calc(0px + ${navTopOffset})`}
-          borderLeft="1px solid"
-        >
-          <RightNav>
-            <Text
-              color="rightNav.titleTop.color"
-              fontWeight="semibold"
-              fontSize="sm"
-            >
-              On This Page
-            </Text>
-            <Flex as="nav" direction="column" mt={5}>
-              <MemoizedToc />
-            </Flex>
-            <Box
-              mt={7}
-              pt={7}
-              borderTop="1px solid"
-              borderTopColor="components.separator.borderColor"
-              fontSize="xs"
-            >
-              <VStack rowGap={1} textAlign="left">
-                <Links
-                  links={links}
-                  props={{
-                    variant: 'right-bottom-nav',
-                    w: '100%',
-                    display: 'block'
-                  }}
-                />
-              </VStack>
-            </Box>
-          </RightNav>
-        </Box>
-      </Stack>
-    </>
-  );
 };
 
 export default DocsPage;
@@ -88,7 +27,7 @@ export const pageConfig: PageConfig = {
   menu: {
     type: 'app',
     order: 100,
-    group: 'photonq'
+    group: 'fhkit'
   }
 };
 

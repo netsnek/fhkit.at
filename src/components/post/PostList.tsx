@@ -155,17 +155,6 @@ const PostList: FC<PostListProps> = props => {
           onClick={() => setIsAdvancedSearchOpen(!isAdvancedSearchOpen)}
         />
 
-        {isAuthenticated && (
-          <Button
-            aria-label="New experiment"
-            as={Link}
-            href="/new/experiment"
-            size="sm"
-            leftIcon={<TbPlus />}
-          >
-            New
-          </Button>
-        )}
       </HStack>
 
       <Collapse

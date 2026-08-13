@@ -1,8 +1,6 @@
 import { LayoutProps } from '@atsnek/jaen';
 import { useLocation } from '@reach/router';
-import { FaFlask } from '@react-icons/all-files/fa/FaFlask';
-import { CMSManagement, useJaenFrameMenuContext } from 'gatsby-plugin-jaen';
-import { useEffect } from 'react';
+import { CMSManagement } from 'gatsby-plugin-jaen';
 import AppLayout from '../../components/AppLayout';
 import Footer from '../../components/sections/Footer';
 import { ContactModalProvider } from '../../services/contact';
@@ -10,19 +8,7 @@ import { ContactModalProvider } from '../../services/contact';
 const Layout: React.FC<LayoutProps> = ({ children, pageProps }) => {
   const path = useLocation().pathname;
 
-  const docsPaths = ['/docs', '/experiments', '/new/experiment'];
-
-  const jaenFrame = useJaenFrameMenuContext();
-
-  useEffect(() => {
-    jaenFrame.extendAddMenu({
-      experimentNew: {
-        label: 'New experiment',
-        icon: FaFlask,
-        path: '/new/experiment'
-      }
-    });
-  }, []);
+  const docsPaths = ['/docs', '/experiments'];
 
   const isDocs = docsPaths.some(docsPath => path.startsWith(docsPath));
 

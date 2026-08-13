@@ -29,17 +29,6 @@ const IndexPage: React.FC<PageProps> = () => {
 
   return (
     <VStack>
-      {/* <PostListControls
-      filterLanguage={filterLanguage}
-      setFilterLanguage={setFilterLanguage}
-      // setPosts={setPostResults}
-      fetchPosts={(query, offset, lang) =>
-        fetchSearchPosts(query, POST_FETCH_LIMIT, 0, lang ?? undefined)
-      }
-      setDateRange={setFilterDateRange}
-      showCreatePostButton
-      query={searchPosts.query}
-    /> */}
       <Box
         borderRadius="xl"
         mt={10}
