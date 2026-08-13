@@ -43,6 +43,10 @@
     "snek-query": "^0.0.114",
     "use-debounce": "^10.0.0"
   },
+  "resolutions": {
+    "msgpackr": "^1.10.2",
+    "ordered-binary": "^1.5.3"
+  },
   "devDependencies": {
     "@types/github-slugger": "^2.0.0",
     "@types/node": "^20.3.3",
