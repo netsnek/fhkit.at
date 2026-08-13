@@ -13,3 +13,4 @@ src/.DS_Store
 # build artefacts kept out of the tree
 public/
 .cache/
+tests/results-*.json
