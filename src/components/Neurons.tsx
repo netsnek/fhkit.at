@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Steps, Box, chakra } from '@chakra-ui/react';
+import { Box, chakra } from '@chakra-ui/react';
 
 export const Neurons = (props: any) => {
   return (

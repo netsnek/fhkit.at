@@ -1,4 +1,4 @@
-import { Steps, Button, Box, Container, Center, Wrap, WrapItem } from '@chakra-ui/react';
+import { Button, Box, Container, Center, Wrap, WrapItem } from '@chakra-ui/react';
 import { Field } from 'jaen';
 import { FC } from 'react';
 import {

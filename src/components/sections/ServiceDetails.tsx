@@ -1,4 +1,4 @@
-import { Steps, Link, Box, Flex, Container, Heading, Text, chakra } from '@chakra-ui/react';
+import { Link, Box, Flex, Container, Heading, Text, chakra } from '@chakra-ui/react';
 
 import { StylizedImage } from '../StylizedImage';
 import servicesSvg from '../../assets/images/services.svg';

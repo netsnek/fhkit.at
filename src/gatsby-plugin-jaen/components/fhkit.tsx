@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Steps, Box, HTMLChakraProps, chakra } from '@chakra-ui/react';
+import { Box, HTMLChakraProps, chakra } from '@chakra-ui/react';
 
 export const Logo = (props: any) => {
   return (

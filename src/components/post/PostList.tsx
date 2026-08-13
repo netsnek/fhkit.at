@@ -1,14 +1,11 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '../icons/chakra';
 import { Post, Query } from '@/clients/social/src/schema.generated';
-import {
-  Steps,
-  Button,
+import { Button,
   Collapsible,
   HStack,
   IconButton,
   Input,
   InputGroup,
-  InputLeftAddon,
-  InputRightAddon,
   List,
   NativeSelect,
   Stack,
@@ -23,7 +20,6 @@ import TbFilterDown from '../icons/tabler/TbFilterDown';
 import TbFilterUp from '../icons/tabler/TbFilterUp';
 import TbPlus from '../icons/tabler/TbPlus';
 import { useAuth } from 'jaen';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 interface PostListProps {
   userId?: string;
@@ -156,9 +152,18 @@ const PostList: FC<PostListProps> = props => {
       <Collapsible.Root open={isAdvancedSearchOpen} style={{ width: '75%' }}>
         <Collapsible.Content>
           <HStack gap={5} w="full">
+            {/*
+              v3's InputGroup takes exactly ONE child and puts the addons on
+              `startAddon`/`endAddon`. The v2 markup packed two inputs and two
+              addons in as siblings, which throws Children.only during SSR, so
+              the pair becomes two groups sharing one row.
+            */}
             {!!setDateRange && (
-              <InputGroup size="sm">
-                <InputLeftAddon borderLeftRadius="lg">Date from</InputLeftAddon>
+              <>
+              <InputGroup
+                size="sm"
+                startAddon="Date from"
+                startAddonProps={{ borderLeftRadius: 'lg' }}>
                 <Input
                   ref={dateFromRef}
                   type="date"
@@ -178,7 +183,8 @@ const PostList: FC<PostListProps> = props => {
                     }
                   }}
                 />
-                <InputRightAddon>Date to</InputRightAddon>
+              </InputGroup>
+              <InputGroup size="sm" startAddon="Date to">
                 <Input
                   ref={dateToRef}
                   type="date"
@@ -207,6 +213,7 @@ const PostList: FC<PostListProps> = props => {
                   }}
                 />
               </InputGroup>
+              </>
             )}
           </HStack>
         </Collapsible.Content>
@@ -229,7 +236,7 @@ const PostList: FC<PostListProps> = props => {
           size="sm"
           borderRadius="lg"
           disabled={!hasPreviousPage}
-          onClick={previousPage}><LuChevronLeft />Previous
+          onClick={previousPage}><ChevronLeftIcon />Previous
                   </Button>
         <Button
           variant="ghost-hover-outline"
@@ -237,7 +244,7 @@ const PostList: FC<PostListProps> = props => {
           borderRadius="lg"
           disabled={!hasNextPage}
           onClick={nextPage}>Next
-                  <LuChevronRight /></Button>
+                  <ChevronRightIcon /></Button>
       </HStack>
     </Stack>
   );

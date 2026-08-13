@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Link,
+import { Link,
   Image,
   Heading,
   LinkBox,

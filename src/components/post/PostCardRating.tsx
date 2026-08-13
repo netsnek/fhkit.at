@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { Steps, Box, Button, HStack, Text } from '@chakra-ui/react';
-import { Tooltip } from '@/components/ui/tooltip';
+import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { Tooltip } from '../Tooltip';
 import TbStar from '../icons/tabler/TbStar';
 import { formatNumber } from '../../utils/general';
 import { useAuth } from 'jaen';
@@ -94,7 +94,11 @@ const PostCardRating: FC<PostCardRatingProps> = ({
         px="2"
         color="features.rating.disabled.color"
         _hover={{
-          color: 'features.rating._hover.disabled.color'
+          // `_hover.disabled` is not a token: `disabled` sits beside `_hover`
+          // in the rating tree, not under it, so this path emitted a literal
+          // string into the stylesheet and the browser dropped the rule. The
+          // button is inert when signed out, so it keeps its colour.
+          color: 'features.rating.disabled.color'
         }}
         transition="color 0.2s ease-in-out"
         onClick={() =>

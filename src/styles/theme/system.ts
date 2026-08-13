@@ -32,7 +32,7 @@
  * whatever selector they land on, which is what replaces v2's cssVarsRoot
  * scoping.
  */
-import { Steps, createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
+import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
 
 import themeColors from './colors';
 import themeFonts from './fonts';
@@ -183,6 +183,22 @@ export const siteConfig = defineConfig({
   // Comes back out once the Tailwind bundle is gone.
   disableLayers: true,
   theme: {
+    /**
+     * The blog header's animated gradient.
+     *
+     * v2 let a component build its own keyframes with the `keyframes` helper
+     * re-exported from @chakra-ui/react. v3 does not export it: keyframes are
+     * declared on the system and referenced by name, which is also what lets
+     * them be emitted once into the server-rendered stylesheet rather than
+     * injected per mount.
+     */
+    keyframes: {
+      'gradient-shift': {
+        '0%': { backgroundPosition: '0% 50%' },
+        '50%': { backgroundPosition: '100% 50%' },
+        '100%': { backgroundPosition: '0% 50%' }
+      }
+    },
     // v3 moved lg from 62em (992px) to 1024px. Pinned, or every responsive
     // array in the site shifts at a width nobody chose.
     breakpoints: {

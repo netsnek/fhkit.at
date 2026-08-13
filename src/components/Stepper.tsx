@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Box,
+import { Box,
   Center,
   HStack,
   LinkBox,

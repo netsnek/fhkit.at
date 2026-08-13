@@ -1,4 +1,4 @@
-import { Steps, Box, Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import CodeSnippet, {
   ICodeSnippetProps

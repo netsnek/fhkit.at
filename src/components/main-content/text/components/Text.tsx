@@ -1,4 +1,4 @@
-import { Steps, Text as ChText } from '@chakra-ui/react';
+import { Text as ChText } from '@chakra-ui/react';
 import React, { FC, ReactNode } from 'react';
 import { IMainContentComponentBaseProps } from '../../types/mainContent';
 import { mainComponentBaseStyle } from '../../../../shared/containers/main/mainContent.vars';

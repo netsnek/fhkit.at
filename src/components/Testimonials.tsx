@@ -1,7 +1,5 @@
 'use client';;
-import {
-  Steps,
-  Box,
+import { Box,
   Flex,
   Heading,
   Text,
@@ -11,7 +9,7 @@ import {
   LinkBox,
   LinkOverlay,
 } from '@chakra-ui/react';
-import { useColorModeValue } from "./ui/color-mode";
+import { useColorModeValue } from 'jaen';
 import { Link } from 'gatsby-plugin-jaen';
 
 interface Props {
@@ -61,7 +59,7 @@ export const TestimonialHeading = (props: Props) => {
   const {children} = props
 
   return (
-    <Heading as={'h3'} fontSize={'xl'}>
+    <Heading as={'h3'} size="card">
       {children}
     </Heading>
   )

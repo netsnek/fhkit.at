@@ -1,8 +1,6 @@
 import { useAuth } from 'jaen';
-import { DarkMode, LightMode, useColorMode } from "../ui/color-mode";
-import {
-  Steps,
-  Box,
+import { DarkMode, LightMode, useColorMode } from 'jaen';
+import { Box,
   BoxProps,
   Button,
   ButtonProps,
@@ -58,7 +56,7 @@ interface ITopNavProps {
 const TopNav: FC<ITopNavProps> = ({ path, children }) => {
   const [hamburgerClass, setHamburgerClass] = useState('');
   const { signinRedirect } = useAuth();
-  const { open, onOpen, onClose } = useDisclosure();
+  const { open: isOpen, onOpen, onClose } = useDisclosure();
 
   const location = useLocation();
   const windowSize = useWindowSize();

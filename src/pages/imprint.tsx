@@ -1,6 +1,6 @@
 import { Field, PageConfig, PageProps } from 'jaen';
 
-import { Steps, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 

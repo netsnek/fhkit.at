@@ -1,4 +1,4 @@
-import { Steps, PlacementWithLogical } from '@chakra-ui/react';
+import { PlacementWithLogical } from '@chakra-ui/react';
 
 export type FilesystemItemType = 'file' | 'folder';
 

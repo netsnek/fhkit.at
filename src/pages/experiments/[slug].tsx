@@ -1,3 +1,4 @@
+import { CheckIcon, DeleteIcon } from '../../components/icons/chakra';
 import {
   PageConfig,
   PageProps,
@@ -5,9 +6,7 @@ import {
   useAuth,
   useNotificationsContext
 } from 'jaen';
-import {
-  Steps,
-  AspectRatio,
+import { AspectRatio,
   Avatar,
   Box,
   Button,
@@ -42,7 +41,6 @@ import UncontrolledMdxEditor from '../../components/mdx-editor/UncontrolledMdxEd
 import { useTOCContext } from '../../contexts/toc';
 import PostCardRating from '../../components/post/PostCardRating';
 import { TextControl } from '../../components/TextControl';
-import { LuCheck, LuTrash2 } from 'react-icons/lu';
 
 const DocsPage: React.FC<PageProps> = ({ params }) => {
   const notify = useNotificationsContext();
@@ -190,7 +188,7 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
                       });
                     }
                   }
-                }}><Icon color="green.500" asChild><LuCheck /></Icon>Published
+                }}><Icon color="green.500" asChild><CheckIcon /></Icon>Published
                             </Button>
             )}
 
@@ -327,7 +325,7 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
                       navigate(`/users/${post.user().id}`);
                     }
                   }
-                }}><LuTrash2 /></IconButton>
+                }}><DeleteIcon /></IconButton>
             </ButtonGroup>
           </Flex></Card.Body>
       </Card.Root>
@@ -369,12 +367,12 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
       </Skeleton>
 
       <Flex alignItems="center">
-        <SkeletonCircle boxSize="unset" isLoaded={isSafe}>
+        <SkeletonCircle boxSize="unset" loading={!(isSafe)}>
           <Avatar.Root size="md"><Avatar.Fallback name={post.user().profile.displayName} /><Avatar.Image src={post.user().profile.avatarUrl || ''} /></Avatar.Root>
         </SkeletonCircle>
 
         <Box ml={2}>
-          <SkeletonText isLoaded={isSafe}>
+          <SkeletonText loading={!(isSafe)}>
             <Link to={`/users/${post.user().id}`}>
               {post.user().profile.displayName}
             </Link>
@@ -391,7 +389,7 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
         </Box>
       </Flex>
 
-      <SkeletonText isLoaded={isSafe}>
+      <SkeletonText loading={!(isSafe)}>
         <TextControl
           key={values.summary}
           text={values.summary || undefined}
@@ -450,7 +448,7 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
                 });
               }
             }
-          }}><Icon color="red.500" asChild><LuTrash2 /></Icon></IconButton>
+          }}><Icon color="red.500" asChild><DeleteIcon /></Icon></IconButton>
       </HStack>
 
       <Skeleton loading={!isSafe}>
@@ -486,7 +484,7 @@ const DocsPage: React.FC<PageProps> = ({ params }) => {
 
       {/* Placeholder for Editor Component */}
       <SkeletonText
-        isLoaded={isSafe}
+        loading={!(isSafe)}
         lineClamp={15}
         gap="4"
         skeletonHeight="6"

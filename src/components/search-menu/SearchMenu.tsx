@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Center,
+import { Center,
   VStack,
   useDisclosure,
   Text,

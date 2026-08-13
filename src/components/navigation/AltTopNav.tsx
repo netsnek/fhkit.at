@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Text,
+import { Text,
   Box,
   Flex,
   HStack,
@@ -15,8 +13,8 @@ import {
   LinkBox,
   Heading,
 } from '@chakra-ui/react';
-import { Tooltip } from '@/components/ui/tooltip';
-import { useColorModeValue } from "../ui/color-mode";
+import { Tooltip } from '../Tooltip';
+import { useColorModeValue } from 'jaen';
 import { FC, useState } from 'react';
 import { useContactModal } from '../../services/contact';
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
@@ -49,7 +47,7 @@ const AltTopNav: FC<IAltTopNavProps> = ({ path, hamburgerIconProps }) => {
       meta: {}
     });
   };
-  const { open, onOpen, onClose } = useDisclosure();
+  const { open: isOpen, onOpen, onClose } = useDisclosure();
   const [hamburgerClass, setHamburgerClass] = useState('');
 
   const openDrawer = () => {

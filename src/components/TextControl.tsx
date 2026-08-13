@@ -1,6 +1,5 @@
-import {
-  Steps,
-  ButtonGroup,
+import { CheckIcon, CloseIcon, EditIcon } from './icons/chakra';
+import { ButtonGroup,
   Editable,
   EditableInput,
   EditablePreview,
@@ -14,7 +13,6 @@ import {
   Textarea,
   useEditableContext,
 } from '@chakra-ui/react';
-import { LuCheck, LuPencil, LuX } from 'react-icons/lu';
 
 export const TextControl: React.FC<{
   text?: string;
@@ -33,12 +31,12 @@ export const TextControl: React.FC<{
 
     return isEditing ? (
       <ButtonGroup justifyContent="center" size="sm">
-        <IconButton {...getSubmitButtonProps()} aria-label="Edit"><LuCheck /></IconButton>
-        <IconButton variant="outline" {...getCancelButtonProps()} aria-label="Close"><LuX /></IconButton>
+        <IconButton {...getSubmitButtonProps()} aria-label="Edit"><CheckIcon /></IconButton>
+        <IconButton variant="outline" {...getCancelButtonProps()} aria-label="Close"><CloseIcon /></IconButton>
       </ButtonGroup>
     ) : (
       <Flex justifyContent="center">
-        <IconButton variant="ghost" size="sm" {...getEditButtonProps()} aria-label="Edit"><LuPencil /></IconButton>
+        <IconButton variant="ghost" size="sm" {...getEditButtonProps()} aria-label="Edit"><EditIcon /></IconButton>
       </Flex>
     );
   }

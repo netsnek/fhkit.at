@@ -1,4 +1,4 @@
-import { Steps, Image, Box, Container, Heading, Text, GridItem, Grid } from '@chakra-ui/react';
+import { Image, Box, Container, Heading, Text, GridItem, Grid } from '@chakra-ui/react';
 import { Field } from 'jaen'
 
 const Services = () => {

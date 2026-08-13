@@ -1,8 +1,5 @@
-import {
-  Steps,
-  Input,
+import { Input,
   InputGroup,
-  InputLeftElement,
   Spinner,
   VStack,
   Dialog,
@@ -79,10 +76,10 @@ const SearchModal: FC<ISearchModalProps> = ({
             minH={0}
             borderRadius="lg">
             <Dialog.Body px={4} overflow="hidden" color="shared.text.default">
-              <InputGroup size="sm">
-                <InputLeftElement pointerEvents="none">
-                  {isLoading ? <Spinner boxSize="3" /> : <TbSearch />}
-                </InputLeftElement>
+              <InputGroup
+                size="sm"
+                startElement={isLoading ? <Spinner boxSize="3" /> : <TbSearch />}
+                startElementProps={{ pointerEvents: 'none' }}>
                 <Input
                   ref={inputRef}
                   placeholder="Search"

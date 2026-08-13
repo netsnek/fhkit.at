@@ -1,4 +1,4 @@
-import { Steps, Flex, FlexProps, Spacer, Stack } from '@chakra-ui/react';
+import { Flex, FlexProps, Spacer, Stack } from '@chakra-ui/react';
 import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import useNavOffset from '../../hooks/use-nav-offset';
 import NavbarControls from './NavbarControls';

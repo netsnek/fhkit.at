@@ -1,4 +1,4 @@
-import { Steps, Alert, Box, ButtonSpinner, Center, Flex, HStack, Stack, Text, List } from '@chakra-ui/react';
+import { Alert, Box, ButtonSpinner, Center, Flex, HStack, Stack, Text, List } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface ICodeResultPreviewProps {

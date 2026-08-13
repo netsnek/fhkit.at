@@ -1,4 +1,4 @@
-import { Steps, HTMLChakraProps, chakra } from '@chakra-ui/react';
+import { HTMLChakraProps, chakra } from '@chakra-ui/react';
 
 const Logo = () => {
   return (

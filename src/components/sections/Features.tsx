@@ -1,4 +1,4 @@
-import { Steps, Box, BoxProps, Button, Center, Container, HStack, Stack, VStack } from '@chakra-ui/react';
+import { Box, BoxProps, Button, Center, Container, HStack, Stack, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Field } from 'jaen';
 import { TextFieldProps } from 'jaen';

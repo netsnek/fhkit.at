@@ -1,11 +1,11 @@
-import { Steps, Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from '@chakra-ui/react';
 
 /**
  * Tabler icon: `messages-circle-2`.
  */
 const TbMessagesCircle2 = (props: IconProps) => {
   return (
-    <Icon
+    <Icon asChild={false} boxSize="1em"
       viewBox="0 0 24 24"
       fill="none"
       strokeWidth={2}

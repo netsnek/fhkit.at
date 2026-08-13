@@ -1,4 +1,4 @@
-import { Steps, MenuItemProps, LinkBox, LinkOverlay, Text, Box, Spacer, Flex, Stack } from '@chakra-ui/react';
+import { MenuItemProps, LinkBox, LinkOverlay, Text, Box, Spacer, Flex, Stack } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import { TSearchResult } from '../../../shared/types/search';
 import Highlighter from 'react-highlight-words';

@@ -1,6 +1,5 @@
-import {
-  Steps,
-  Button,
+import { EditIcon, SettingsIcon } from '../icons/chakra';
+import { Button,
   ButtonGroup,
   Stack,
   Table,
@@ -28,7 +27,6 @@ import Filesystem from '../main-content/filesystem/components/Filesystem';
 import IconCard from '../main-content/icon-card/components/IconCard';
 import ImageCard from '../main-content/image-card/components/ImageCard';
 import JaenImage from '../JaenImage';
-import { LuPencil, LuSettings } from 'react-icons/lu';
 
 interface IMdxEditorProps {
   hideHeadingHash?: boolean;
@@ -107,10 +105,10 @@ const MdxEditor: FC<IMdxEditorProps> = ({ hideHeadingHash }) => {
           <Button
             variant="outline"
             colorPalette={isEditing ? 'red' : undefined}
-            onClick={() => toggleIsEditing()}><LuPencil />{isEditing ? 'Stop Editing' : 'Edit'}</Button>
+            onClick={() => toggleIsEditing()}><EditIcon />{isEditing ? 'Stop Editing' : 'Edit'}</Button>
 
           <Link
-            leftIcon={<LuSettings />}
+            leftIcon={<SettingsIcon />}
             variant="outline"
             as={Button}
             to={`/cms/pages/#${btoa(jaenPage.id)}`}

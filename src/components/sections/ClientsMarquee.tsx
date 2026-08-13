@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Steps, Box, BoxProps, Image, LinkBox, LinkOverlay, useBreakpointValue } from '@chakra-ui/react';
+import { Box, BoxProps, Image, LinkBox, LinkOverlay, useBreakpointValue } from '@chakra-ui/react';
 import Marquee from 'react-fast-marquee'
 
 // Defining type for a single client

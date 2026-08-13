@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Heading as ChakraHeading,
+import { Heading as ChakraHeading,
   HeadingProps as ChakraHeadingProps,
   HeadingProps,
   ResponsiveValue,
@@ -82,7 +80,23 @@ const Heading: FC<IHeadingProps> = ({
       {...props}
       as={variant}
       id={id}
-      fontSize={variantFontSizes[variant]}
+      /**
+       * A recipe size, not a fontSize prop, and the difference is load-bearing.
+       *
+       * v2 merged the styleConfig and the style props into one object before
+       * serialising it, so a scalar `fontSize` replaced the recipe's whole
+       * responsive value and the rule carried a single `font-size: 36px`.
+       *
+       * v3 runs the recipe through css() FIRST, which turns the default size's
+       * `fontSize: ['3xl', null, '4xl']` into a flat entry plus an
+       * `@media (min-width: 48rem)` key, and only then merges the style props.
+       * A prop only overwrites the unconditional entry, so from 768px up the
+       * recipe won it straight back and every docs heading grew to 4xl. The six
+       * h1-h6 sizes live in headingRecipe for exactly this reason; a caller can
+       * still override with `fontSize`, because there is no media rule left for
+       * it to lose to.
+       */
+      size={variant}
       // mt={!noSpacing ? customSpacing ?? baseProps?.marginTop : 0}
       // mb="4"
       _hover={{
@@ -101,7 +115,7 @@ const Heading: FC<IHeadingProps> = ({
           ml={1}
           opacity={activeLink ? 1 : 0}
           color="components.heading.link.color.default"
-          fontSize={variantLinkFontSizes[variant]}
+          fontSize={`${variantLinkFontSizes[variant]}px`}
           lineHeight={Number(variantLinkFontSizes[variant]) + 5 + 'px'}
           verticalAlign="top"
           onClick={handleClick}

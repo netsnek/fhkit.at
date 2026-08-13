@@ -1,5 +1,5 @@
 import { PageConfig } from 'jaen';
-import { Steps, Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react';
 import { PageProps, graphql } from 'gatsby';
 import * as React from 'react';
 import TableOfContent from '../components/navigation/TableOfContent';

@@ -1,6 +1,4 @@
-import {
-  Steps,
-  HeadingProps,
+import { HeadingProps,
   Heading,
   HStack,
   Box,

@@ -1,4 +1,4 @@
-import { Steps, IconProps, Icon } from '@chakra-ui/react';
+import { IconProps, Icon } from '@chakra-ui/react';
 
 import { FaFlask } from '@react-icons/all-files/fa/FaFlask';
 

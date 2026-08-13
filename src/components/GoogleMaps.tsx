@@ -1,4 +1,4 @@
-import { Steps, Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } from '@chakra-ui/react';
+import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } from '@chakra-ui/react';
   import {useCookieConsentContext} from 'jaen'
   import {useEffect, useState} from 'react'
   // import {useCookieConsent} from '@jaenjs/jaen'

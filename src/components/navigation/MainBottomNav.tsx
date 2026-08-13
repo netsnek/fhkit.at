@@ -1,4 +1,5 @@
-import { Steps, Flex, Spacer, Text, Icon } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '../icons/chakra';
+import { Flex, Spacer, Text, Icon } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { useLocation } from '@reach/router';
 import {
@@ -10,7 +11,6 @@ import { useCMSManagementContext } from 'jaen';
 import { TLinkData } from '../types';
 import { TAdjacentPages } from '../../utils/navigation/types';
 import { Link } from 'gatsby-plugin-jaen';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 interface MainBottomNavProps {
   previousPage?: TLinkData;
@@ -54,7 +54,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({}) => {
     >
       {pages.prev && (
         <Link to={pages.prev.href} {...props}>
-          <Icon mr={2} asChild><LuChevronLeft /></Icon>
+          <Icon mr={2} asChild><ChevronLeftIcon /></Icon>
           <Text as="span" verticalAlign="middle">
             {pages.prev.name}
           </Text>
@@ -66,7 +66,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({}) => {
           <Text as="span" verticalAlign="middle">
             {pages.next.name}
           </Text>
-          <Icon ml={2} asChild><LuChevronRight /></Icon>
+          <Icon ml={2} asChild><ChevronRightIcon /></Icon>
         </Link>
       )}
     </Flex>

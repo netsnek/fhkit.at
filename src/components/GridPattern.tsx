@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Steps, chakra } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
 
 function Block({ x, y, ...props }) {
   return (

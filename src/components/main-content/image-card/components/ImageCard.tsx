@@ -1,4 +1,5 @@
-import { Steps, Box, Card, CardProps, LinkBox, LinkOverlay, Icon } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '../../../icons/chakra';
+import { Box, Card, CardProps, LinkBox, LinkOverlay, Icon } from '@chakra-ui/react';
 import { FC } from 'react';
 import { IMainContentComponentBaseProps } from '../../types/mainContent';
 import { TImageData } from '../types/imageCard';
@@ -6,7 +7,6 @@ import { useContentManagement, useEditingContext } from 'jaen';
 import { TLinkData } from '../../../types';
 import JaenImage from '../../../JaenImage';
 import { Link } from 'gatsby-plugin-jaen';
-import { LuArrowRight } from 'react-icons/lu';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
   id: string;
@@ -48,7 +48,12 @@ const ImageCard: FC<IImageCardProps> = ({
         borderColor="components.imageCard.borderColor"
         _hover={{
           bgColor: 'components.imageCard.hover.bgColor',
-          boxShadow: 'components.imageCard.hover.boxShadow',
+          // `boxShadow` resolves against the `shadows` scale, never `colors`,
+          // and the token this used to name lives under semanticTokens.colors.
+          // It could not resolve in v2 either, so the card has never had a
+          // hover shadow. The token's own values are `md` in light and `none`
+          // in dark, applied here as the condition they always described.
+          boxShadow: { base: 'md', _dark: 'none' },
           borderColor: 'components.imageCard.hover.borderColor',
           '& .sd-cmp-image-card-link-icon': {
             marginLeft: 3
@@ -81,7 +86,7 @@ const ImageCard: FC<IImageCardProps> = ({
               className="sd-cmp-image-card-link-icon"
               ml={2}
               transition="margin .15s ease-in-out"
-              asChild><LuArrowRight /></Icon>
+              asChild><ArrowForwardIcon /></Icon>
           </Link>
         </Box>
       </Card.Root>

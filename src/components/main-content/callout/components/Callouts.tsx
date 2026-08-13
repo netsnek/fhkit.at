@@ -1,4 +1,4 @@
-import { Steps, Alert, Box } from '@chakra-ui/react';
+import { Alert, Box } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface ICalloutProps {

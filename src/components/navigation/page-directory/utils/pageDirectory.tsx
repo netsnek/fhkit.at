@@ -1,4 +1,5 @@
-import { Steps, AccordionButtonProps, Box, Center, CenterProps, LinkProps, Icon } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '../../../icons/chakra';
+import { AccordionButtonProps, Box, Center, CenterProps, LinkProps, Icon } from '@chakra-ui/react';
 import { Link } from 'gatsby-plugin-jaen';
 import { MouseEvent, createRef } from 'react';
 import { NavMenuItem } from '../../../../utils/navigation/types';
@@ -6,7 +7,6 @@ import {
   activeMenuItemProps,
   inactiveMenuItemProps
 } from '../vars/pageDirectory';
-import { LuArrowRight } from 'react-icons/lu';
 
 /**
  * Handles clicks on links in the main navigation menu. If the target is not an anchor element, the default action is prevented, which prevents the page from reloading.
@@ -41,7 +41,7 @@ export const generateMenuItem = (
   const accordionItemRef = createRef<HTMLDivElement>();
 
   const externalLinkIcon = (
-    <Icon transform={`rotate(-45deg)`} ml={2} asChild><LuArrowRight /></Icon>
+    <Icon transform={`rotate(-45deg)`} ml={2} asChild><ArrowForwardIcon /></Icon>
   );
 
   const styleProps: CenterProps & AccordionButtonProps & LinkProps = {

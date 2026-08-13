@@ -1,4 +1,4 @@
-import { Steps, ChakraProps } from '@chakra-ui/react';
+import { ChakraProps } from '@chakra-ui/react';
 import { ICodeSnippetProps } from '../code-snippet/components/CodeSnippet';
 import { IFileSystemProps } from '../filesystem/components/Filesystem';
 import { IHeadingProps } from '../heading/components/Heading';

@@ -1,16 +1,13 @@
-import {
-  Steps,
-  FocusLock,
+import { FocusLock,
   Input,
   InputGroup,
   InputProps,
-  InputRightElement,
-  InputRightElementProps,
+  InputElementProps,
   Kbd,
   useMenuButton,
   useMenuContext,
 } from '@chakra-ui/react';
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from 'jaen';
 import {
   Dispatch,
   SetStateAction,
@@ -25,7 +22,7 @@ import { getPlatform, isTouchDevice } from '../../utils/general';
 
 export type TSearchInputStyleProps = {
   parent?: InputProps;
-  kbd?: InputRightElementProps;
+  kbd?: InputElementProps;
 };
 
 interface SearchInputProps {
@@ -106,7 +103,29 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
 
     return (
       <FocusLock disabled={!isFocusLocked}>
-        <InputGroup size="sm">
+        {/*
+          v3's InputGroup takes exactly ONE child, the input itself, and the
+          addons move to `startElement`/`endElement`. Left as the codemod had
+          it — an Input and a conditional InputRightElement as siblings — it
+          throws "React.Children.only expected to receive a single React
+          element child" during SSR and takes the whole page build with it.
+        */}
+        <InputGroup
+          size="sm"
+          endElement={
+            !isTouchDevice() ? (
+              <Kbd
+                borderBottomWidth={1}
+                background="transparent"
+                borderRadius={4}
+                py={0.5}
+                {...styleProps?.kbd}
+              >
+                {kbd}
+              </Kbd>
+            ) : undefined
+          }
+          endElementProps={{ pr: '10px', color: 'topNav.input.kbd.color' }}>
           <Input
             type="text"
             htmlSize={20}
@@ -163,23 +182,6 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
               }
             }}
           />
-          {!isTouchDevice() && (
-            <InputRightElement
-              children={
-                <Kbd
-                  borderBottomWidth={1}
-                  background="transparent"
-                  borderRadius={4}
-                  py={0.5}
-                  {...styleProps?.kbd}
-                >
-                  {kbd}
-                </Kbd>
-              }
-              pr="10px"
-              color="topNav.input.kbd.color"
-            />
-          )}
         </InputGroup>
       </FocusLock>
     );

@@ -1,5 +1,5 @@
 import {useId} from 'react'
-import { Steps, Box, Image, AspectRatio } from '@chakra-ui/react';
+import { Box, Image, AspectRatio } from '@chakra-ui/react';
 
 const shapes = [
   {

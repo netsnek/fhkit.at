@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Button,
+import { Button,
   Container,
   Flex,
   VStack,

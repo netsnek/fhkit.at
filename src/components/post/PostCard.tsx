@@ -1,7 +1,5 @@
 import { Post, Privacy } from '@/clients/social/src/schema.generated';
-import {
-  Steps,
-  Badge,
+import { Badge,
   Box,
   Card,
   HStack,
@@ -49,7 +47,7 @@ const PostCard: FC<PostCardProps> = ({ hideAuthor, post, isSafe }) => {
         }
       }}
       asChild
-    ><Card>
+    ><Card.Root>
             <Card.Body justifyContent="end" asChild><Stack>
                 <HStack w="full" gap="3">
                   {post.avatarURL && post.avatarURL?.length > 0 && (
@@ -63,7 +61,7 @@ const PostCard: FC<PostCardProps> = ({ hideAuthor, post, isSafe }) => {
 
                   <Stack>
                     {!hideAuthor && (
-                      <SkeletonText isLoaded={isLoaded} lineClamp={1} minW="50px">
+                      <SkeletonText loading={!(isLoaded)} lineClamp={1} minW="50px">
                         <Link
                           noOfLines={1}
                           variant="hover-theme"
@@ -88,7 +86,7 @@ const PostCard: FC<PostCardProps> = ({ hideAuthor, post, isSafe }) => {
                   </Stack>
                 </HStack>
 
-                <SkeletonText isLoaded={isLoaded}>
+                <SkeletonText loading={!(isLoaded)}>
                   <Text
                     mt="2"
                     flexGrow={1}
@@ -101,10 +99,10 @@ const PostCard: FC<PostCardProps> = ({ hideAuthor, post, isSafe }) => {
                   </Text>
                 </SkeletonText>
 
-                <SkeletonText isLoaded={isLoaded} lineClamp={1}>
+                <SkeletonText loading={!(isLoaded)} lineClamp={1}>
                   <HStack mt="4" justifyContent="space-between">
                     <Wrap>
-                      <Text fontSize={12} color="components.postPreview.date.color">
+                      <Text fontSize={12} color="shared.text.bright">
                         <NoSSR>{new Date(post.createdAt).toLocaleDateString()}</NoSSR>
                       </Text>
 
@@ -139,7 +137,7 @@ const PostCard: FC<PostCardProps> = ({ hideAuthor, post, isSafe }) => {
                   </HStack>
                 </SkeletonText>
               </Stack></Card.Body>
-          </Card></LinkBox>
+          </Card.Root></LinkBox>
   );
 };
 

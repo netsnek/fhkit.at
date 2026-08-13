@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Avatar,
+import { Avatar,
   Card,
   Heading,
   Icon,

@@ -1,5 +1,5 @@
 import { useAuth } from 'jaen';
-import { Steps, Accordion, Box, HStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Accordion, Box, HStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import { FaLink } from '@react-icons/all-files/fa/FaLink';
 import { FC, Fragment, useMemo, useState } from 'react';
 import {

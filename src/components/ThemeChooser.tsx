@@ -1,9 +1,7 @@
-import { DarkMode, LightMode, useColorMode } from "./ui/color-mode";
-import {
-  Steps,
-  Button,
+import { CheckIcon, MoonIcon, SunIcon } from './icons/chakra';
+import { ColorMode, DarkMode, LightMode, useColorMode } from 'jaen';
+import { Button,
   ButtonProps,
-  ColorMode,
   Icon,
   IconProps,
   Menu,
@@ -11,7 +9,6 @@ import {
   Portal,
 } from '@chakra-ui/react';
 import { FC, ReactNode, memo } from 'react';
-import { LuCheck, LuMoon, LuSun } from 'react-icons/lu';
 
 interface IThemeChooserProps {
   menuProps?: Partial<MenuProps>;
@@ -99,11 +96,16 @@ const MemoizedColorModeMenuItems = memo<{
               position="relative"
               disabled={isCurrentColorMode}
               onSelect={!isCurrentColorMode ? toggleColorMode : undefined}
-              value='item-0'>
+              // `value` is the item's DOM identity, not a label: zag builds the
+              // element id as `${menuId}/${value}` and resolves onSelect by
+              // getElementById. The codemod stamped the literal 'item-0' on
+              // every row of this map, so all of them shared one id and only
+              // the first was reachable.
+              value={mode.toLocaleLowerCase()}>
               {mode}
               {isCurrentColorMode && (
                 <Icon
-                  as={LuCheck}
+                  as={CheckIcon}
                   position="absolute"
                   right={3}
                   top="50%"

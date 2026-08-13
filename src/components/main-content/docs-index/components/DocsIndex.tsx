@@ -1,5 +1,5 @@
 import { useCMSManagementContext, useJaenPageIndex } from 'jaen';
-import { Steps, SimpleGrid, Text, List } from '@chakra-ui/react';
+import { SimpleGrid, Text, List } from '@chakra-ui/react';
 import { Link } from 'gatsby-plugin-jaen';
 
 import ImageCard from '../../image-card/components/ImageCard';

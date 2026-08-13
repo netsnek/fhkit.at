@@ -1,4 +1,4 @@
-import { Steps, Box, Collapsible, Flex, Spacer } from '@chakra-ui/react';
+import { Box, Collapsible, Flex, Spacer } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import PageDirectory from './page-directory/PageDirectory';
 import NavbarControls from './NavbarControls';

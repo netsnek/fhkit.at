@@ -1,7 +1,7 @@
 import { sq } from '@/clients/social';
 import { PageConfig, PageProps } from 'jaen';
 
-import { Steps, Box, Heading, SimpleGrid, Stack, VStack, keyframes } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Stack, VStack } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import { useQuery } from 'snek-query/react-hooks';
@@ -10,12 +10,6 @@ import PostCardSkeleton from '../../components/post/PostCardSkeleton';
 import PostList from '../../components/post/PostList';
 
 export const POST_FETCH_LIMIT = 3;
-
-const gradientAnimation = keyframes`
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-`;
 
 const IndexPage: React.FC<PageProps> = () => {
   const { data, isSafe, refetch } = useQuery(sq);
@@ -27,8 +21,14 @@ const IndexPage: React.FC<PageProps> = () => {
         mt={10}
         p={1}
         background="blueGradient"
-        background-size="600% 600%"
-        animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
+        // `background-size` was written as a JSX attribute, which React passes
+        // straight to the DOM rather than to the style system, so the gradient
+        // has never had a canvas to travel across. The token itself already
+        // carries `300% 300%`, so the shorthand only needs its own scale here.
+        backgroundSize="600% 600%"
+        // The keyframe is declared on the system now; v3 dropped the
+        // `keyframes` helper this used to build it with.
+        animation="gradient-shift 5s ease 0s infinite"
         w="full"
       >
         <Box bgColor="shared.body.bgColor" borderRadius="xl">
@@ -41,7 +41,7 @@ const IndexPage: React.FC<PageProps> = () => {
             ml={5}
             borderRadius="full"
           >
-            <Heading as="h1" size="lg" color="pages.posts.featured.title.color">
+            <Heading as="h1" size="lg" color="shared.text.default">
               Featured Experiments
             </Heading>
           </Box>

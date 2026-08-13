@@ -28,7 +28,7 @@
  * Token paths are untouched. v3 resolves tokens by path, so every
  * `components.button.ghost.hover.bgColor` string here means what it did.
  */
-import { Steps, defineRecipe, defineSlotRecipe } from '@chakra-ui/react';
+import { defineRecipe, defineSlotRecipe } from '@chakra-ui/react';
 
 /**
  * The six sizes the docs headings select, and why they are sizes at all.

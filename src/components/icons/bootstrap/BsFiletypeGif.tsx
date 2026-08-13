@@ -1,4 +1,4 @@
-import { Steps, Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from '@chakra-ui/react';
 import React from 'react';
 
 /**
@@ -6,7 +6,7 @@ import React from 'react';
  */
 const BsFiletypeGif = (props: IconProps) => {
   return (
-    <Icon
+    <Icon asChild={false} boxSize="1em"
       viewBox="0 0 16 16"
       strokeWidth={0}
       stroke="currentColor"

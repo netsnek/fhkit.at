@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Box,
+import { Box,
   Button,
   Container,
   Flex,
@@ -16,7 +14,7 @@ import {
   VisuallyHidden,
   IconButton,
 } from '@chakra-ui/react';
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from 'jaen';
 import {useContactModal} from '../../services/contact'
 import {Field} from 'jaen'
 import {FaGithub} from '@react-icons/all-files/fa/FaGithub'

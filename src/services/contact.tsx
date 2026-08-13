@@ -1,4 +1,3 @@
-import { Steps, useToast } from "@chakra-ui/react";
 import { sendTemplateMail } from "gatsby-jaen-emailwerk";
 import React, { useMemo } from "react";
 import { RouteComponentProps } from "@reach/router";
@@ -7,7 +6,7 @@ import {
   ContactFormValues,
   ContactModal,
 } from "../components/ContactModal/ContactModal";
-import { useAuth } from "jaen";
+import { useAuth, useNotificationsContext } from "jaen";
 import { useQueryRouter } from "../hooks/use-query-router";
 
 /**
@@ -66,7 +65,11 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
     }
   }, [isCalled]);
 
-  const toast = useToast();
+  // v3 dropped useToast for a store whose create() reads `type`, not `status`.
+  // jaen's notifications context wraps that store back up in v2's option shape
+  // and is already mounted above every page, so the two calls below keep the
+  // placement, timing and close button they had.
+  const { toast } = useNotificationsContext();
 
   const authentication = useAuth();
 
@@ -135,9 +138,12 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
     }
 
     return {
-      firstName: authentication.user.profile.given_name,
-      lastName: authentication.user.profile.family_name,
-      email: authentication.user.profile.email,
+      // `profile` is optional on jaen v3's user: the provider hands back a
+      // user object before the OIDC profile has been resolved, and the static
+      // build renders in exactly that state.
+      firstName: authentication.user.profile?.given_name,
+      lastName: authentication.user.profile?.family_name,
+      email: authentication.user.profile?.email,
     };
   }, [authentication.user]);
 

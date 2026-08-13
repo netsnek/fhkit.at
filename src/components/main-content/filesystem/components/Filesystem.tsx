@@ -1,6 +1,5 @@
-import { Steps, Box, BoxProps, TooltipProps } from '@chakra-ui/react';
-import { Tooltip } from '@/components/ui/tooltip';
-import { useColorModeValue } from "../../../ui/color-mode";
+import { Box, BoxProps } from '@chakra-ui/react';
+import { Tooltip } from '../../../Tooltip';
 import { FC, useState } from 'react';
 
 import BsFileEarmark from '../../../icons/bootstrap/BsFileEarmark';
@@ -27,26 +26,14 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
     isFolder && (item.defaultOpen ?? true)
   );
   const toggleShowChildren = () => setShowChildren(!showChildren);
-  //!Bug: Chakra doesnt set the bg color via the background-color css prop but via the bg prop, which allows our default tooltip props to take precedence. This is a temporary workaround
-  const tooltipBgColor = useColorModeValue('theme.700', 'theme.800');
-
-  // Tooltip sttings
+  // Tooltip settings.
+  //
+  // `tooltipProps` used to be assembled here in v2's prop shape and then never
+  // passed to anything: the element below spells its own props out. It is gone
+  // rather than ported, along with the `TooltipProps` type it was annotated
+  // with, which v3 does not export at the top level.
   const tooltipText =
     typeof item.tooltip === 'string' ? item.tooltip : item.tooltip?.text;
-  let tooltipProps: TooltipProps = {
-    label: tooltipText,
-    bgColor: 'components.filesystem.tooltip.bgColor',
-    color: 'components.filesystem.tooltip.color',
-    borderRadius: 'md',
-    placement: 'right',
-    children: undefined
-  };
-  if (typeof item.tooltip === 'object') {
-    tooltipProps = {
-      ...tooltipProps,
-      ...item.tooltip
-    };
-  }
 
   // Icon settings
   let IconComp;
@@ -75,7 +62,7 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
     };
   } else {
     const color = `components.filesystem.color.${
-      item.lowContrast ? 'lowContrast.initial' : 'default'
+      item.lowContrast ? 'lowContrast' : 'default'
     }`;
     props = {
       ...props,
@@ -107,7 +94,7 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
         transform: 'translateY(-50%)',
         height: '1px',
         width: 2,
-        bg: 'components.filesystem.'
+        bg: 'components.filesystem.borderColor'
       }
     };
   }
@@ -117,8 +104,8 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
       <IconComp
         boxSize="14px"
         mr={2}
-        fill="components.filesystem.icon.color"
-        color="components.filesystem.icon.color"
+        fill="components.filesystem.icon.color.default"
+        color="components.filesystem.icon.color.default"
       />
       {item.name}
     </Box>
@@ -136,9 +123,8 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
         {tooltipText && tooltipText.length ? (
           <Tooltip
             content={tooltipText}
-            bgColor={`${tooltipBgColor} !important`}
-            borderRadius="md"
-            openDelay={500}>
+            openDelay={500}
+            contentProps={{ borderRadius: 'md' }}>
             {itemContent}
           </Tooltip>
         ) : (

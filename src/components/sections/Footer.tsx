@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Box,
+import { Box,
   Center,
   Heading,
   Container,
@@ -15,7 +13,7 @@ import {
   VStack,
   Separator,
 } from '@chakra-ui/react';
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from 'jaen';
 import { FC, ReactNode } from 'react';
 import { Link } from 'gatsby-plugin-jaen';
 import { Field } from 'jaen';

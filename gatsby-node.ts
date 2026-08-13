@@ -33,7 +33,57 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
         ),
         '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
         react: path.resolve(__dirname, 'node_modules/react'),
-        'react-dom': path.resolve(__dirname, 'node_modules/react-dom')
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+
+        /**
+         * The same argument, for the packages the linked plugins reach for
+         * rather than the site.
+         *
+         * gqty is gatsby-jaen-emailwerk's GraphQL client, and a second nested
+         * copy pulls gqty's CommonJS files into an ESM context: webpack parses
+         * `gqty/Utils/hash.js` as a module and the bundle dies on "exports is
+         * not defined" before the app renders.
+         *
+         * The CodeMirror and lezer family carry jaen-fields-mdx's editor.
+         * CodeMirror compares languages and extensions by FACET IDENTITY, so a
+         * facet from one copy is not the facet the other copy reads: an
+         * extension is handed over and quietly ignored, everything renders in
+         * the default grey and nothing is raised anywhere.
+         *
+         * acorn is not two copies but two FORMATS of one, which is enough to
+         * ship it twice: its exports map offers dist/acorn.mjs under `import`
+         * and dist/acorn.js under `require`, and the MDX runtime reaches it
+         * from both sides. The exact-match alias collapses both onto the ESM
+         * build, and that direction only: webpack lets CommonJS require an ES
+         * module and hands back the namespace object, while named imports out
+         * of the UMD build into strict ESM is the case that does not hold.
+         */
+        gqty: path.resolve(__dirname, 'node_modules/gqty'),
+        '@gqty/react': path.resolve(__dirname, 'node_modules/@gqty/react'),
+        'use-sync-external-store': path.resolve(
+          __dirname,
+          'node_modules/use-sync-external-store'
+        ),
+        graphql: path.resolve(__dirname, 'node_modules/graphql'),
+        acorn$: path.resolve(__dirname, 'node_modules/acorn/dist/acorn.mjs'),
+        '@codemirror/state': path.resolve(
+          __dirname,
+          'node_modules/@codemirror/state'
+        ),
+        '@codemirror/view': path.resolve(
+          __dirname,
+          'node_modules/@codemirror/view'
+        ),
+        '@codemirror/language': path.resolve(
+          __dirname,
+          'node_modules/@codemirror/language'
+        ),
+        '@lezer/common': path.resolve(__dirname, 'node_modules/@lezer/common'),
+        '@lezer/highlight': path.resolve(
+          __dirname,
+          'node_modules/@lezer/highlight'
+        ),
+        '@lezer/lr': path.resolve(__dirname, 'node_modules/@lezer/lr')
       }
     }
   });

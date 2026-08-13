@@ -1,10 +1,10 @@
-import { Steps, Breadcrumb, BreadcrumbLinkProps, TextProps } from '@chakra-ui/react';
+import { ChevronRightIcon } from '../icons/chakra';
+import { Breadcrumb, BreadcrumbLinkProps, TextProps } from '@chakra-ui/react';
 import { Link } from 'gatsby-plugin-jaen';
 import { FC } from 'react';
 // import UserPreview from '../../../../features/user/avatar/components/UserPreview';
 
 import { MainBreadcrumbPart } from '../../utils/navigation/types';
-import { LuChevronRight } from 'react-icons/lu';
 
 interface IMainBradcrumbProps {
   parts: MainBreadcrumbPart[];

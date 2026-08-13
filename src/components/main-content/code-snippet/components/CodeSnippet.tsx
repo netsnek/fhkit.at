@@ -1,4 +1,4 @@
-import { Steps, Box, BoxProps, Flex, Stack, Text } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, Stack, Text } from '@chakra-ui/react';
 import 'highlight.js/styles/atom-one-dark.css';
 import { highlight, languages } from 'prismjs';
 import React, { FC, useEffect, useMemo, useState } from 'react';

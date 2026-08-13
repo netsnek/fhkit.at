@@ -1,4 +1,4 @@
-import { Steps, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface ICommunityLayoutProps {

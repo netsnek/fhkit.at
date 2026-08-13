@@ -2,7 +2,7 @@ import { PageConfig, PageProps } from 'jaen';
 import { Global } from '@emotion/react';
 
 import { graphql } from 'gatsby';
-import { Steps, Flex, Heading, Stack } from '@chakra-ui/react';
+import { Flex, Heading, Stack } from '@chakra-ui/react';
 import AboutUs from '../components/sections/AboutUs';
 import Features from '../components/sections/Features';
 import Hero from '../components/sections/Hero';

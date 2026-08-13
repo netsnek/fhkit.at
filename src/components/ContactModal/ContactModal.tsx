@@ -1,6 +1,4 @@
-import {
-  Steps,
-  Button,
+import { Button,
   Heading,
   HStack,
   Input,
@@ -13,6 +11,7 @@ import {
 } from '@chakra-ui/react';
   import React from 'react'
   import {Controller, useForm} from 'react-hook-form'
+  import {DialogCloseButton} from '../DialogCloseButton'
   import {CheckboxStyled} from './CheckboxStyled'
   
   export interface ContactFormValues {
@@ -71,7 +70,12 @@ import {
     return (
       <Dialog.Root
         open={isOpen}
-        size='xl'
+        // v2 was `size="2xl"`, and the dialog size names all shifted one step
+        // up the sizes scale in v3: the recipe maps xs->sizes.sm, sm->md,
+        // md->lg, lg->2xl, xl->4xl. v2's 2xl was maxW 42rem; the codemod's
+        // `xl` is sizes.4xl = 56rem, 224px wider. `lg` resolves to the same
+        // 42rem v2 painted.
+        size='lg'
         preventScroll={false}
         onOpenChange={e => {
           if (!e.open) {
@@ -88,7 +92,7 @@ import {
                 onSubmit={event => {
                   void handleSubmit(onSubmit)(event)
                 }}>
-                <Dialog.CloseTrigger />
+                <DialogCloseButton />
                 <Dialog.Body
                   p={{
                     base: 4,
@@ -208,7 +212,7 @@ import {
                             ref={field.ref}
                             onBlur={field.onBlur}
                             onChange={field.onChange}
-                            checked={field.value}
+                            checked={!!field.value}
                             roundedFull>
                             <Text
                               fontSize={{
@@ -234,7 +238,7 @@ import {
                   </Stack>
                 </Dialog.Body>
       
-                <Dialog.Footer borderTop="1px solid" color="gray.200">
+                <Dialog.Footer borderTop="1px solid" borderColor="gray.200">
                   <Button
                     loading={isSubmitting}
                     type="submit"

@@ -1,4 +1,4 @@
-import { Steps, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import useTocNavigation from '../../hooks/use-toc-navigation';
 

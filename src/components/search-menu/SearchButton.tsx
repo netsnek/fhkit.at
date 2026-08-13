@@ -1,5 +1,5 @@
 import { withRedux } from 'jaen';
-import { Steps, Button, ButtonProps, Kbd } from '@chakra-ui/react';
+import { Button, ButtonProps, Kbd } from '@chakra-ui/react';
 import { FC } from 'react';
 
 interface ISearchButtonProps extends ButtonProps {
