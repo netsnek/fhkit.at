@@ -39,7 +39,7 @@ import smtSearchFeature from './features/search';
 import smtPqFeaturesSection from '../photonq/semanticTokens/sections/features';
 import smtPqPhotonQSection from '../photonq/semanticTokens/sections/photonQ';
 import smtPqAboutUsSection from '../photonq/semanticTokens/sections/aboutUs';
-import smtPageDirectoryComponent from '../components/pageDirectory';
+import smtPageDirectoryComponent from './components/pageDirectory';
 // import smtUserAvatarComponent from '../../../components/user/avatar/styles/userAvatar';
 import smtLinkComponent from './components/link';
 import smtPqSectionTitle from '../photonq/semanticTokens/components/sectionTitle';

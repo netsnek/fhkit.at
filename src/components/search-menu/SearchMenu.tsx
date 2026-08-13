@@ -1,7 +1,6 @@
 import {
   Center,
   Divider,
-  ThemeProvider,
   VStack,
   useDisclosure,
   Text,
@@ -27,7 +26,6 @@ import {
   searchUser
 } from '../../utils/search';
 import useSearch from '../../hooks/use-search';
-import theme from '../../styles/theme/theme';
 import {
   SearchResultSection,
   SearchResultSectionTitle
@@ -36,7 +34,7 @@ import SearchButton from './SearchButton';
 import SearchModal from './SearchModal';
 import TbBooks from '../icons/tabler/TbBooks';
 import TbUser from '../icons/tabler/TbUser';
-import { useAuth } from '@atsnek/jaen';
+import { useAuth } from 'jaen';
 import { navigate } from 'gatsby';
 import { useSearchContext } from '../../contexts/search';
 import { TSearchResults } from '../../utils/search/types';
@@ -312,7 +310,7 @@ const SearchMenu: FC<SearchMenuProps> = ({...props}) => {
   }, [data, navigateIdx]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <SearchButton openModal={onOpen} navigate={handleNavigate} {...props} />
       <SearchModal
         defaultQuery={searchQuery}
@@ -324,7 +322,7 @@ const SearchMenu: FC<SearchMenuProps> = ({...props}) => {
         handleNavigate={handleNavigate}
         openActiveItem={handleOpenActiveItem}
       />
-    </ThemeProvider>
+    </>
   );
 };
 

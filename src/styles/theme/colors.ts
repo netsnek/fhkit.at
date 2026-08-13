@@ -24,9 +24,32 @@ const themeColors = {
     800: '#823e0c',
     900: '#461d04',
   },
+  /**
+   * v2's gray, pinned in full.
+   *
+   * 550 and 750 were the only two this site ever wrote down; 50-900 came from
+   * @chakra-ui/theme and are blue-tinted (500 #718096). v3 replaced the ramp
+   * with a neutral zinc scale (500 #71717a), and almost every semantic-token
+   * leaf in this theme resolves through gray, so inheriting v3's would re-tint
+   * essentially every neutral surface, divider and line of body text. 550 and
+   * 750 were chosen to sit between 500/600 and 700/800 of THIS ramp, which is
+   * also why they look out of place against v3's.
+   *
+   * v3's gray.950 is left alone: v2 had no 950 and nothing here references one.
+   */
   gray: {
+    50: '#F7FAFC',
+    100: '#EDF2F7',
+    200: '#E2E8F0',
+    300: '#CBD5E0',
+    400: '#A0AEC0',
+    500: '#718096',
     550: '#5F6C81',
-    750: '#212836'
+    600: '#4A5568',
+    700: '#2D3748',
+    750: '#212836',
+    800: '#1A202C',
+    900: '#171923'
   },
   pq: {
     500: '#0580D2'
