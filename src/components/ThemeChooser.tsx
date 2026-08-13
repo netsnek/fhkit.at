@@ -1,20 +1,17 @@
-import { CheckIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { DarkMode, LightMode, useColorMode } from "./ui/color-mode";
 import {
+  Steps,
   Button,
   ButtonProps,
   ColorMode,
-  DarkMode,
   Icon,
   IconProps,
-  LightMode,
   Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   MenuProps,
-  useColorMode
+  Portal,
 } from '@chakra-ui/react';
 import { FC, ReactNode, memo } from 'react';
+import { LuCheck, LuMoon, LuSun } from 'react-icons/lu';
 
 interface IThemeChooserProps {
   menuProps?: Partial<MenuProps>;
@@ -40,12 +37,12 @@ const ThemeChooser: FC<IThemeChooserProps> = ({
 
   const menuList = (() => {
     const list = (
-      <MenuList>
-        <MemoizedColorModeMenuItems
-          currentColorMode={colorMode}
-          toggleColorMode={toggleColorMode}
-        />
-      </MenuList>
+      <Portal><Menu.Positioner><Menu.Content>
+            <MemoizedColorModeMenuItems
+              currentColorMode={colorMode}
+              toggleColorMode={toggleColorMode}
+            />
+          </Menu.Content></Menu.Positioner></Portal>
     );
     if (!forceMenuColorMode) {
       return list;
@@ -58,21 +55,26 @@ const ThemeChooser: FC<IThemeChooserProps> = ({
   })();
 
   return (
-    <Menu id="navbar-color-mode-menu" placement="top" {...menuProps} isLazy>
-      <MenuButton
-        as={Button}
-        size="sm"
-        flexGrow={1}
-        variant="ghost-hover"
-        textAlign="left"
-        color="shared.text.default"
-        {...buttonProps}
-      >
-        <Icon as={isLightColorMode ? SunIcon : MoonIcon} {...buttonIconProps} />
-        {buttonContent}
-      </MenuButton>
+    <Menu.Root
+      id="navbar-color-mode-menu"
+      {...menuProps}
+      lazyMount
+      unmountOnExit
+      positioning={{
+        placement: 'top'
+      }}>
+      <Menu.Trigger asChild><Button
+          size="sm"
+          flexGrow={1}
+          variant="ghost-hover"
+          textAlign="left"
+          color="shared.text.default"
+          {...buttonProps}>
+          <Icon as={isLightColorMode ? SunIcon : MoonIcon} {...buttonIconProps} />
+          {buttonContent}
+        </Button></Menu.Trigger>
       {menuList}
-    </Menu>
+    </Menu.Root>
   );
 };
 
@@ -92,23 +94,23 @@ const MemoizedColorModeMenuItems = memo<{
           const isCurrentColorMode =
             currentColorMode === mode.toLocaleLowerCase();
           return (
-            <MenuItem
+            <Menu.Item
               key={i}
               position="relative"
               disabled={isCurrentColorMode}
-              onClick={!isCurrentColorMode ? toggleColorMode : undefined}
-            >
+              onSelect={!isCurrentColorMode ? toggleColorMode : undefined}
+              value='item-0'>
               {mode}
               {isCurrentColorMode && (
-                <CheckIcon
+                <Icon
+                  as={LuCheck}
                   position="absolute"
                   right={3}
                   top="50%"
                   transform="translateY(-50%)"
-                  boxSize="10px"
-                />
+                  boxSize="10px" />
               )}
-            </MenuItem>
+            </Menu.Item>
           );
         })}
       </>

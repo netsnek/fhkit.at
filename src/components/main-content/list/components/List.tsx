@@ -1,9 +1,4 @@
-import {
-  List as ChList,
-  UnorderedList,
-  OrderedList,
-  ListItem
-} from '@chakra-ui/react';
+import { Steps, List as ChList } from '@chakra-ui/react';
 import { ComponentType, FC, ReactNode } from 'react';
 import { IMainContentComponentBaseProps } from '../../types/mainContent';
 

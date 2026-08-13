@@ -1,4 +1,4 @@
-import {Checkbox, CheckboxProps} from '@chakra-ui/react'
+import { Steps, Checkbox, CheckboxProps } from '@chakra-ui/react';
 import {forwardRef} from 'react'
 
 const bgColor = '#EDEDF0'
@@ -71,9 +71,9 @@ export const CheckboxStyled = forwardRef<HTMLInputElement, CheckboxStyledProps>(
     }
 
     return (
-      <Checkbox spacing={spacing} sx={classes} {...props} ref={ref}>
-        {children}
-      </Checkbox>
-    )
+      <Checkbox.Root gap={spacing} sx={classes} {...props} ref={ref}><Checkbox.HiddenInput /><Checkbox.Control><Checkbox.Indicator /></Checkbox.Control><Checkbox.Label>
+            {children}
+          </Checkbox.Label></Checkbox.Root>
+    );
   }
 )

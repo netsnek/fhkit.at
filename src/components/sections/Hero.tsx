@@ -1,4 +1,5 @@
 import {
+  Steps,
   Box,
   Button,
   Container,
@@ -10,12 +11,12 @@ import {
   LinkOverlay,
   Stack,
   Text,
-  useColorModeValue,
   Image,
   Icon,
   VisuallyHidden,
-  IconButton
-} from '@chakra-ui/react'
+  IconButton,
+} from '@chakra-ui/react';
+import { useColorModeValue } from "../ui/color-mode";
 import {useContactModal} from '../../services/contact'
 import {Field} from 'jaen'
 import {FaGithub} from '@react-icons/all-files/fa/FaGithub'
@@ -40,37 +41,35 @@ const HeroSection = () => {
         justifyContent="center">
         <Stack
           direction="column"
-          spacing={6}
+          gap={6}
           justifyContent="center"
           maxW="480px">
           <HStack
-            as={LinkBox}
             p={1}
             rounded="full"
             fontSize="sm"
             w="max-content"
             bg={useColorModeValue('gray.300', 'gray.700')}
-            onClick={onContactClick}
             _hover={{
               textDecoration: 'underline',
               bg: useColorModeValue('gray.100', 'gray.700')
-            }}>
-            <Box
-              py={1}
-              px={2}
-              lineHeight={1}
-              rounded="full"
-              color="white"
-              bgColor="brand.500">
-              Für dich
-            </Box>
-            <HStack spacing={1} alignItems="center" justifyContent="center">
-              <Text as={LinkOverlay} lineHeight={1} mr={2}>
-                Kostenlose Erstberatung
-              </Text>
-              {/* <Icon as={GoChevronRight} w={4} h={4} /> */}
-            </HStack>
-          </HStack>
+            }}
+            asChild><LinkBox onClick={onContactClick}>
+              <Box
+                py={1}
+                px={2}
+                lineHeight={1}
+                rounded="full"
+                color="white"
+                bgColor="brand.500">
+                Für dich
+              </Box>
+              <HStack gap={1} alignItems="center" justifyContent="center">
+                <Text lineHeight={1} mr={2} asChild><LinkOverlay>Kostenlose Erstberatung
+                                </LinkOverlay></Text>
+                {/* <Icon as={GoChevronRight} w={4} h={4} /> */}
+              </HStack>
+            </LinkBox></HStack>
           <Field.Text
             as={Heading}
             fontSize={{base: '4xl', lg: '5xl'}}
@@ -96,7 +95,7 @@ const HeroSection = () => {
             Lass dich von mir beraten! 🤝 Erfahrung, Leidenschaft und technisches Know-how aus Österreich. Und ja, ich finde immer eine Lösung (aber ich empfehle, das Problem nicht selbst zu lösen 😉)."
           />
           <HStack
-            spacing={{base: 0, sm: 2}}
+            gap={{base: 0, sm: 2}}
             mb={{base: '3rem !important', sm: 0}}
             flexWrap="wrap">
             <Button
@@ -124,17 +123,20 @@ const HeroSection = () => {
               lineHeight={1.18}
               rounded="md"
               boxShadow="md"
-              as={LinkBox}
               zIndex={1}
               _hover={{
                 textDecoration: 'underline',
                 bg: useColorModeValue('gray.100', 'gray.700')
-              }}>
-              <Icon as={FaGithub} w={4} h={4} mr={2} />
-              <LinkOverlay href="https://github.com/kleberbaum" isExternal>
-                GitHub
-              </LinkOverlay>
-            </Flex>
+              }}
+              asChild><LinkBox>
+                <Icon w={4} h={4} mr={2} asChild><FaGithub /></Icon>
+                <LinkOverlay
+                  href="https://github.com/kleberbaum"
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  GitHub
+                </LinkOverlay>
+              </LinkBox></Flex>
           </HStack>
         </Stack>
         <Box ml={{base: 0, md: 5}} pos="relative" flex="1">
@@ -159,77 +161,67 @@ const HeroSection = () => {
               w="full"
             />
             <Stack
-              as={LinkBox}
               direction={'row'}
-              spacing="0"
+              gap="0"
               //mx="-12px"
-              flexWrap={'wrap'}>
-              <IconButton
-                as={LinkOverlay}
-                size="lg"
-                variant={'ghost'}
-                color="brand.500"
-                icon={<Netsnek w={'25px'} h={'25px'} />}
-                aria-label="Netsnek"
-                href="https://netsnek.com/kleberbaum"
-                isExternal
-              />
-              <IconButton
-                as={LinkOverlay}
-                size="lg"
-                variant={'ghost'}
-                color="brand.500"
-                icon={<FaGithub />}
-                aria-label="Github"
-                href="https://github.com/kleberbaum/"
-                isExternal
-              />
-              <IconButton
-                as={LinkOverlay}
-                size="lg"
-                variant={'ghost'}
-                color="brand.500"
-                icon={<FaLinkedin />}
-                aria-label="Linkedin"
-                href="https://www.linkedin.com/in/kleberbaum/"
-                isExternal
-              />
-              <IconButton
-                as={LinkOverlay}
-                size="lg"
-                variant={'ghost'}
-                color="brand.500"
-                icon={<FaInstagram />}
-                aria-label="Instagram"
-                href="https://www.instagram.com/kleberbaum/"
-                isExternal
-              />
-              <IconButton
-                as={LinkOverlay}
-                size="lg"
-                variant={'ghost'}
-                color="brand.500"
-                icon={<FaTelegram />}
-                aria-label="Telegram"
-                href="https://t.me/kleberbaum"
-                isExternal
-              />
-              {/*<IconButton
-            as={LinkOverlay}
-            size="lg"
-            variant={'ghost'}
-            color="#ffffff"
-            icon={<FaTwitter />}
-            aria-label="Twitter"
-            href="https://twitter.com/kleberbaum"
-            isExternal
-          />*/}
-            </Stack>
+              flexWrap={'wrap'}
+              asChild><LinkBox>
+                <IconButton
+                  size="lg"
+                  variant={'ghost'}
+                  color="brand.500"
+                  aria-label="Netsnek"
+                  href="https://netsnek.com/kleberbaum"
+                  isExternal
+                  asChild><LinkOverlay><Netsnek w={'25px'} h={'25px'} /></LinkOverlay></IconButton>
+                <IconButton
+                  size="lg"
+                  variant={'ghost'}
+                  color="brand.500"
+                  aria-label="Github"
+                  href="https://github.com/kleberbaum/"
+                  isExternal
+                  asChild><LinkOverlay><FaGithub /></LinkOverlay></IconButton>
+                <IconButton
+                  size="lg"
+                  variant={'ghost'}
+                  color="brand.500"
+                  aria-label="Linkedin"
+                  href="https://www.linkedin.com/in/kleberbaum/"
+                  isExternal
+                  asChild><LinkOverlay><FaLinkedin /></LinkOverlay></IconButton>
+                <IconButton
+                  size="lg"
+                  variant={'ghost'}
+                  color="brand.500"
+                  aria-label="Instagram"
+                  href="https://www.instagram.com/kleberbaum/"
+                  isExternal
+                  asChild><LinkOverlay><FaInstagram /></LinkOverlay></IconButton>
+                <IconButton
+                  size="lg"
+                  variant={'ghost'}
+                  color="brand.500"
+                  aria-label="Telegram"
+                  href="https://t.me/kleberbaum"
+                  isExternal
+                  asChild><LinkOverlay><FaTelegram /></LinkOverlay></IconButton>
+                {/*<IconButton
+              as={LinkOverlay}
+              size="lg"
+              variant={'ghost'}
+              color="#ffffff"
+              icon={<FaTwitter />}
+              aria-label="Twitter"
+              href="https://twitter.com/kleberbaum"
+              isExternal
+            />*/}
+              </LinkBox></Stack>
           </Box>
         </Box>
       </Stack>
     </Container>
-  )
+  );
 }
 
 function DottedBox() {

@@ -1,8 +1,7 @@
 import {
+  Steps,
   Button,
   ButtonGroup,
-  ListItem,
-  OrderedList,
   Stack,
   Table,
   Tbody,
@@ -11,7 +10,7 @@ import {
   Th,
   Thead,
   Tr,
-  UnorderedList
+  List,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 
@@ -19,10 +18,9 @@ import { FC } from 'react';
 
 import { useAuth, useContentManagement, usePageContext } from 'jaen';
 import { MdxField, MdxFieldProps } from 'jaen-fields-mdx';
-import { EditIcon, SettingsIcon } from '@chakra-ui/icons';
 import { Link } from 'gatsby-plugin-jaen';
-
 import Heading from '../main-content/heading/components/Heading';
+
 import Callout from '../main-content/callout/components/Callouts';
 import CodeSnippet from '../main-content/code-snippet/components/CodeSnippet';
 import DocsIndex from '../main-content/docs-index/components/DocsIndex';
@@ -30,6 +28,7 @@ import Filesystem from '../main-content/filesystem/components/Filesystem';
 import IconCard from '../main-content/icon-card/components/IconCard';
 import ImageCard from '../main-content/image-card/components/ImageCard';
 import JaenImage from '../JaenImage';
+import { LuPencil, LuSettings } from 'react-icons/lu';
 
 interface IMdxEditorProps {
   hideHeadingHash?: boolean;
@@ -39,18 +38,18 @@ export const mdxEditorComponents: MdxFieldProps['components'] = {
   // TEXT
   p: props => <Text children={props.children} />,
   // LIST
-  ul: (props: any) => <UnorderedList children={props.children}></UnorderedList>,
-  ol: (props: any) => <OrderedList children={props.children}></OrderedList>,
-  li: (props: any) => <ListItem children={props.children}></ListItem>,
+  ul: (props: any) => <List.Root as='ul' children={props.children}></List.Root>,
+  ol: (props: any) => <List.Root as='ol' children={props.children}></List.Root>,
+  li: (props: any) => <List.Item children={props.children}></List.Item>,
   // TABLE
   table: (props: any) => (
-    <Table variant="striped" w="fit-content" children={props.children} />
+    <Table.Root variant="striped" w="fit-content" children={props.children} />
   ),
-  thead: (props: any) => <Thead children={props.children} />,
-  tbody: (props: any) => <Tbody children={props.children} />,
-  tr: (props: any) => <Tr children={props.children} />,
-  th: (props: any) => <Th children={props.children} />,
-  td: (props: any) => <Td children={props.children} />,
+  thead: (props: any) => <Table.Header children={props.children} />,
+  tbody: (props: any) => <Table.Body children={props.children} />,
+  tr: (props: any) => <Table.Row children={props.children} />,
+  th: (props: any) => <Table.ColumnHeader children={props.children} />,
+  td: (props: any) => <Table.Cell children={props.children} />,
   // MISC
   code: ({
     className,
@@ -96,9 +95,9 @@ const MdxEditor: FC<IMdxEditorProps> = ({ hideHeadingHash }) => {
 
   return (
     <Stack
-      spacing={4}
-      sx={{
-        '.cm-editor': {
+      gap={4}
+      css={{
+        '& .cm-editor': {
           height: '60dvh'
         }
       }}
@@ -106,16 +105,12 @@ const MdxEditor: FC<IMdxEditorProps> = ({ hideHeadingHash }) => {
       {canEdit && isLoading === false && (
         <ButtonGroup>
           <Button
-            leftIcon={<EditIcon />}
             variant="outline"
-            colorScheme={isEditing ? 'red' : undefined}
-            onClick={() => toggleIsEditing()}
-          >
-            {isEditing ? 'Stop Editing' : 'Edit'}
-          </Button>
+            colorPalette={isEditing ? 'red' : undefined}
+            onClick={() => toggleIsEditing()}><LuPencil />{isEditing ? 'Stop Editing' : 'Edit'}</Button>
 
           <Link
-            leftIcon={<SettingsIcon />}
+            leftIcon={<LuSettings />}
             variant="outline"
             as={Button}
             to={`/cms/pages/#${btoa(jaenPage.id)}`}

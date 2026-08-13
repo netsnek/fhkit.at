@@ -32,7 +32,7 @@
  * whatever selector they land on, which is what replaces v2's cssVarsRoot
  * scoping.
  */
-import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
+import { Steps, createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
 
 import themeColors from './colors';
 import themeFonts from './fonts';

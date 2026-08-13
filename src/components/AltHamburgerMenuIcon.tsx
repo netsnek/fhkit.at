@@ -1,4 +1,4 @@
-import {Box, BoxProps} from '@chakra-ui/react'
+import { Steps, Box, BoxProps } from '@chakra-ui/react';
 import {FC, useState} from 'react'
 
 export type THamburgerMenuIconStylerProps = BoxProps

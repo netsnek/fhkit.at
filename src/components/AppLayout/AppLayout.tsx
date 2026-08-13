@@ -1,4 +1,4 @@
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Steps, Box, Flex, useDisclosure } from '@chakra-ui/react';
 import React, { FC, ReactNode, useMemo } from 'react';
 import TopNav from '../navigation/TopNav';
 import AltTopNav from '../navigation/AltTopNav';

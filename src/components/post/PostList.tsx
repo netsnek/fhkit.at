@@ -1,7 +1,8 @@
 import { Post, Query } from '@/clients/social/src/schema.generated';
 import {
+  Steps,
   Button,
-  Collapse,
+  Collapsible,
   HStack,
   IconButton,
   Input,
@@ -9,21 +10,20 @@ import {
   InputLeftAddon,
   InputRightAddon,
   List,
-  ListItem,
-  Select,
-  Stack
+  NativeSelect,
+  Stack,
 } from '@chakra-ui/react';
 import { Link } from 'gatsby-plugin-jaen';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import PostCardSkeleton from './PostCardSkeleton';
 import PostCard from './PostCard';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useLazyQuery, useQuery } from 'snek-query/react-hooks';
 import { sq } from '@/clients/social';
 import TbFilterDown from '../icons/tabler/TbFilterDown';
 import TbFilterUp from '../icons/tabler/TbFilterUp';
 import TbPlus from '../icons/tabler/TbPlus';
 import { useAuth } from 'jaen';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 interface PostListProps {
   userId?: string;
@@ -135,88 +135,84 @@ const PostList: FC<PostListProps> = props => {
 
   return (
     <Stack w="full">
-      <HStack spacing="3" w="full">
+      <HStack gap="3" w="full">
         <Input
           flex="1"
           placeholder="Find a experiment..."
           size="sm"
           borderRadius="lg"
-          focusBorderColor="theme.600"
           value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
+          onValueChange={e => setQuery(e.target.value)} />
 
         <IconButton
-          colorScheme="gray"
+          colorPalette="gray"
           size="sm"
           variant="outline"
-          icon={isAdvancedSearchOpen ? <TbFilterDown /> : <TbFilterUp />}
           aria-label={'Toggle advanced search filter visibility'}
-          onClick={() => setIsAdvancedSearchOpen(!isAdvancedSearchOpen)}
-        />
+          onClick={() => setIsAdvancedSearchOpen(!isAdvancedSearchOpen)}>{isAdvancedSearchOpen ? <TbFilterDown /> : <TbFilterUp />}</IconButton>
 
       </HStack>
 
-      <Collapse
-        in={isAdvancedSearchOpen}
-        animateOpacity
-        style={{ width: '75%' }}
-      >
-        <HStack gap={5} w="full">
-          {!!setDateRange && (
-            <InputGroup size="sm">
-              <InputLeftAddon borderLeftRadius="lg">Date from</InputLeftAddon>
-              <Input
-                ref={dateFromRef}
-                type="date"
-                onChange={e => {
-                  const date = e.currentTarget.valueAsDate;
+      <Collapsible.Root open={isAdvancedSearchOpen} style={{ width: '75%' }}>
+        <Collapsible.Content>
+          <HStack gap={5} w="full">
+            {!!setDateRange && (
+              <InputGroup size="sm">
+                <InputLeftAddon borderLeftRadius="lg">Date from</InputLeftAddon>
+                <Input
+                  ref={dateFromRef}
+                  type="date"
+                  onValueChange={e => {
+                    const date = e.currentTarget.valueAsDate;
 
-                  if (!date) {
-                    setDateRange({
-                      ...dateRange,
-                      from: undefined
-                    });
-                  } else {
-                    setDateRange({
-                      ...dateRange,
-                      from: isNaN(date.getTime()) ? undefined : date
-                    });
-                  }
-                }}
-              />
-              <InputRightAddon>Date to</InputRightAddon>
-              <Input
-                ref={dateToRef}
-                type="date"
-                sx={{ borderRightRadius: 'lg' }}
-                onChange={e => {
-                  const date = e.currentTarget.valueAsDate;
+                    if (!date) {
+                      setDateRange({
+                        ...dateRange,
+                        from: undefined
+                      });
+                    } else {
+                      setDateRange({
+                        ...dateRange,
+                        from: isNaN(date.getTime()) ? undefined : date
+                      });
+                    }
+                  }}
+                />
+                <InputRightAddon>Date to</InputRightAddon>
+                <Input
+                  ref={dateToRef}
+                  type="date"
+                  css={{
+                    borderRightRadius: 'lg'
+                  }}
+                  onValueChange={e => {
+                    const date = e.currentTarget.valueAsDate;
 
-                  if (!date) {
-                    setDateRange({
-                      ...dateRange,
-                      to: undefined
-                    });
-                  } else {
-                    date.setHours(23);
-                    date.setMinutes(59);
-                    date.setSeconds(59);
-                    date.setMilliseconds(999);
+                    if (!date) {
+                      setDateRange({
+                        ...dateRange,
+                        to: undefined
+                      });
+                    } else {
+                      date.setHours(23);
+                      date.setMinutes(59);
+                      date.setSeconds(59);
+                      date.setMilliseconds(999);
 
-                    setDateRange({
-                      ...dateRange,
-                      to: isNaN(date.getTime()) ? undefined : date
-                    });
-                  }
-                }}
-              />
-            </InputGroup>
-          )}
-        </HStack>
-      </Collapse>
+                      setDateRange({
+                        ...dateRange,
+                        to: isNaN(date.getTime()) ? undefined : date
+                      });
+                    }
+                  }}
+                />
+              </InputGroup>
+            )}
+          </HStack>
+        </Collapsible.Content>
+      </Collapsible.Root>
 
-      <List spacing={3}>
+      <List.Root gap={3}>
         {allPosts.nodes.map((post, idx) => (
           <PostCard
             key={idx}
@@ -225,29 +221,23 @@ const PostList: FC<PostListProps> = props => {
             isSafe={isSafe}
           />
         ))}
-      </List>
+      </List.Root>
 
       <HStack justifyContent="center">
         <Button
           variant="ghost-hover-outline"
           size="sm"
           borderRadius="lg"
-          leftIcon={<ChevronLeftIcon />}
-          isDisabled={!hasPreviousPage}
-          onClick={previousPage}
-        >
-          Previous
-        </Button>
+          disabled={!hasPreviousPage}
+          onClick={previousPage}><LuChevronLeft />Previous
+                  </Button>
         <Button
           variant="ghost-hover-outline"
           size="sm"
           borderRadius="lg"
-          rightIcon={<ChevronRightIcon />}
-          isDisabled={!hasNextPage}
-          onClick={nextPage}
-        >
-          Next
-        </Button>
+          disabled={!hasNextPage}
+          onClick={nextPage}>Next
+                  <LuChevronRight /></Button>
       </HStack>
     </Stack>
   );

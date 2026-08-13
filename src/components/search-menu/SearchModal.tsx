@@ -1,13 +1,12 @@
 import {
+  Steps,
   Input,
   InputGroup,
   InputLeftElement,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalOverlay,
   Spinner,
-  VStack
+  VStack,
+  Dialog,
+  Portal,
 } from '@chakra-ui/react';
 import {
   Dispatch,
@@ -63,58 +62,66 @@ const SearchModal: FC<ISearchModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
-      <ModalOverlay />
-      <ModalContent
-        top="10px"
-        m={0}
-        w={{ base: '95vw', md: '75vw' }}
-        h="fit-content"
-        minH={0}
-        borderRadius="lg"
-      >
-        <ModalBody px={4} overflow="hidden" color="shared.text.default">
-          <InputGroup size="sm">
-            <InputLeftElement pointerEvents="none">
-              {isLoading ? <Spinner boxSize="3" /> : <TbSearch />}
-            </InputLeftElement>
-            <Input
-              ref={inputRef}
-              placeholder="Search"
-              size="sm"
-              borderRadius="lg"
-              focusBorderColor="brand.400"
-              onChange={e => {
-                setSearchQuery(e.target.value);
-              }}
-              defaultValue={defaultQuery}
-              onKeyDown={handleKeyDown}
-            />
-          </InputGroup>
-          <VStack
-            mt={3}
-            alignItems="start"
-            fontSize="sm"
-            __css={{
-              '.sd-search-outer-section::-webkit-scrollbar-thumb': {
-                borderRadius: 'full',
-                backgroundColor: 'shared.scrollbar.thumb.bgColor',
-                '&:hover': {
-                  backgroundColor: 'shared.scrollbar.thumb.hover.bgColor'
-                },
-                transition: 'background-color 0.2s ease-in-out'
-              },
-              '.sd-search-outer-section::-webkit-scrollbar': {
-                width: '4px',
-                backgroundColor: 'transparent'
-              }
-            }}
-          >
-            {!isLoading && searchResultItems}
-          </VStack>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+    <Dialog.Root open={isOpen} size='full' onOpenChange={e => {
+      if (!e.open) {
+        onClose();
+      }
+    }}>
+      <Portal>
+
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content
+            top="10px"
+            m={0}
+            w={{ base: '95vw', md: '75vw' }}
+            h="fit-content"
+            minH={0}
+            borderRadius="lg">
+            <Dialog.Body px={4} overflow="hidden" color="shared.text.default">
+              <InputGroup size="sm">
+                <InputLeftElement pointerEvents="none">
+                  {isLoading ? <Spinner boxSize="3" /> : <TbSearch />}
+                </InputLeftElement>
+                <Input
+                  ref={inputRef}
+                  placeholder="Search"
+                  size="sm"
+                  borderRadius="lg"
+                  onValueChange={e => {
+                    setSearchQuery(e.target.value);
+                  }}
+                  defaultValue={defaultQuery}
+                  onKeyDown={handleKeyDown} />
+              </InputGroup>
+              <VStack
+                mt={3}
+                alignItems="start"
+                fontSize="sm"
+                css={{
+                  '& .sd-search-outer-section::-webkit-scrollbar-thumb': {
+                    borderRadius: 'full',
+                    backgroundColor: 'shared.scrollbar.thumb.bgColor',
+                    '&:hover': {
+                      backgroundColor: 'shared.scrollbar.thumb.hover.bgColor'
+                    },
+                    transition: 'background-color 0.2s ease-in-out'
+                  },
+
+                  '& .sd-search-outer-section::-webkit-scrollbar': {
+                    width: '4px',
+                    backgroundColor: 'transparent'
+                  }
+                }}
+              >
+                {!isLoading && searchResultItems}
+              </VStack>
+            </Dialog.Body>
+          </Dialog.Content>
+        </Dialog.Positioner>
+
+      </Portal>
+    </Dialog.Root>
   );
 };
 

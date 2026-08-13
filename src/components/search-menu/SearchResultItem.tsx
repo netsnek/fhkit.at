@@ -1,13 +1,4 @@
-import {
-  MenuItemProps,
-  LinkBox,
-  LinkOverlay,
-  Text,
-  Box,
-  Spacer,
-  Flex,
-  Stack
-} from '@chakra-ui/react';
+import { Steps, MenuItemProps, LinkBox, LinkOverlay, Text, Box, Spacer, Flex, Stack } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import { TSearchResult } from '../../../shared/types/search';
 import Highlighter from 'react-highlight-words';
@@ -53,8 +44,6 @@ export const SearchResultItem: FC<{
 
   return (
     <LinkBox
-      as={Flex}
-      key={id}
       id={`sd-search-ri-${id}`}
       _hover={{
         bgColor: 'features.search.section.item._hover.bgColor',
@@ -74,68 +63,66 @@ export const SearchResultItem: FC<{
         bgColor: 'features.search.section.item._hover.bgColor',
         color: 'features.search.section.item._hover.color'
       })}
-    >
-      <Box
-        display="flex"
-        alignItems="center"
-        __css={{
-          '& svg': {
-            stroke: 'features.search.section.item.icon.color',
-            verticalAlign: 'middle'
-          }
-        }}
-        w={isDocs ? 'calc(95% - 20px)' : 'calc(95%)'}
-      >
-        {icon}
-        <LinkOverlay
-          as={Link}
-          to={item.to}
-          ml={2}
-          _focus={{
-            outline: 'none'
-          }}
-          textOverflow="ellipsis"
-          overflow="hidden"
-          whiteSpace="nowrap"
-        >
-          {isDocs ? (
-            <Stack spacing="0.5">
-              <Text
-                fontSize="sm"
-                color="features.search.section.item.title.color"
-                fontWeight="bold"
-              >
-                <Highlighter
-                  searchWords={queryTokens}
-                  autoEscape
-                  textToHighlight={item.title}
-                  highlightTag={highlightTag}
-                />
-              </Text>
-              {item.description && (
-                <Text
-                  fontSize="sm"
-                  color="features.search.section.item.description.color"
-                >
-                  <Highlighter
-                    searchWords={queryTokens}
-                    autoEscape
-                    textToHighlight={item.description}
-                    highlightTag={highlightTag}
-                  />
-                </Text>
-              )}
-            </Stack>
-          ) : (
-            item.title || item.description
-          )}
-        </LinkOverlay>
-      </Box>
-      <Spacer />
-      <Text whiteSpace="nowrap" color="features.search.section.item.goto.color">
-        Go to
-      </Text>
-    </LinkBox>
+      asChild><Flex key={id}>
+          <Box
+            display="flex"
+            alignItems="center"
+            css={{
+              '& & svg': {
+                stroke: 'features.search.section.item.icon.color',
+                verticalAlign: 'middle'
+              }
+            }}
+            w={isDocs ? 'calc(95% - 20px)' : 'calc(95%)'}
+          >
+            {icon}
+            <LinkOverlay
+              ml={2}
+              _focus={{
+                outline: 'none'
+              }}
+              textOverflow="ellipsis"
+              overflow="hidden"
+              whiteSpace="nowrap"
+              asChild><Link to={item.to}>
+                {isDocs ? (
+                  <Stack gap="0.5">
+                    <Text
+                      fontSize="sm"
+                      color="features.search.section.item.title.color"
+                      fontWeight="bold"
+                    >
+                      <Highlighter
+                        searchWords={queryTokens}
+                        autoEscape
+                        textToHighlight={item.title}
+                        highlightTag={highlightTag}
+                      />
+                    </Text>
+                    {item.description && (
+                      <Text
+                        fontSize="sm"
+                        color="features.search.section.item.description.color"
+                      >
+                        <Highlighter
+                          searchWords={queryTokens}
+                          autoEscape
+                          textToHighlight={item.description}
+                          highlightTag={highlightTag}
+                        />
+                      </Text>
+                    )}
+                  </Stack>
+                ) : (
+                  item.title || item.description
+                )}
+              </Link></LinkOverlay>
+          </Box>
+          <Spacer />
+          <Text whiteSpace="nowrap" color="features.search.section.item.goto.color">
+            Go to
+          </Text>
+        </Flex></LinkBox>
   );
 };
 

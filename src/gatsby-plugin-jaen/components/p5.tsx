@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Box, HTMLChakraProps, chakra} from '@chakra-ui/react'
+import { Steps, Box, HTMLChakraProps, chakra } from '@chakra-ui/react';
 
 export const MyP5Icon: React.FC<HTMLChakraProps<'svg'>> = props => {
   return (
@@ -9,8 +9,8 @@ export const MyP5Icon: React.FC<HTMLChakraProps<'svg'>> = props => {
       width="full"
       height="full"
       viewBox="0 0 1000 1000"
-      sx={{
-        '.squarel': {
+      css={{
+        '& .squarel': {
           fillRule: 'evenodd',
           clipRule: 'evenodd',
           fill: '#000000'
@@ -71,5 +71,5 @@ export const MyP5Icon: React.FC<HTMLChakraProps<'svg'>> = props => {
           d="M864.8,951.5l0-77.5l43.1,0l0,10.4l-32.5,0v21.1l30.1,0V916l-30.1,0l0,25.1l32.5,0v10.4L864.8,951.5z"></path>
       </g>
     </chakra.svg>
-  )
+  );
 }

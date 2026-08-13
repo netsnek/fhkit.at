@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { Steps, ChakraProvider } from '@chakra-ui/react';
 import SearchMenu from '../../components/search-menu';
 import { chromeSystem } from '../../styles/theme/system';
 

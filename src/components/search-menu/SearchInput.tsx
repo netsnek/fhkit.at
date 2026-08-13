@@ -1,4 +1,5 @@
 import {
+  Steps,
   FocusLock,
   Input,
   InputGroup,
@@ -6,10 +7,10 @@ import {
   InputRightElement,
   InputRightElementProps,
   Kbd,
-  useColorModeValue,
   useMenuButton,
-  useMenuContext
+  useMenuContext,
 } from '@chakra-ui/react';
+import { useColorModeValue } from "../ui/color-mode";
 import {
   Dispatch,
   SetStateAction,
@@ -104,7 +105,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
     }, [menu.isOpen]);
 
     return (
-      <FocusLock isDisabled={!isFocusLocked}>
+      <FocusLock disabled={!isFocusLocked}>
         <InputGroup size="sm">
           <Input
             type="text"
@@ -121,7 +122,9 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
             _focus={{
               backgroundColor: 'topNav.input.focus.bgColor'
             }}
-            focusBorderColor={focusBorderColor}
+            css={{
+              '--focus-color': focusBorderColor
+            }}
             {...menuButton}
             {...styleProps?.parent}
             onClick={e => {

@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react';
+import { Steps, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import useTocNavigation from '../../hooks/use-toc-navigation';
 
@@ -28,7 +28,7 @@ const TableOfContent: FC<ITableOfContentProps> = ({
   );
 
   return (
-    <VStack spacing={2} fontSize="sm">
+    <VStack gap={2} fontSize="sm">
       {data.map(item => {
         const isActive = false; //TODO: implement active state
         return (

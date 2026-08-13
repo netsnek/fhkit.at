@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Steps, Icon, IconProps } from '@chakra-ui/react';
 
 /**
  * Tabler icon: `user-minus`.

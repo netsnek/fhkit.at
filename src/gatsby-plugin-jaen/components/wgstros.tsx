@@ -1,4 +1,4 @@
-import {HTMLChakraProps, chakra} from '@chakra-ui/react'
+import { Steps, HTMLChakraProps, chakra } from '@chakra-ui/react';
 
 export const WGIcon: React.FC<HTMLChakraProps<'svg'>> = props => {
   return (

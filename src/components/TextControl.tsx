@@ -1,4 +1,5 @@
 import {
+  Steps,
   ButtonGroup,
   Editable,
   EditableInput,
@@ -11,9 +12,9 @@ import {
   Input,
   Text,
   Textarea,
-  useEditableControls
+  useEditableContext,
 } from '@chakra-ui/react';
-import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { LuCheck, LuPencil, LuX } from 'react-icons/lu';
 
 export const TextControl: React.FC<{
   text?: string;
@@ -28,46 +29,29 @@ export const TextControl: React.FC<{
       getSubmitButtonProps,
       getCancelButtonProps,
       getEditButtonProps
-    } = useEditableControls();
+    } = useEditableContext();
 
     return isEditing ? (
       <ButtonGroup justifyContent="center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-          aria-label="Edit"
-        />
-        <IconButton
-          variant="outline"
-          icon={<CloseIcon />}
-          {...getCancelButtonProps()}
-          aria-label="Close"
-        />
+        <IconButton {...getSubmitButtonProps()} aria-label="Edit"><LuCheck /></IconButton>
+        <IconButton variant="outline" {...getCancelButtonProps()} aria-label="Close"><LuX /></IconButton>
       </ButtonGroup>
     ) : (
       <Flex justifyContent="center">
-        <IconButton
-          variant="ghost"
-          size="sm"
-          icon={<EditIcon />}
-          {...getEditButtonProps()}
-          aria-label="Edit"
-        />
+        <IconButton variant="ghost" size="sm" {...getEditButtonProps()} aria-label="Edit"><LuPencil /></IconButton>
       </Flex>
     );
   }
 
   return (
-    <Editable
+    <Editable.Root
       as={HStack}
       textAlign={props.type === 'heading' ? 'center' : 'left'}
-      isPreviewFocusable={props.editable ? true : false}
       defaultValue={props.text}
-      onSubmit={props.onSubmit}
+      onValueCommit={props.onSubmit}
       fontSize={props.type === 'heading' ? '4xl' : undefined}
-      fontWeight={props.type === 'heading' ? 'bold' : 'normal'}
-    >
-      <EditablePreview as={props.type === 'heading' ? Heading : Text} />
+      fontWeight={props.type === 'heading' ? 'bold' : 'normal'}>
+      <Editable.Preview as={props.type === 'heading' ? Heading : Text} />
       {/* Here is the custom input */}
       {props.type === 'heading' ? (
         <Input as={EditableInput} />
@@ -75,6 +59,6 @@ export const TextControl: React.FC<{
         <Textarea as={EditableTextarea} />
       )}
       {props.editable && <EditableControls />}
-    </Editable>
+    </Editable.Root>
   );
 };

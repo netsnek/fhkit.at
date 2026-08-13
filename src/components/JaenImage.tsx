@@ -1,6 +1,6 @@
 import { Field } from 'jaen';
 import { ImageFieldProps } from 'jaen';
-import { Box } from '@chakra-ui/react';
+import { Steps, Box } from '@chakra-ui/react';
 import { FC } from 'react';
 
 interface IImageProps {

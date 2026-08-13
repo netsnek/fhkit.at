@@ -1,16 +1,14 @@
 import {
+  Steps,
   HeadingProps,
   Heading,
-  MenuGroup,
-  MenuDivider,
   HStack,
   Box,
   Divider,
   Icon,
   VStack,
-  UnorderedList,
-  ListItem,
-  Stack
+  Stack,
+  List,
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import SearchResultItem from './SearchResultItem';
@@ -49,8 +47,8 @@ export const SearchResultSectionTitle: FC<
       <HStack
         mb={2}
         mt={idx === 0 ? 2 : 5}
-        __css={{
-          '& svg': {
+        css={{
+          '& & svg': {
             stroke: props.color ?? 'components.menu.groupTitle.color'
           }
         }}
@@ -89,7 +87,7 @@ export const SearchResultSection: FC<{
   };
 
   return (
-    <Stack key={idx} w="full" spacing="1">
+    <Stack key={idx} w="full" gap="1">
       {isDocs && (
         <SearchResultItem
           item={{
@@ -106,8 +104,8 @@ export const SearchResultSection: FC<{
       )}
       {/* <SearchResultSectionTitle title={section.title} idx={idx} icon={icon} /> */}
       {/* <Divider /> */}
-      <UnorderedList listStyleType="none" ml={isDocs ? 4 : 0}>
-        <ListItem>
+      <List.Root as='ul' listStyleType="none" ml={isDocs ? 4 : 0}>
+        <List.Item>
           {section.results.map((result, i) => (
             <SearchResultItem
               item={result}
@@ -120,8 +118,8 @@ export const SearchResultSection: FC<{
               isDocs={isDocs}
             />
           ))}
-        </ListItem>
-      </UnorderedList>
+        </List.Item>
+      </List.Root>
     </Stack>
   );
 };

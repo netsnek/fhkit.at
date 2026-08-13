@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Box, chakra} from '@chakra-ui/react'
+import { Steps, Box, chakra } from '@chakra-ui/react';
 
 export const Logo = (props: any) => {
   return (
@@ -9,16 +9,18 @@ export const Logo = (props: any) => {
       width="full"
       height="full"
       viewBox="0 0 475 475"
-      sx={{
-        '.squarel': {
+      css={{
+        '& .squarel': {
           fillRule: 'evenodd',
           clipRule: 'evenodd',
           fill: 'transparent'
         },
-        '.snek': {
+
+        '& .snek': {
           fill: 'currentColor'
         },
-        '.arrows': {
+
+        '& .arrows': {
             fill: 'currentColor'
           }
       }}
@@ -45,7 +47,7 @@ export const Logo = (props: any) => {
         />
       </g>
     </chakra.svg>
-  )
+  );
 }
 
 export default Logo

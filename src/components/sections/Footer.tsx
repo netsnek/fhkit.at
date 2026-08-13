@@ -1,9 +1,9 @@
 import {
+  Steps,
   Box,
   Center,
   Heading,
   Container,
-  Divider,
   Flex,
   HStack,
   Icon,
@@ -13,8 +13,9 @@ import {
   Spacer,
   Text,
   VStack,
-  useColorModeValue
+  Separator,
 } from '@chakra-ui/react';
+import { useColorModeValue } from "../ui/color-mode";
 import { FC, ReactNode } from 'react';
 import { Link } from 'gatsby-plugin-jaen';
 import { Field } from 'jaen';
@@ -91,7 +92,7 @@ const Footer: FC = () => {
 
   links.forEach((linkGroup, i) => {
     linkElmnts.push(
-      <VStack spacing={3} alignItems="start" wrap="wrap" key={i}>
+      <VStack gap={3} alignItems="start" wrap="wrap" key={i}>
         {linkGroup.map((link, i) => {
           if ('isTitle' in link) {
             return (
@@ -184,7 +185,7 @@ const Footer: FC = () => {
             <Spacer minW={{ base: '5rem', lg: '25%' }} />
             <HStack
               alignItems="start"
-              spacing={{ base: 5, sm: 20 }}
+              gap={{ base: 5, sm: 20 }}
               wrap={{ base: 'wrap', md: 'nowrap' }}
               mt={{ base: 10, md: 0 }}
             >
@@ -243,60 +244,72 @@ const Footer: FC = () => {
             //justifyContent={"flex-end"}
             color={'white'}
             mt={20}
-            as={LinkBox}
-            spacing="4"
+            gap="4"
             flexWrap={'wrap'}
-          >
-            <LinkBox
-              mr="4"
-              display="flex"
-              transition="color 0.2s"
-              _hover={{
-                color: 'brand.500'
-              }}
-            >
-              <LinkOverlay href="https://facebook.com/netsnek" isExternal>
-                <Icon as={FaFacebook} boxSize="5" />
-              </LinkOverlay>
-            </LinkBox>
-            <LinkBox
-              mr="4"
-              display="flex"
-              transition="color 0.2s"
-              _hover={{
-                color: 'brand.500'
-              }}
-            >
-              <LinkOverlay href="https://instagram.com/netsnek" isExternal>
-                <Icon as={FaInstagram} boxSize="5" />
-              </LinkOverlay>
-            </LinkBox>
-            <LinkBox
-              mr="4"
-              display="flex"
-              transition="color 0.2s"
-              _hover={{
-                color: 'brand.500'
-              }}
-            >
-              <LinkOverlay href="https://twitter.com/netsnek_com" isExternal>
-                <Icon as={FaTwitter} boxSize="5" />
-              </LinkOverlay>
-            </LinkBox>
-            <LinkBox
-              mr="4"
-              display="flex"
-              transition="color 0.2s"
-              _hover={{
-                color: 'brand.500'
-              }}
-            >
-              <LinkOverlay href="https://github.com/netsnek" isExternal>
-                <Icon as={FaGithub} boxSize="5" />
-              </LinkOverlay>
-            </LinkBox>
-          </HStack>
-          <Divider mt={8} opacity={0.2} />
+            asChild
+          ><LinkBox>
+              <LinkBox
+                mr="4"
+                display="flex"
+                transition="color 0.2s"
+                _hover={{
+                  color: 'brand.500'
+                }}
+              >
+                <LinkOverlay
+                  href="https://facebook.com/netsnek"
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <Icon boxSize="5" asChild><FaFacebook /></Icon>
+                </LinkOverlay>
+              </LinkBox>
+              <LinkBox
+                mr="4"
+                display="flex"
+                transition="color 0.2s"
+                _hover={{
+                  color: 'brand.500'
+                }}
+              >
+                <LinkOverlay
+                  href="https://instagram.com/netsnek"
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <Icon boxSize="5" asChild><FaInstagram /></Icon>
+                </LinkOverlay>
+              </LinkBox>
+              <LinkBox
+                mr="4"
+                display="flex"
+                transition="color 0.2s"
+                _hover={{
+                  color: 'brand.500'
+                }}
+              >
+                <LinkOverlay
+                  href="https://twitter.com/netsnek_com"
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <Icon boxSize="5" asChild><FaTwitter /></Icon>
+                </LinkOverlay>
+              </LinkBox>
+              <LinkBox
+                mr="4"
+                display="flex"
+                transition="color 0.2s"
+                _hover={{
+                  color: 'brand.500'
+                }}
+              >
+                <LinkOverlay
+                  href="https://github.com/netsnek"
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <Icon boxSize="5" asChild><FaGithub /></Icon>
+                </LinkOverlay>
+              </LinkBox>
+            </LinkBox></HStack>
+          <Separator mt={8} opacity={0.2} />
           <Field.Text
             name="FooterBottomText"
             defaultValue="Copyright © 2024 Netsnek, Florian Herbert Kleber IT & Werbeagentur Nico Schett. All rights reserved."

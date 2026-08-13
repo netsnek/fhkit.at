@@ -1,17 +1,4 @@
-import {
-    Alert,
-    AlertDescription,
-    AlertIcon,
-    AlertTitle,
-    Box,
-    BoxProps,
-    Center,
-    Heading,
-    Link,
-    Spinner,
-    Text,
-    chakra
-  } from '@chakra-ui/react'
+import { Steps, Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } from '@chakra-ui/react';
   import {useCookieConsentContext} from 'jaen'
   import {useEffect, useState} from 'react'
   // import {useCookieConsent} from '@jaenjs/jaen'
@@ -57,7 +44,7 @@ import {
   
     if (mapsEnabled === false) {
       return (
-        <Alert
+        <Alert.Root
           h="full"
           status="warning"
           variant="subtle"
@@ -66,17 +53,17 @@ import {
           justifyContent="center"
           textAlign="center">
           <Spinner />
-          <AlertTitle mt={4} mb={1} fontSize="lg">
+          <Alert.Title mt={4} mb={1} fontSize="lg">
             Google Maps is nicht verfügbar
-          </AlertTitle>
-          <AlertDescription maxWidth="sm">
+          </Alert.Title>
+          <Alert.Description maxWidth="sm">
             Bitte aktivieren Sie Cookies, um Google Maps anzuzeigen.{' '}
             <Link onClick={handleAccept} variant="link">
               Analyse Cookies aktivieren
             </Link>
-          </AlertDescription>
-        </Alert>
-      )
+          </Alert.Description>
+        </Alert.Root>
+      );
     }
   
     return (

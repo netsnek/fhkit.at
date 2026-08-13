@@ -1,15 +1,4 @@
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-import {
-  AccordionButton,
-  AccordionButtonProps,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Center,
-  CenterProps,
-  LinkProps
-} from '@chakra-ui/react';
+import { Steps, AccordionButtonProps, Box, Center, CenterProps, LinkProps, Icon } from '@chakra-ui/react';
 import { Link } from 'gatsby-plugin-jaen';
 import { MouseEvent, createRef } from 'react';
 import { NavMenuItem } from '../../../../utils/navigation/types';
@@ -17,6 +6,7 @@ import {
   activeMenuItemProps,
   inactiveMenuItemProps
 } from '../vars/pageDirectory';
+import { LuArrowRight } from 'react-icons/lu';
 
 /**
  * Handles clicks on links in the main navigation menu. If the target is not an anchor element, the default action is prevented, which prevents the page from reloading.
@@ -51,7 +41,7 @@ export const generateMenuItem = (
   const accordionItemRef = createRef<HTMLDivElement>();
 
   const externalLinkIcon = (
-    <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />
+    <Icon transform={`rotate(-45deg)`} ml={2} asChild><LuArrowRight /></Icon>
   );
 
   const styleProps: CenterProps & AccordionButtonProps & LinkProps = {
@@ -90,10 +80,10 @@ export const generateMenuItem = (
       item.isActive ? '' : 'in'
     }activeItem.`;
     resultObj.item = (
-      <AccordionItem
+      <Accordion.Item
         ref={accordionItemRef}
         key={item.href + item.name}
-        id={item.href + item.name}
+        value={item.href + item.name}
         css={{
           // Remove padding from last accordion item
           '& .chakra-accordion__panel': {
@@ -123,7 +113,7 @@ export const generateMenuItem = (
                 }
               }}
             >
-              <AccordionButton
+              <Accordion.ItemTrigger
                 {...(item.isActive
                   ? activeMenuItemProps
                   : inactiveMenuItemProps)}
@@ -148,34 +138,34 @@ export const generateMenuItem = (
                     bgColor: semanticPath + 'button.icon.hoverContainerBgColor'
                   }}
                 >
-                  <AccordionIcon
+                  <Accordion.ItemIndicator
                     className="prv-link"
                     opacity="inherit"
                     transform={`rotate(${isExpanded ? 0 : -90}deg)`}
                   />
                 </Center>
-              </AccordionButton>
+              </Accordion.ItemTrigger>
             </Link>
-            <AccordionPanel position="relative">
-              <Box
-                _before={{
-                  content: '""',
-                  display: 'block',
-                  position: 'absolute',
-                  top: 2,
-                  borderRadius: 'full',
-                  left: '10px',
-                  width: '1px',
-                  height: 'calc(100% - 0.5rem)',
-                  backgroundColor: 'leftNav.accordion.panel.borderLeftColor'
-                }}
-              >
-                {children?.map(child => child.item)}
-              </Box>
-            </AccordionPanel>
+            <Accordion.ItemContent position="relative"><Accordion.ItemBody>
+                <Box
+                  _before={{
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 2,
+                    borderRadius: 'full',
+                    left: '10px',
+                    width: '1px',
+                    height: 'calc(100% - 0.5rem)',
+                    backgroundColor: 'leftNav.accordion.panel.borderLeftColor'
+                  }}
+                >
+                  {children?.map(child => child.item)}
+                </Box>
+              </Accordion.ItemBody></Accordion.ItemContent>
           </>
         )}
-      </AccordionItem>
+      </Accordion.Item>
     );
   } else {
     resultObj.item = (

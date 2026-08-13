@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Box, HTMLChakraProps, chakra} from '@chakra-ui/react'
+import { Steps, Box, HTMLChakraProps, chakra } from '@chakra-ui/react';
 
 export const Logo = (props: any) => {
   return (
@@ -9,13 +9,14 @@ export const Logo = (props: any) => {
       width="full"
       height="full"
       viewBox="0 0 475 475"
-      sx={{
-        '.squarel': {
+      css={{
+        '& .squarel': {
           fillRule: 'evenodd',
           clipRule: 'evenodd',
           fill: '#000000'
         },
-        '.k': {
+
+        '& .k': {
           fill: '#FFFFFF'
         }
       }}
@@ -50,7 +51,7 @@ export const Logo = (props: any) => {
         />
       </g>
     </chakra.svg>
-  )
+  );
 }
 
 export const FHKITIcon: React.FC<HTMLChakraProps<'svg'>> = props => {
@@ -60,13 +61,14 @@ export const FHKITIcon: React.FC<HTMLChakraProps<'svg'>> = props => {
       width="full"
       height="full"
       viewBox="0 0 475 475"
-      sx={{
-        '.squarel': {
+      css={{
+        '& .squarel': {
           fillRule: 'evenodd',
           clipRule: 'evenodd',
           fill: '#000000'
         },
-        '.k': {
+
+        '& .k': {
           fill: '#FFFFFF'
         }
       }}
@@ -94,7 +96,7 @@ export const FHKITIcon: React.FC<HTMLChakraProps<'svg'>> = props => {
         />
       </g>
     </chakra.svg>
-  )
+  );
 }
 
 export default Logo

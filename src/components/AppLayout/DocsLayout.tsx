@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text, VStack } from '@chakra-ui/react';
+import { Steps, Box, Container, Flex, Text, VStack } from '@chakra-ui/react';
 import React, { FC, useMemo, useState } from 'react';
 import { useMenuStructureContext } from '../../contexts/menu-structure';
 import { createBreadCrumbParts } from '../../utils/navigation';

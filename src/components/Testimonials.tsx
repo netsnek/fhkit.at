@@ -1,6 +1,6 @@
-'use client';
-
+'use client';;
 import {
+  Steps,
   Box,
   Flex,
   Heading,
@@ -8,10 +8,10 @@ import {
   Stack,
   Container,
   Avatar,
-  useColorModeValue,
   LinkBox,
-  LinkOverlay
+  LinkOverlay,
 } from '@chakra-ui/react';
+import { useColorModeValue } from "./ui/color-mode";
 import { Link } from 'gatsby-plugin-jaen';
 
 interface Props {
@@ -91,13 +91,13 @@ export const TestimonialAvatar = ({
 }) => {
   return (
     <Flex align={'center'} mt={8} direction={'column'}>
-      <Avatar src={src} mb={2} objectFit={'contain'} />
-      <Stack spacing={-1} align={'center'}>
+      <Avatar.Root mb={2} objectFit={'contain'}><Avatar.Fallback /><Avatar.Image src={src} /></Avatar.Root>
+      <Stack gap={-1} align={'center'}>
         <Text fontWeight={600}>{name}</Text>
         <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
           {title}
         </Text>
       </Stack>
     </Flex>
-  )
+  );
 }

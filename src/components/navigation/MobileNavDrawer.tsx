@@ -1,4 +1,4 @@
-import { Box, Collapse, Flex, Spacer } from '@chakra-ui/react';
+import { Steps, Box, Collapsible, Flex, Spacer } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import PageDirectory from './page-directory/PageDirectory';
 import NavbarControls from './NavbarControls';
@@ -37,29 +37,31 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
         }}
       />
       <Box position="fixed" top={`calc(64px)`} left={0} zIndex={3}>
-        <Collapse in={isOpen} animateOpacity>
-          <Flex
-            direction="column"
-            w="100vw"
-            h={`calc(100vh - ${navOffset})`}
-            bg="shared.body.bgColor"
-            pt={9}
-            px={9}
-            overflowY="scroll"
-          >
-            <SearchMenu />
-            <Box mt={5}>
-              <PageDirectory
-                isMobile
-                closeMobileDrawer={onClose}
-                data={menuStructure}
-                path={pathname}
-              />
-            </Box>
-            <Spacer />
-            <NavbarControls isMobile />
-          </Flex>
-        </Collapse>
+        <Collapsible.Root open={isOpen}>
+          <Collapsible.Content>
+            <Flex
+              direction="column"
+              w="100vw"
+              h={`calc(100vh - ${navOffset})`}
+              bg="shared.body.bgColor"
+              pt={9}
+              px={9}
+              overflowY="scroll"
+            >
+              <SearchMenu />
+              <Box mt={5}>
+                <PageDirectory
+                  isMobile
+                  closeMobileDrawer={onClose}
+                  data={menuStructure}
+                  path={pathname}
+                />
+              </Box>
+              <Spacer />
+              <NavbarControls isMobile />
+            </Flex>
+          </Collapsible.Content>
+        </Collapsible.Root>
       </Box>
     </>
   );

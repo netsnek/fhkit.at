@@ -1,12 +1,5 @@
 import { FC } from 'react'
-import {
-  Box,
-  BoxProps,
-  Image,
-  LinkBox,
-  LinkOverlay,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import { Steps, Box, BoxProps, Image, LinkBox, LinkOverlay, useBreakpointValue } from '@chakra-ui/react';
 import Marquee from 'react-fast-marquee'
 
 // Defining type for a single client
@@ -78,7 +71,7 @@ const ClientsMarquee: FC<ClientsMarqueeProps> = ({...props}) => {
               p="2"
               mx="16"
               overflow="hidden">
-              <LinkOverlay href={client.href} isExternal>
+              <LinkOverlay href={client.href} target='_blank' rel='noopener noreferrer'>
                 <Image
                   src={client.logo}
                   alt={client.name}
@@ -91,7 +84,7 @@ const ClientsMarquee: FC<ClientsMarqueeProps> = ({...props}) => {
         </Box>
       </Marquee>
     </Box>
-  )
+  );
 }
 
 export default ClientsMarquee

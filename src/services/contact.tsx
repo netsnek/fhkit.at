@@ -1,4 +1,4 @@
-import { useToast } from "@chakra-ui/react";
+import { Steps, useToast } from "@chakra-ui/react";
 import { sendTemplateMail } from "gatsby-jaen-emailwerk";
 import React, { useMemo } from "react";
 import { RouteComponentProps } from "@reach/router";

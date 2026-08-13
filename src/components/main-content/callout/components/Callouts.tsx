@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box } from '@chakra-ui/react';
+import { Steps, Alert, Box } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface ICalloutProps {
@@ -13,18 +13,18 @@ interface ICalloutProps {
  */
 const Callout: FC<ICalloutProps> = ({ type = 'default', icon, children }) => {
   return (
-    <Alert variant={type} borderRadius="lg" p={4} mt={8}>
-      <AlertIcon>{icon}</AlertIcon>
+    <Alert.Root variant={type} borderRadius="lg" p={4} mt={8}>
+      <Alert.Indicator />
       <Box
-        __css={{
-          '.chakra-text': {
+        css={{
+          '& .chakra-text': {
             marginTop: '0 !important'
           }
         }}
       >
         {children}
       </Box>
-    </Alert>
+    </Alert.Root>
   );
 };
 

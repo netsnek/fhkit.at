@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { chakra } from '@chakra-ui/react'
+import { Steps, chakra } from '@chakra-ui/react';
 
 function Block({ x, y, ...props }) {
   return (
@@ -13,7 +13,8 @@ function Block({ x, y, ...props }) {
 }
 
 export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
-  let id = useId()
+  // Use React.useId instead (available in React 18+)
+  let id = useId();
   let ref = useRef()
   let currentBlock = useRef()
   let counter = useRef(0)

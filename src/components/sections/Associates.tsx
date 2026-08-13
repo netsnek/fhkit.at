@@ -1,4 +1,5 @@
 import {
+  Steps,
   Link,
   Image,
   Heading,
@@ -7,8 +8,8 @@ import {
   GridItem,
   Grid,
   AspectRatio,
-  chakra
-} from '@chakra-ui/react'
+  chakra,
+} from '@chakra-ui/react';
 import {Field} from 'jaen'
 
 const Associates = () => {
@@ -87,7 +88,8 @@ const Associates = () => {
           _hover={{bg: 'brand.500'}}>
           <LinkOverlay
             href={'https://www.wko.at/oe/aussenwirtschaft'}
-            isExternal>
+            target='_blank'
+            rel='noopener noreferrer'>
             <AspectRatio ratio={4 / 3}>
               {/* Assuming you have a way to dynamically select your icon component */}
               <Image
@@ -95,7 +97,7 @@ const Associates = () => {
                 alt={'Austria'}
                 w="full"
                 h="full"
-                sx={{
+                css={{
                   objectFit: 'contain !important'
                 }}
               />
@@ -122,7 +124,7 @@ const Associates = () => {
           overflow="hidden"
           transition="bg 0.2s"
           _hover={{bg: 'brand.500'}}>
-          <LinkOverlay href={associate.href} isExternal>
+          <LinkOverlay href={associate.href} target='_blank' rel='noopener noreferrer'>
             <AspectRatio ratio={4 / 3}>
               {/* Assuming you have a way to dynamically select your icon component */}
               <Image
@@ -130,7 +132,7 @@ const Associates = () => {
                 alt={associate.name}
                 w="full"
                 h="full"
-                sx={{
+                css={{
                   objectFit: 'contain !important'
                 }}
               />
@@ -164,7 +166,7 @@ const Associates = () => {
         </Link>
       </GridItem>
     </Grid>
-  )
+  );
 }
 
 export default Associates

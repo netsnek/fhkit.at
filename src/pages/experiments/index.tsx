@@ -1,14 +1,7 @@
 import { sq } from '@/clients/social';
 import { PageConfig, PageProps } from 'jaen';
 
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  Stack,
-  VStack,
-  keyframes
-} from '@chakra-ui/react';
+import { Steps, Box, Heading, SimpleGrid, Stack, VStack, keyframes } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import { useQuery } from 'snek-query/react-hooks';

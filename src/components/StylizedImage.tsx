@@ -1,5 +1,5 @@
 import {useId} from 'react'
-import {Box, Image, AspectRatio} from '@chakra-ui/react'
+import { Steps, Box, Image, AspectRatio } from '@chakra-ui/react';
 
 const shapes = [
   {
@@ -20,6 +20,7 @@ const shapes = [
 ]
 
 export function StylizedImage({ shape = 0, ...props }) {
+  // Use React.useId instead (available in React 18+)
   let id = useId();
   let { width, height, path } = shapes[shape];
 

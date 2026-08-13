@@ -2,7 +2,7 @@ import { PageConfig, PageProps } from 'jaen';
 import { Global } from '@emotion/react';
 
 import { graphql } from 'gatsby';
-import { Flex, Heading, Stack } from '@chakra-ui/react';
+import { Steps, Flex, Heading, Stack } from '@chakra-ui/react';
 import AboutUs from '../components/sections/AboutUs';
 import Features from '../components/sections/Features';
 import Hero from '../components/sections/Hero';
@@ -81,7 +81,7 @@ const IndexPage: React.FC<PageProps> = () => {
           <br/><br/>
           - Florian'
         />
-        <Stack spacing={0}>
+        <Stack gap={0}>
           <Field.Text
             mt={{ base: '20 !important', md: '0' }}
             mb="8"
@@ -102,7 +102,7 @@ const IndexPage: React.FC<PageProps> = () => {
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 10, md: 4, lg: 10 }}
+          gap={{ base: 10, md: 4, lg: 10 }}
         >
           <Testimonial>
             <TestimonialContent>

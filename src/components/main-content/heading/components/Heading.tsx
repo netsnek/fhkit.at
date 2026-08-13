@@ -1,9 +1,10 @@
 import {
+  Steps,
   Heading as ChakraHeading,
   HeadingProps as ChakraHeadingProps,
   HeadingProps,
   ResponsiveValue,
-  ThemeTypings
+  ThemeTypings,
 } from '@chakra-ui/react';
 import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import { IMainContentComponentBaseProps } from '../../types/mainContent';

@@ -1,5 +1,4 @@
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Box, Card, CardProps, LinkBox, LinkOverlay } from '@chakra-ui/react';
+import { Steps, Box, Card, CardProps, LinkBox, LinkOverlay, Icon } from '@chakra-ui/react';
 import { FC } from 'react';
 import { IMainContentComponentBaseProps } from '../../types/mainContent';
 import { TImageData } from '../types/imageCard';
@@ -7,6 +6,7 @@ import { useContentManagement, useEditingContext } from 'jaen';
 import { TLinkData } from '../../../types';
 import JaenImage from '../../../JaenImage';
 import { Link } from 'gatsby-plugin-jaen';
+import { LuArrowRight } from 'react-icons/lu';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
   id: string;
@@ -40,7 +40,7 @@ const ImageCard: FC<IImageCardProps> = ({
 
   return (
     <LinkBox>
-      <Card
+      <Card.Root
         {...baseProps}
         maxW={size}
         bgColor="components.imageCard.bgColor"
@@ -77,14 +77,14 @@ const ImageCard: FC<IImageCardProps> = ({
             to={link.href}
           >
             {link.name}
-            <ArrowForwardIcon
+            <Icon
               className="sd-cmp-image-card-link-icon"
               ml={2}
               transition="margin .15s ease-in-out"
-            />
+              asChild><LuArrowRight /></Icon>
           </Link>
         </Box>
-      </Card>
+      </Card.Root>
     </LinkBox>
   );
 };
