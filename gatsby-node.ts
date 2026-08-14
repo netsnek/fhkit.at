@@ -5,8 +5,23 @@ import fs from 'fs';
 import { buildSearchIndex } from './src/utils/search/build-search-index';
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
+  stage,
   actions
 }) => {
+  /**
+   * No source maps in the production bundle.
+   *
+   * They were 3550 of the build's 8886 files and about 60 of its 104 MB, which
+   * is what made `wrangler pages deploy` give up after eighteen upload attempts
+   * with an empty error. They also publish the site's own sources, including
+   * every comment, to anyone who asks for the .map next to a chunk.
+   *
+   * Development keeps them: this only touches the two production stages.
+   */
+  if (stage === 'build-javascript' || stage === 'build-html') {
+    actions.setWebpackConfig({ devtool: false });
+  }
+
   actions.setWebpackConfig({
     resolve: {
       alias: {
