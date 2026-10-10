@@ -11,15 +11,23 @@ import { useAuth, useNotificationsContext } from "jaen";
 import { useQueryRouter } from "../hooks/use-query-router";
 
 /**
- * The emailwerk template the form posts to.
+ * The emailwerk template the form posts to, or null while fhkit.at has none.
  *
- * TODO: replace with fhkit.at's own template id once it exists. This is
- * netsnek.com's "Contact" template, which means an inquiry sent from here
- * currently lands in netsnek's inbox and the confirmation carries netsnek's
- * branding. It is here so the form is exercisable end to end during
- * development; see docs/emailwerk-setup.md for what has to be created.
+ * TODO: set to the id of fhkit's own "fhkit Contact" template once it has
+ * been created in emailwerk (docs/emailwerk-setup.md lists both templates and
+ * the CORS entry that go with it).
+ *
+ * This used to carry netsnek.com's Contact template, so the day emailwerk
+ * accepted this origin every fhkit enquiry would have gone to netsnek's inbox
+ * with netsnek's branding on the confirmation. Until fhkit's own template
+ * exists the form falls back to a prefilled mail to {@link CONTACT_EMAIL}
+ * instead, the way adlerhorst does, so it is never a dead end and never
+ * delivers to the wrong business.
  */
-const CONTACT_TEMPLATE_ID = 'cmsmguuxh0038rb2pgsrpzhur';
+const CONTACT_TEMPLATE_ID: string | null = null;
+
+/** The site's own mailbox, as the footer and the legal notice give it. */
+const CONTACT_EMAIL = 'office@fhkit.at';
 
 /**
  * The inline style the confirmation template gives its links.
@@ -184,6 +192,32 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
   };
 
   const onSubmit = async (data: ContactFormValues): Promise<void> => {
+    // The fallback, taken while fhkit has no emailwerk template. It opens the
+    // visitor's own mail client with the enquiry already written out, labelled
+    // in the language the form was filled in.
+    if (!CONTACT_TEMPLATE_ID) {
+      const text = confirmationText(intl);
+      const name = `${data.firstName} ${data.lastName}`.trim();
+
+      const lines = [
+        `${text.t_labelName} ${name}`,
+        `${text.t_labelEmail} ${data.email}`
+      ];
+
+      if (data.phone) lines.push(`${text.t_labelPhone} ${data.phone}`);
+
+      lines.push('', `${text.t_labelMessage}`, data.message);
+
+      window.location.href =
+        `mailto:${CONTACT_EMAIL}` +
+        `?subject=${encodeURIComponent(`${text.t_heading}: ${name}`)}` +
+        `&body=${encodeURIComponent(lines.join('\n'))}`;
+
+      onClose();
+
+      return;
+    }
+
     // The "Contact" template on emailwerk, flagged isPublic, so this posts
     // anonymously when there is no CMS session and emailwerk takes its public
     // branch. Recipients come from the template's stored envelope server-side
