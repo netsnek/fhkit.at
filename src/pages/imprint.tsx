@@ -5,6 +5,8 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 
+import useNavOffset from '../hooks/use-nav-offset';
+
 /**
  * Who stands behind fhkit.at, as the legal notice states it.
  *
@@ -53,12 +55,15 @@ const IMPRINT = {
  */
 const ImprintPage: React.FC<PageProps> = () => {
   const intl = useIntl();
+  // The top navigation is fixed, so the notice starts below it, the same way
+  // the docs layout offsets its content.
+  const offset = useNavOffset();
 
   // A plain Box, not `as="main"`: the site layout already wraps every page in
   // its own main element.
   return (
     <Box>
-      <Container maxW="4xl" py={{ base: 10, md: 16 }}>
+      <Container maxW="4xl" mt={offset} py={{ base: 6, md: 10 }}>
         <Stack gap={8}>
           <Heading as="h1" fontSize={{ base: '3xl', md: '4xl' }}>
             {intl.formatMessage({
