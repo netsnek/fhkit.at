@@ -22,6 +22,7 @@ import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import Logo from '../../gatsby-plugin-jaen/components/Logo';
+import { useLocalizeHref } from '../../contexts/locale';
 
 const year = new Date().getFullYear();
 
@@ -29,6 +30,8 @@ const year = new Date().getFullYear();
  * Footer component.
  */
 const Footer: FC = () => {
+  const localizeHref = useLocalizeHref();
+
   const links = [
     [
       {
@@ -52,8 +55,11 @@ const Footer: FC = () => {
         href: 'https://www.instagram.com/kleberbaum/'
       },
       {
+        // The page is /imprint/, in each locale under its prefix. The old
+        // /impressum target does not exist, and with no 404 page the link
+        // quietly showed the home page instead of the legal notice.
         label: 'Impressum',
-        href: '/impressum'
+        href: localizeHref('/imprint/')
       }
     ],
     [
