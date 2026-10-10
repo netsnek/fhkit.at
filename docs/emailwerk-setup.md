@@ -4,9 +4,10 @@ Everything in this file happens **outside this repository**, in emailwerk and
 in its deployment. The site reads exactly one value from here: the template id
 that goes into `CONTACT_TEMPLATE_ID` at the top of `src/services/contact.tsx`.
 
-## Where things stand (2026-10-10, 13:35 UTC)
+## Where things stand (2026-10-10, 23:30 UTC)
 
-The templates exist and the origin is allowed. The site does not use them yet.
+The templates exist, the origin is allowed and the site carries the id. The
+build with the id is not deployed yet.
 
 - emailwerk holds fhkit's two templates in the tenant `netsnek` (124
   templates now, 122 before). The script below created them at 13:29 UTC.
@@ -20,11 +21,15 @@ The templates exist and the origin is allowed. The site does not use them yet.
   and an unlisted origin still gets 401.
 - `www.fhkit.at` no longer answers 522. A Cloudflare zone redirect rule sends
   every request to `https://fhkit.at` with 301 and keeps the path and query.
-- Still open is the site itself. `CONTACT_TEMPLATE_ID` is still `null`, so the
-  form opens a prefilled mail to office@fhkit.at until the site carries the id
-  and is deployed. It used to carry netsnek.com's template, which would have
-  delivered every fhkit enquiry to netsnek's inbox the moment the origin was
-  allowed.
+- The site posts to `cmv2fl2cu14ebps2p05nwpoev` since commit `82d7096`, and
+  the prefilled mail it opened until then is gone. The dialog shows the
+  outcome in the page's language: a thank-you when emailwerk accepted the
+  enquiry, or a notice that it was not sent, with the enquiry offered as a
+  prepared mail to office@fhkit.at. The live site (Pages deployment
+  `51e0ce34`, built from `be8afbd`) still opens the prefilled mail until the
+  new build is deployed. The id used to be netsnek.com's template, which would
+  have delivered every fhkit enquiry to netsnek's inbox the moment the origin
+  was allowed.
 
 ## How the send works, so the templates make sense
 
@@ -40,6 +45,12 @@ session it carries no credentials, and emailwerk takes its **public branch**
 - A template with `verifyReplyTo` or `requiresSignature` set is not publicly
   sendable. Both stay off.
 - Sends are rate limited per client IP and globally.
+- A send that fails on the network (the connection breaks, or the browser
+  blocks the answer because the preflight was refused) is repeated by the
+  plugin's GraphQL client, gqty, three times one second apart before the
+  dialog reports it. A refusal from emailwerk is an answer and is
+  not repeated. gqty's default policy does this, and `sendTemplateMail` in
+  jaen does not switch it off.
 
 The confirmation to the visitor is **not** sent by the site. emailwerk enqueues
 every public template whose `parentId` is the contact template, addressed to
@@ -121,11 +132,20 @@ The preflight from an allowed origin already reaches the application and gets
 
 ## 3. Put the id into the site
 
-Set `CONTACT_TEMPLATE_ID` in `src/services/contact.tsx` to the id the script
-printed, `cmv2fl2cu14ebps2p05nwpoev`, and delete the TODO above it. The id is
-not a secret and not an authorization. Then build and deploy the site.
+Done on 2026-10-10 in `82d7096`: `CONTACT_TEMPLATE_ID` in
+`src/services/contact.tsx` is the id the script printed,
+`cmv2fl2cu14ebps2p05nwpoev`. The id is not a secret and not an authorization.
+What is left is to build and deploy the site.
 
 ## Verifying
+
+Before a deploy, `tests/fhkit-browser.ipynb` presses Send in every language on
+the local build. It answers the request inside the browser, so no mail goes
+out. It checks that one press makes one POST to `https://emailwerk.com/graphql`
+(repeated only by gqty, after a network failure) with this template id, the
+form fields as typed, the visitor as `replyTo` only and the confirmation's
+twelve `t_` texts in the page's language, and that the dialog shows the
+outcome in that language.
 
 1. The preflight answers 204 with the origin echoed:
 
