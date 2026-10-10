@@ -107,7 +107,12 @@ export const messagesDe = {
   MapsUnavailable: 'Google Maps ist nicht verfügbar.',
   MapsEnableCookies:
     'Bitte aktivieren Sie Cookies, um Google Maps anzuzeigen.',
-  MapsEnableAnalytics: 'Analyse-Cookies aktivieren'
+  MapsEnableAnalytics: 'Analyse-Cookies aktivieren',
+
+  // The 404 page (src/pages/404.tsx), also its title and description
+  NotFoundTitle: 'Seite nicht gefunden',
+  NotFoundText: 'Unter dieser Adresse gibt es keine Seite.',
+  NotFoundBackHome: 'Zur Startseite'
 } as const;
 
 export type MessageKey = keyof typeof messagesDe;
@@ -184,7 +189,11 @@ export const messagesEn: MessageCatalog = {
 
   MapsUnavailable: 'Google Maps is unavailable.',
   MapsEnableCookies: 'Please enable cookies to display Google Maps.',
-  MapsEnableAnalytics: 'Enable analytics cookies'
+  MapsEnableAnalytics: 'Enable analytics cookies',
+
+  NotFoundTitle: 'Page not found',
+  NotFoundText: 'There is no page at this address.',
+  NotFoundBackHome: 'Go to the home page'
 };
 
 export const messagesSl: MessageCatalog = {
@@ -255,7 +264,11 @@ export const messagesSl: MessageCatalog = {
   MapsUnavailable: 'Google Zemljevidi niso na voljo.',
   MapsEnableCookies:
     'Za prikaz Google Zemljevidov omogočite piškotke.',
-  MapsEnableAnalytics: 'Omogoči analitične piškotke'
+  MapsEnableAnalytics: 'Omogoči analitične piškotke',
+
+  NotFoundTitle: 'Strani ni mogoče najti',
+  NotFoundText: 'Na tem naslovu ni strani.',
+  NotFoundBackHome: 'Na domačo stran'
 };
 
 export const messagesIt: MessageCatalog = {
@@ -326,7 +339,11 @@ export const messagesIt: MessageCatalog = {
 
   MapsUnavailable: 'Google Maps non è disponibile.',
   MapsEnableCookies: 'Abilita i cookie per visualizzare Google Maps.',
-  MapsEnableAnalytics: 'Abilita i cookie analitici'
+  MapsEnableAnalytics: 'Abilita i cookie analitici',
+
+  NotFoundTitle: 'Pagina non trovata',
+  NotFoundText: 'A questo indirizzo non c’è nessuna pagina.',
+  NotFoundBackHome: 'Vai alla home page'
 };
 
 export const messagesJa: MessageCatalog = {
@@ -395,7 +412,11 @@ export const messagesJa: MessageCatalog = {
 
   MapsUnavailable: 'Google マップを利用できません。',
   MapsEnableCookies: 'Google マップを表示するには Cookie を有効にしてください。',
-  MapsEnableAnalytics: '分析 Cookie を有効にする'
+  MapsEnableAnalytics: '分析 Cookie を有効にする',
+
+  NotFoundTitle: 'ページが見つかりません',
+  NotFoundText: 'このアドレスにはページがありません。',
+  NotFoundBackHome: 'ホームページへ'
 };
 
 const catalogs: Record<Locale, MessageCatalog> = {

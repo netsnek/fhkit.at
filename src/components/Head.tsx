@@ -7,6 +7,7 @@ import {
   locales,
   type MessageKey
 } from '../locales/messages';
+import { localeOfPath } from '../contexts/locale';
 
 type JaenHeadProps = React.ComponentProps<typeof JaenHead>;
 
@@ -15,7 +16,11 @@ type JaenHeadProps = React.ComponentProps<typeof JaenHead>;
  * gatsby-source-jaen's localized page generation writes into the context.
  */
 type SiteHeadProps = Omit<JaenHeadProps, 'children'> & {
-  pageContext: JaenHeadProps['pageContext'] & { locale?: string };
+  pageContext: JaenHeadProps['pageContext'] & {
+    locale?: string;
+    /** Set on the 404 pages by gatsby-node.ts. */
+    notFound?: boolean;
+  };
 };
 
 /** Catalog keys of the title and description a route defaults to. */
@@ -34,7 +39,8 @@ const routeMetadata: Record<string, RouteMetadata> = {
   '/imprint': {
     title: 'PageTitleImprint',
     description: 'PageDescriptionImprint'
-  }
+  },
+  '/404': { title: 'NotFoundTitle', description: 'NotFoundText' }
 };
 
 const localePrefixes = new Set<string>(locales);
@@ -115,10 +121,16 @@ const routeOf = (pathname: string): string => {
 const withLocalizedMetadata =
   (Component: React.FC<JaenHeadProps>): React.FC<SiteHeadProps> =>
   props => {
-    const locale = props.pageContext?.locale ?? defaultLocale;
-    const messages = getMessages(locale);
     const pathname = props.location?.pathname ?? '/';
-    const route = routeMetadata[routeOf(pathname)];
+    // The 404 page is rendered for every unknown address, so its language and
+    // its route come from the address and the flag, not from the context of
+    // whichever 404 page the browser loaded. See wrap-page-element.tsx.
+    const notFound = Boolean(props.pageContext?.notFound);
+    const locale = notFound
+      ? localeOfPath(pathname)
+      : props.pageContext?.locale ?? defaultLocale;
+    const messages = getMessages(locale);
+    const route = routeMetadata[notFound ? '/404' : routeOf(pathname)];
 
     const stored = props.data?.jaenPage?.jaenPageMetadata;
 
@@ -163,7 +175,8 @@ const withLocalizedMetadata =
 
     return (
       <Component {...props} data={{ ...props.data, jaenPage }}>
-        {null}
+        {/* A 404 answer is not a page to index, whatever address it is at. */}
+        {notFound ? <meta name="robots" content="noindex" /> : null}
       </Component>
     );
   };

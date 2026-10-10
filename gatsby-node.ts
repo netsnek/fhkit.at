@@ -2,6 +2,8 @@ import { GatsbyNode } from 'gatsby';
 import fs from 'fs';
 import path from 'path';
 
+import { defaultLocale, locales } from './src/locales/messages';
+
 /**
  * Keep src/templates in existence, even empty.
  *
@@ -16,6 +18,51 @@ export const onPreInit: GatsbyNode['onPreInit'] = () => {
   fs.mkdirSync(path.join(process.cwd(), 'src', 'templates'), {
     recursive: true
   });
+};
+
+/**
+ * A 404 page per language, for Cloudflare Pages.
+ *
+ * Pages answers an unknown address with the NEAREST 404.html and status 404:
+ * /ja/whatever gets /ja/404.html if it exists, /404.html otherwise. Gatsby
+ * only writes /404.html (from src/pages/404.tsx, copied from /404/), so this
+ * adds /en/404.html, /sl/404.html, /it/404.html and /ja/404.html.
+ *
+ * gatsby-source-jaen never fans a 404 page out into the locales, and it should
+ * not: the browser renders the page data of /404.html for every unknown
+ * address anyway. So the copies are plain extra files, and every 404 page
+ * carries `notFound`, which makes the site take the language from the address
+ * instead (wrap-page-element.tsx, Head.tsx). The server render of
+ * /ja/404.html and the browser's render at /ja/whatever then agree, and so
+ * does jaen's consent banner, which reads its language from the address too.
+ *
+ * The default locale is set on /404/ (and so on /404.html, which Gatsby copies
+ * from it with its context), which is what gives the German page its
+ * `<html lang>`. Pages created here run through gatsby-source-jaen's own
+ * onCreatePage, which gives each copy its locale and its own JaenPage.
+ */
+export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
+  if (page.path !== '/404/' && page.path !== '/404') return;
+
+  const { createPage, deletePage } = actions;
+
+  if (!page.context?.notFound) {
+    deletePage(page);
+    createPage({
+      ...page,
+      context: { locale: defaultLocale, ...page.context, notFound: true }
+    });
+  }
+
+  for (const locale of locales) {
+    if (locale === defaultLocale) continue;
+
+    createPage({
+      path: `/${locale}/404.html`,
+      component: page.component,
+      context: { notFound: true }
+    });
+  }
 };
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({

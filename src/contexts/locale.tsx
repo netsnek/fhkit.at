@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 
-import { defaultLocale } from '../locales/messages';
+import { defaultLocale, locales } from '../locales/messages';
 
 /**
  * A sibling translation of the current page, as emitted by
@@ -51,6 +51,28 @@ export const useLocalizeHref = (): ((href: string) => string) => {
 
     return `/${prefix}${href.startsWith('/') ? href : `/${href}`}`;
   };
+};
+
+/**
+ * The locale a path is served in, read off its first segment: `/ja/...` is
+ * Japanese, and an unprefixed path is the default locale.
+ *
+ * Only the 404 page needs this. Every other page knows its locale from its
+ * page context, but the browser renders the one /404.html page for every
+ * unknown address, /ja/whatever included, so there the address is the only
+ * place the visitor's language can come from.
+ */
+export const localeOfPath = (pathname: string | undefined): string => {
+  const segment = (pathname ?? '/')
+    .split('/')
+    .filter(Boolean)[0]
+    ?.toLowerCase();
+
+  return segment &&
+    segment !== defaultLocale &&
+    (locales as readonly string[]).includes(segment)
+    ? segment
+    : defaultLocale;
 };
 
 /**
