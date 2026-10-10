@@ -74,10 +74,11 @@ const config: GatsbyConfig = {
                   ? 'https://fhkit.at'
                   : 'http://localhost:8000',
               projectIds: ['TODO_FHKIT_PROJECT_ID']
-            },
-        googleAnalytics: {
-          trackingIds: ['G-M58K75M9PG']
-        }
+            }
+        // No googleAnalytics here on purpose. The id this config carried,
+        // G-M58K75M9PG, is PhotonQ's property and came along with the
+        // template fork, so every consenting visitor of fhkit.at was counted
+        // in PhotonQ's analytics. fhkit.at has no property of its own.
       }
     },
     {
