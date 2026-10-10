@@ -89,7 +89,11 @@ import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } fr
         <chakra.iframe
           src={src}
           w="calc(100% + 4px)"
-          h="600"
+          // 600px, not "600". Chakra v2 turned a unitless number into pixels,
+          // v3 passes an unknown size through as it is, and `height: 600` is
+          // invalid CSS that the browser drops. The map then shrank to the
+          // 150px an iframe has by default.
+          h="600px"
           m="-2px"
         />
       </Box>
