@@ -132,19 +132,36 @@ const brandScale = {
  *
  * The ramp stops at 900 because blackAlpha does, so `subtle` cannot reach for
  * the 950 that v3's own palettes use.
+ *
+ * THE DARK HALVES ARE THE SITE'S OWN, and that is deliberate. Copied from v2
+ * they were steps of the same near-black ramp: `solid` was brand.200, which is
+ * black at 8% opacity, `fg` the same, `contrast` gray.800. On the gray.800 page
+ * of dark mode that made every solid button a dark label on a dark field and
+ * every ghost or outline label next to invisible, the contact buttons and the
+ * language switcher included. Dark mode inverts the brand instead: a near-white
+ * button with dark text, light labels, and white overlays where the light half
+ * darkens. The light halves are untouched. Because jaen merges these slots
+ * into the CMS (see above), the CMS's dark mode gets the same readable
+ * buttons.
  */
 const brandColorPalette = {
-  solid: { value: { base: '{colors.brand.500}', _dark: '{colors.brand.200}' } },
-  contrast: { value: { base: '{colors.white}', _dark: '{colors.gray.800}' } },
-  fg: { value: { base: '{colors.brand.600}', _dark: '{colors.brand.200}' } },
-  muted: { value: { base: '{colors.brand.100}', _dark: '{colors.brand.800}' } },
-  subtle: { value: { base: '{colors.brand.50}', _dark: '{colors.brand.900}' } },
-  emphasized: {
-    value: { base: '{colors.brand.600}', _dark: '{colors.brand.300}' }
+  solid: { value: { base: '{colors.brand.500}', _dark: '{colors.gray.100}' } },
+  contrast: { value: { base: '{colors.white}', _dark: '{colors.gray.900}' } },
+  fg: { value: { base: '{colors.brand.600}', _dark: '{colors.gray.200}' } },
+  muted: {
+    value: { base: '{colors.brand.100}', _dark: '{colors.whiteAlpha.300}' }
   },
-  border: { value: { base: '{colors.brand.500}', _dark: '{colors.brand.400}' } },
+  subtle: {
+    value: { base: '{colors.brand.50}', _dark: '{colors.whiteAlpha.200}' }
+  },
+  emphasized: {
+    value: { base: '{colors.brand.600}', _dark: '{colors.whiteAlpha.400}' }
+  },
+  border: {
+    value: { base: '{colors.brand.500}', _dark: '{colors.whiteAlpha.500}' }
+  },
   focusRing: {
-    value: { base: '{colors.brand.500}', _dark: '{colors.brand.200}' }
+    value: { base: '{colors.brand.500}', _dark: '{colors.gray.300}' }
   }
 };
 
@@ -339,7 +356,17 @@ export const system = createSystem(
        * all revert to v3's grey, and both tsc and gatsby build stay green while
        * they do it.
        */
-      html: { colorPalette: 'brand' },
+      html: {
+        colorPalette: 'brand',
+        /**
+         * The page colour on html as well as on body. jaen paints html with
+         * its own canvas colour, and body is only one viewport tall, so in
+         * dark mode everything below the first screen sat on jaen's
+         * near-black instead of the site's gray.800. In light mode both are
+         * white and nothing changes.
+         */
+        bg: 'shared.body.bgColor'
+      },
       /**
        * v2's body rule, restored.
        *

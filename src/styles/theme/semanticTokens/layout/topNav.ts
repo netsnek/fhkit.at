@@ -81,7 +81,9 @@ const smtTopNav = {
     active: {
       color: {
         default: 'brand.500',
-        _dark: 'brand.600'
+        // brand.600 is black at 48% opacity, which left the current page's
+        // entry invisible on the dark bar.
+        _dark: 'white'
       }
     }
   }
