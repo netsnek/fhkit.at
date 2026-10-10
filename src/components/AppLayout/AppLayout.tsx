@@ -7,13 +7,11 @@ import { useAuth, useCMSManagementContext } from 'jaen';
 import { useLocation } from '@reach/router';
 import { MenuStructureContext } from '../../contexts/menu-structure';
 import { createPageTree } from '../../utils/navigation';
-import DocsLayout from './DocsLayout';
 import Footer from './Footer';
 import { GridPattern } from '../GridPattern';
 
 interface AppLayoutProps {
   children?: React.ReactNode;
-  isDocs?: boolean;
   path: string;
   footer?: FC;
 }
@@ -22,7 +20,7 @@ interface AppLayoutProps {
  * The global layout component.
  * This should not be directly used in pages, but used in gatsby.
  */
-const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path, footer }) => {
+const AppLayout: FC<AppLayoutProps> = ({ children, path, footer }) => {
   const cmsManager = useCMSManagementContext();
   const location = useLocation();
   const topNavDisclosure = useDisclosure(); // for the top nav mobile drawer
@@ -36,14 +34,6 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path, footer }) => {
   );
 
   const FooterComp = footer ?? Footer;
-
-  let childrenElmnt: ReactNode = null;
-
-  if (isDocs) {
-    childrenElmnt = <DocsLayout path={path}>{children}</DocsLayout>;
-  } else {
-    childrenElmnt = children;
-  }
 
   return (
     <>
@@ -74,7 +64,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path, footer }) => {
             />} */}
           {!isAuthenticated && path !== "/" && <TopNav path={path} />}
           {!isAuthenticated && path === "/" && <AltTopNav path={path} />}
-          {childrenElmnt}
+          {children}
         </Box>
       </MenuStructureContext.Provider>
       <FooterComp />

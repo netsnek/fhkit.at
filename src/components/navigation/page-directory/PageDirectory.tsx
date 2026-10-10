@@ -61,18 +61,6 @@ const PageDirectory: FC<PageDirectoryProps> = ({
     }
   ];
 
-  if (path === '/') {
-    baseMenuItems.unshift({
-      name: 'Navigation',
-      items: [
-        {
-          name: 'Documentation',
-          href: '/docs'
-        }
-      ]
-    });
-  }
-
   if (isSmallScreen && !isAuthenticated) {
     // The same full page load as the top bar's entry, for the same reason:
     // signinRedirect throws outside jaen's sign-in routes.

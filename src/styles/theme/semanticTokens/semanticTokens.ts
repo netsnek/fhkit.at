@@ -1,11 +1,6 @@
 import smtButtonComponent from './components/button';
-import smtCalloutComponent from '../../../components/main-content/callout/styles/callout';
-import smtCodeSnippetComponent from '../../../components/main-content/code-snippet/styles/codeSnippet';
 import smtDrawerComponent from './components/drawer';
-import smtFilesystemComponent from '../../../components/main-content/filesystem/styles/filesystem';
 import smtHeadingComponent from './components/heading';
-import smtIconCardComponent from '../../../components/main-content/icon-card/styles/iconCard';
-import smtImageCardComponent from '../../../components/main-content/image-card/styles/imageCard';
 import smtMenuComponent from './components/menu';
 import smtpSeparatorComponent from './components/separator';
 import smtFooter from './layout/footer';
@@ -18,7 +13,6 @@ import smtPqShared from '../photonq/semanticTokens/shared';
 import smtShared from './shared';
 import smtPqSectionLabel from '../photonq/semanticTokens/components/sectionLabel';
 import smtPqFeatureCard from '../photonq/semanticTokens/components/featureCard';
-import smtcodeResultPreviewComponent from '../../../components/main-content/code-result-preview/styles/codeResultPreview';
 // import smtUserProfilePage from '../../../components/user/profile/styles/userProfile';
 // import smtUserActivityComponent from '../../../components/user/activity/styles/userActivity';
 import smtStepperComponent from './components/stepper';
@@ -54,13 +48,7 @@ const themeSemanticTokens = {
       textarea: smtTextareaComponent,
       drawer: smtDrawerComponent,
       menu: smtMenuComponent,
-      codeSnippet: smtCodeSnippetComponent,
-      codeResultPreview: smtcodeResultPreviewComponent,
-      filesystem: smtFilesystemComponent,
       heading: smtHeadingComponent,
-      callout: smtCalloutComponent,
-      imageCard: smtImageCardComponent,
-      iconCard: smtIconCardComponent,
       pageDirectory: smtPageDirectoryComponent,
       // postPreview: smtPostPreviewComponent,
       // postEditor: smtPostEditorComponent,

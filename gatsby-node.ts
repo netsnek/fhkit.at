@@ -1,8 +1,24 @@
 import { PageConfig } from 'jaen';
 import { GatsbyNode } from 'gatsby';
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 import { buildSearchIndex } from './src/utils/search/build-search-index';
+
+/**
+ * Keep src/templates in existence, even empty.
+ *
+ * jaen's page renderer loads CMS page templates with a dynamic import from
+ * that directory, so webpack fails the build when it is missing ("Can't
+ * resolve .../src/templates"). fhkit.at has no page template since the docs
+ * pages went, and git does not keep an empty directory. A placeholder file
+ * would not do: gatsby-source-jaen offers every file in there as a template
+ * in the CMS. The path is built the way gatsby-source-jaen builds it.
+ */
+export const onPreInit: GatsbyNode['onPreInit'] = () => {
+  fs.mkdirSync(path.join(process.cwd(), 'src', 'templates'), {
+    recursive: true
+  });
+};
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   stage,

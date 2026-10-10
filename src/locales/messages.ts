@@ -27,9 +27,6 @@ export const messagesDe = {
   PageTitleHome: 'Florian Herbert Kleber IT',
   PageDescriptionHome:
     'IT-Beratung, Cyber-Security, Cloud-Dienste und Softwareentwicklung. Kostenlose Erstberatung.',
-  PageTitleDocs: 'Dokumentation',
-  PageDescriptionDocs:
-    'Leitfäden und Referenzen zu unseren Diensten und Projekten.',
   PageTitleImprint: 'Impressum',
   PageDescriptionImprint: 'Impressum und Offenlegung nach österreichischem Recht.',
 
@@ -102,8 +99,6 @@ export const messagesDe = {
   LanguageSwitcherLabel: 'Sprache',
 
 
-  // Docs (src/templates/DocPage.tsx)
-  DocsOnThisPage: 'Auf dieser Seite',
 
   // Cookie-gated map (src/components/GoogleMaps.tsx)
   MapsUnavailable: 'Google Maps ist nicht verfügbar.',
@@ -126,8 +121,6 @@ export const messagesEn: MessageCatalog = {
   PageTitleHome: 'Florian Herbert Kleber IT',
   PageDescriptionHome:
     'IT consulting, cyber security, cloud services and software development. Free initial consultation.',
-  PageTitleDocs: 'Documentation',
-  PageDescriptionDocs: 'Guides and references for our services and projects.',
   PageTitleImprint: 'Legal notice',
   PageDescriptionImprint: 'Legal notice and disclosure under Austrian law.',
 
@@ -183,7 +176,6 @@ export const messagesEn: MessageCatalog = {
   LanguageSwitcherLabel: 'Language',
 
 
-  DocsOnThisPage: 'On this page',
 
   MapsUnavailable: 'Google Maps is unavailable.',
   MapsEnableCookies: 'Please enable cookies to display Google Maps.',
@@ -196,8 +188,6 @@ export const messagesSl: MessageCatalog = {
   PageTitleHome: 'Florian Herbert Kleber IT',
   PageDescriptionHome:
     'Svetovanje na področju IT, kibernetska varnost, storitve v oblaku in razvoj programske opreme. Brezplačen uvodni posvet.',
-  PageTitleDocs: 'Dokumentacija',
-  PageDescriptionDocs: 'Vodniki in reference za naše storitve in projekte.',
   PageTitleImprint: 'Impresum',
   PageDescriptionImprint: 'Impresum in razkritje po avstrijskem pravu.',
 
@@ -254,7 +244,6 @@ export const messagesSl: MessageCatalog = {
   LanguageSwitcherLabel: 'Jezik',
 
 
-  DocsOnThisPage: 'Na tej strani',
 
   MapsUnavailable: 'Google Zemljevidi niso na voljo.',
   MapsEnableCookies:
@@ -268,8 +257,6 @@ export const messagesIt: MessageCatalog = {
   PageTitleHome: 'Florian Herbert Kleber IT',
   PageDescriptionHome:
     'Consulenza IT, cyber security, servizi cloud e sviluppo software. Primo colloquio gratuito.',
-  PageTitleDocs: 'Documentazione',
-  PageDescriptionDocs: 'Guide e riferimenti per i nostri servizi e progetti.',
   PageTitleImprint: 'Note legali',
   PageDescriptionImprint:
     'Note legali e informazioni obbligatorie secondo il diritto austriaco.',
@@ -327,7 +314,6 @@ export const messagesIt: MessageCatalog = {
   LanguageSwitcherLabel: 'Lingua',
 
 
-  DocsOnThisPage: 'In questa pagina',
 
   MapsUnavailable: 'Google Maps non è disponibile.',
   MapsEnableCookies: 'Abilita i cookie per visualizzare Google Maps.',
@@ -340,8 +326,6 @@ export const messagesJa: MessageCatalog = {
   PageTitleHome: 'Florian Herbert Kleber IT',
   PageDescriptionHome:
     'ITコンサルティング、サイバーセキュリティ、クラウドサービス、ソフトウェア開発。初回相談は無料です。',
-  PageTitleDocs: 'ドキュメント',
-  PageDescriptionDocs: 'サービスとプロジェクトのガイドおよびリファレンス。',
   PageTitleImprint: '法的表示',
   PageDescriptionImprint: 'オーストリア法に基づく法的表示および開示。',
 
@@ -397,7 +381,6 @@ export const messagesJa: MessageCatalog = {
   LanguageSwitcherLabel: '言語',
 
 
-  DocsOnThisPage: 'このページの内容',
 
   MapsUnavailable: 'Google マップを利用できません。',
   MapsEnableCookies: 'Google マップを表示するには Cookie を有効にしてください。',

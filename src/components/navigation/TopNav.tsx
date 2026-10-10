@@ -65,11 +65,6 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
         name: 'Home',
         href: '/',
         matchMethod: 'exact'
-      },
-      {
-        name: 'Documentation',
-        href: '/docs/',
-        matchMethod: 'includes'
       }
     ],
     right: [

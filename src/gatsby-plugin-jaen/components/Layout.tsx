@@ -10,14 +10,10 @@ const Layout: React.FC<LayoutProps> = ({ children, pageProps }) => {
   const path = useLocation().pathname;
   const { prefix } = usePageLocale();
 
-  // Every route test below is written against the unprefixed path, so /docs
-  // and /ja/docs pick the same layout. Comparing the raw pathname sent every
-  // non-German page down the marketing branch.
+  // Every route test below is written against the unprefixed path, so / and
+  // /ja/ pick the same top bar. Comparing the raw pathname sent every
+  // non-German page down the wrong branch.
   const route = stripLocalePrefix(path, prefix);
-
-  const docsPaths = ['/docs'];
-
-  const isDocs = docsPaths.some(docsPath => route.startsWith(docsPath));
 
   if (route.startsWith('/admin')) {
     return children;
@@ -26,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children, pageProps }) => {
   return (
     <CMSManagement>
       <ContactModalProvider location={{ pathname: path, search: '' }}>
-        <AppLayout footer={Footer} isDocs={isDocs} path={route}>
+        <AppLayout footer={Footer} path={route}>
           {children}
         </AppLayout>
       </ContactModalProvider>

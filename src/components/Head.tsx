@@ -26,12 +26,11 @@ interface RouteMetadata {
 
 /**
  * Routes with their own metadata, keyed by path without locale prefix. Pages
- * outside this map (docs articles) keep the title jaen resolves for
+ * outside this map keep the title jaen resolves for
  * them and only gain the localized site description.
  */
 const routeMetadata: Record<string, RouteMetadata> = {
   '/': { title: 'PageTitleHome', description: 'PageDescriptionHome' },
-  '/docs': { title: 'PageTitleDocs', description: 'PageDescriptionDocs' },
   '/imprint': {
     title: 'PageTitleImprint',
     description: 'PageDescriptionImprint'

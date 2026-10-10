@@ -1,10 +1,11 @@
 /**
  * Converts the site's semantic-token tree from its v2 shape to v3's.
  *
- * The 27 files under `semanticTokens/` and `components/main-content/*\/styles/`
- * are a readable, hand-maintained data structure, and they stay in that shape.
- * Only the assembly step changes, which keeps the diff at one file instead of
- * twenty-seven hand-edits, each with its own chance of introducing exactly the
+ * The files under `semanticTokens/` (and, until the docs pages were dropped,
+ * `components/main-content/*\/styles/`) are a readable, hand-maintained data
+ * structure, and they stay in that shape. Only the assembly step changes,
+ * which kept the migration's diff at one file instead of twenty-seven
+ * hand-edits, each with its own chance of introducing exactly the
  * silent error this migration is trying to avoid.
  *
  *   v2   {default: 'brand.500', _dark: 'brand.200'}
