@@ -1,0 +1,353 @@
+{
+ "message": "Englische, slowenische, italienische und japanische Seitentexte",
+ "createdAt": "2026-10-10T18:00:00.000Z",
+ "data": {
+  "pages": [
+   {
+    "id": "JaenPage /en/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "ContentSectionHeading": {
+       "value": "Welcome! 🙌"
+      },
+      "ContentSectionText": {
+       "value": "It has always been my passion to run my own businesses and to juggle technology. Today I would like to talk to you about it – from the beginnings to the present reality and the future we are shaping right now. 🚀<br/><br/>My journey into the fascinating world of information technology began with the founding of Florian Herbert Kleber IT on 21 July 2020. Driven by my passion✨, I wanted to meet the demand for high-quality, tailor-made IT services. That is why I founded this company in Villach, but we will soon be moving our headquarters to Vienna. 📦💼<br/><br/>My focus is always on cyber security 🔒, cloud services ☁️ and software development 🎨, always intent on offering my clients the best solutions. 🙌 My line of work allows me to work for a wide range of industries, always looking for the best IT solutions for each individual company.<br/><br/>On this wonderful journey we have had the chance to bring incredible projects to life, together with some of the best experts in my network. 🌐 One of my favourite projects was working with one of my partners on the development of a successful ERP system called \"Jaen\". 😎<br/><br/>But I am not resting on my laurels. My company is always striving to develop further and to refine what we offer. That is why I am glad to give you a little foretaste of my upcoming ventures... 😉<br/><br/>We are planning to found a new company for the development of enterprise software! It is an exciting time, and we are ready to set new milestones. 💡🎯<br/><br/>It is amazing to see how far Florian Herbert Kleber IT has come, and I am looking forward to what is still to come. Our work is our passion, and we always do our best to give the IT world the best of us.<br/><br/>Thank you for accompanying me on this exciting journey, and we can hardly wait to show you what comes next! 🚀<br/><br/>So keep an eye on our updates. Until then, stay safe and digital! 😉<br/><br/>- Florian"
+      },
+      "ContentSectionHeadingTeam": {
+       "value": "Partners 🤝"
+      },
+      "ContentSectionTextTeam": {
+       "value": "I offer cross-industry client consulting and support, backed by experts from my extensive network. Together with my partners, we ensure a broad range of services. My goal is to master all your technological challenges together with you. 💪🚀"
+      },
+      "ContentSectionTextTeam1": {
+       "value": "As a JavaScript grandmaster🎯 and open-source veteran⚡ with a strong cyber security foundation🔒, my expertise lies in web development and in building highly effective ERP systems ⚙️. The successful development of a joint ERP system called \"Jaen\"✨, together with Florian Herbert Kleber IT, underlines my ability to act proactively and with a focus on solutions. As a technical wizard🧙‍♂️💻 I am always ready to tackle problems before they arise, creating a seamless technological experience."
+      },
+      "ContentSectionTextTeam2": {
+       "value": "I combine my master’s studies in electrical engineering⚡️ and information technology📡 with dedicated work on technology of every kind. I am particularly passionate about programming cloud systems and websites and about maintaining computers. I run servers and networks with constant fascination. Simplify and make efficient - that is my credo! 💪🚀"
+      },
+      "ContentSectionTextTeam3": {
+       "value": "We are a creative 🎨 advertising agency in the charming town of Villach. Together with Florian Herbert Kleber IT, we work on creating modern, stylish and effective online presences."
+      },
+      "MapSectionHeading": {
+       "value": "Offices 📦💼"
+      },
+      "HeroSectionHeading": {
+       "value": "Let me <br/>advise you"
+      },
+      "HeroSectionText": {
+       "value": "Discover the world of IT services with me. 💻🚀 As a professional IT consultant, I help you master your technical challenges. 🎯 My specialities are security and cloud computing. ⛅🔒 <br/><br/>Looking to optimise your system?<br/><br/>Let me advise you! 🤝 Experience, passion and technical know-how from Austria. And yes, I always find a solution (but I recommend not trying to solve the problem yourself 😉)."
+      },
+      "FooterTitleLine1": {
+       "value": "Thank you for your visit!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Austria <br><br>Email: office@fhkit.at<br>Tel: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Links"
+      },
+      "FooterLinkImpressum": {
+       "value": "Legal notice"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partners"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Designed by"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /en/imprint/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "FooterTitleLine1": {
+       "value": "Thank you for your visit!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Austria <br><br>Email: office@fhkit.at<br>Tel: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Links"
+      },
+      "FooterLinkImpressum": {
+       "value": "Legal notice"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partners"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Designed by"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /sl/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "ContentSectionHeading": {
+       "value": "Dobrodošli! 🙌"
+      },
+      "ContentSectionText": {
+       "value": "Vedno je bila moja strast voditi lastna podjetja in žonglirati s tehnologijo. Danes bi se rad s tabo pogovoril o tem – od začetkov do današnje resničnosti in prihodnosti, ki jo prav zdaj oblikujemo. 🚀<br/><br/>Moja pot v fascinanten svet informacijske tehnologije se je začela z ustanovitvijo podjetja Florian Herbert Kleber IT 21. 7. 2020. Gnan s strastjo✨ sem želel zadostiti potrebi po kakovostnih in po meri izdelanih storitvah IT. Zato sem to podjetje ustanovil v Beljaku, a kmalu bomo sedež podjetja preselili na Dunaj. 📦💼<br/><br/>Moj poudarek je vedno na kibernetski varnosti 🔒, storitvah v oblaku ☁️ in razvoju programske opreme 🎨, pri čemer si vedno prizadevam strankam ponuditi najboljše rešitve. 🙌 Moj poklic mi omogoča delo za najrazličnejše panoge, vedno v iskanju najboljših rešitev IT za vsako posamezno podjetje.<br/><br/>Na tej čudoviti poti smo imeli priložnost uresničiti neverjetne projekte, skupaj z nekaterimi najboljšimi strokovnjaki iz moje mreže. 🌐 Eden mojih najljubših projektov je bilo sodelovanje z enim od mojih partnerjev pri razvoju uspešnega sistema ERP z imenom »Jaen«. 😎<br/><br/>Vendar ne počivam na lovorikah. Moje podjetje si nenehno prizadeva za nadaljnji razvoj in izpopolnjevanje naše ponudbe. Zato sem vesel, da ti lahko ponudim majhen predokus mojih prihodnjih podvigov... 😉<br/><br/>Načrtujemo ustanovitev novega podjetja za razvoj poslovne programske opreme! To je vznemirljiv čas in pripravljeni smo postaviti nove mejnike. 💡🎯<br/><br/>Neverjetno je videti, kako daleč je prišlo podjetje Florian Herbert Kleber IT, in veselim se vsega, kar še prihaja. Naše delo je naša strast in vedno damo vse od sebe, da bi svetu IT dali najboljše od sebe.<br/><br/>Hvala ti, da me spremljaš na tej razburljivi poti, in komaj čakamo, da ti pokažemo, kaj sledi! 🚀<br/><br/>Zato spremljaj naše novice. Do takrat pa ostani varen in digitalen! 😉<br/><br/>- Florian"
+      },
+      "ContentSectionHeadingTeam": {
+       "value": "Partnerji 🤝"
+      },
+      "ContentSectionTextTeam": {
+       "value": "Ponujam medpanožno svetovanje in podporo strankam ob pomoči strokovnjakov iz moje obsežne mreže. V sodelovanju s svojimi partnerji zagotavljamo široko ponudbo storitev. Moj cilj je, da skupaj s tabo obvladamo vse tvoje tehnološke izzive. 💪🚀"
+      },
+      "ContentSectionTextTeam1": {
+       "value": "Kot velemojster JavaScripta🎯 in veteran odprte kode⚡ s trdnimi temelji v kibernetski varnosti🔒 imam strokovno znanje na področju spletnega razvoja in gradnje zelo učinkovitih sistemov ERP ⚙️. Uspešen razvoj skupnega sistema ERP z imenom »Jaen«✨, skupaj s podjetjem Florian Herbert Kleber IT, poudarja mojo sposobnost proaktivnega in k rešitvam usmerjenega delovanja. Kot tehnični čarovnik🧙‍♂️💻 sem vedno pripravljen obvladati težave, preden nastanejo, in tako ustvarjam brezhibno tehnološko izkušnjo."
+      },
+      "ContentSectionTextTeam2": {
+       "value": "Svoj magistrski študij elektrotehnike⚡️ in informacijske tehnologije📡 združujem s predanim delom na tehniki vseh vrst. Posebno strast gojim do programiranja sistemov v oblaku in spletnih strani ter do vzdrževanja računalnikov. Z nenehnim navdušenjem upravljam strežnike in omrežja. Poenostaviti in narediti učinkovito - to je moj kredo! 💪🚀"
+      },
+      "ContentSectionTextTeam3": {
+       "value": "Smo kreativna 🎨 oglaševalska agencija v očarljivem mestu Beljak. Skupaj s podjetjem Florian Herbert Kleber IT si prizadevamo oblikovati sodobne, elegantne in učinkovite spletne predstavitve."
+      },
+      "MapSectionHeading": {
+       "value": "Poslovni prostori 📦💼"
+      },
+      "HeroSectionHeading": {
+       "value": "Naj ti <br/>svetujem"
+      },
+      "HeroSectionText": {
+       "value": "Odkrij z menoj svet storitev IT. 💻🚀 Kot profesionalni svetovalec za IT ti pomagam obvladati tvoje tehnične izzive. 🎯 Moji specialnosti sta varnost in računalništvo v oblaku. ⛅🔒 <br/><br/>Iščeš način za optimizacijo svojega sistema?<br/><br/>Naj ti svetujem! 🤝 Izkušnje, strast in tehnično znanje iz Avstrije. In ja, vedno najdem rešitev (a priporočam ti, da težave ne rešuješ sam 😉)."
+      },
+      "FooterTitleLine1": {
+       "value": "Hvala za tvoj obisk!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Avstrija <br><br>E-pošta: office@fhkit.at<br>Tel.: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Povezave"
+      },
+      "FooterLinkImpressum": {
+       "value": "Impresum"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partnerji"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Oblikoval"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /sl/imprint/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "FooterTitleLine1": {
+       "value": "Hvala za tvoj obisk!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Avstrija <br><br>E-pošta: office@fhkit.at<br>Tel.: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Povezave"
+      },
+      "FooterLinkImpressum": {
+       "value": "Impresum"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partnerji"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Oblikoval"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /it/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "ContentSectionHeading": {
+       "value": "Benvenuti! 🙌"
+      },
+      "ContentSectionText": {
+       "value": "È sempre stata la mia passione guidare le mie aziende e destreggiarmi con la tecnologia. Oggi vorrei parlartene – dagli inizi alla realtà attuale e al futuro che stiamo plasmando proprio ora. 🚀<br/><br/>Il mio viaggio nell’affascinante mondo della tecnologia dell’informazione è iniziato con la fondazione di Florian Herbert Kleber IT il 21 luglio 2020. Spinto dalla mia passione✨, volevo rispondere alla domanda di servizi IT di alta qualità e su misura. Per questo ho fondato questa azienda a Villach, ma presto trasferiremo la nostra sede a Vienna. 📦💼<br/><br/>Mi concentro sempre su cyber security 🔒, servizi cloud ☁️ e sviluppo software 🎨, sempre attento a offrire ai miei clienti le soluzioni migliori. 🙌 Il mio ambito professionale mi permette di lavorare per un’ampia varietà di settori, sempre alla ricerca delle migliori soluzioni IT per ogni singola azienda.<br/><br/>In questo meraviglioso viaggio abbiamo avuto l’opportunità di realizzare progetti incredibili, insieme ad alcuni dei migliori esperti della mia rete. 🌐 Uno dei miei progetti preferiti è stata la collaborazione con uno dei miei partner per lo sviluppo di un sistema ERP di successo chiamato \"Jaen\". 😎<br/><br/>Ma non mi adagio sugli allori. La mia azienda si impegna costantemente a crescere e a perfezionare la nostra offerta. Per questo sono felice di poterti dare un piccolo assaggio delle mie prossime iniziative... 😉<br/><br/>Stiamo pianificando la fondazione di una nuova azienda per lo sviluppo di software enterprise! È un periodo entusiasmante e siamo pronti a raggiungere nuovi traguardi. 💡🎯<br/><br/>È sorprendente vedere quanta strada abbia fatto Florian Herbert Kleber IT e non vedo l’ora di vedere cosa verrà. Il nostro lavoro è la nostra passione e diamo sempre il massimo per offrire al mondo IT il meglio di noi.<br/><br/>Ti ringrazio di accompagnarmi in questo viaggio emozionante e non vediamo l’ora di mostrarti cosa verrà dopo! 🚀<br/><br/>Quindi tieni d’occhio i nostri aggiornamenti. Fino ad allora, resta al sicuro e digitale! 😉<br/><br/>- Florian"
+      },
+      "ContentSectionHeadingTeam": {
+       "value": "Partner 🤝"
+      },
+      "ContentSectionTextTeam": {
+       "value": "Offro consulenza e assistenza ai clienti in tutti i settori, con il supporto di esperti della mia ampia rete. In collaborazione con i miei partner garantiamo un’ampia gamma di servizi. Il mio obiettivo è superare insieme a te tutte le tue sfide tecnologiche. 💪🚀"
+      },
+      "ContentSectionTextTeam1": {
+       "value": "Come gran maestro di JavaScript🎯 e veterano dell’open source⚡, con solide basi di cyber security🔒, la mia competenza è nello sviluppo web e nella realizzazione di sistemi ERP altamente efficaci ⚙️. Lo sviluppo di successo di un sistema ERP comune chiamato \"Jaen\"✨, insieme a Florian Herbert Kleber IT, sottolinea la mia capacità di agire in modo proattivo e orientato alle soluzioni. Come mago della tecnologia🧙‍♂️💻 sono sempre pronto ad affrontare i problemi prima che si presentino, creando così un’esperienza tecnologica senza intoppi."
+      },
+      "ContentSectionTextTeam2": {
+       "value": "Unisco il mio corso di laurea magistrale in ingegneria elettrica⚡️ e tecnologia dell’informazione📡 a un lavoro appassionato sulla tecnologia di ogni genere. Ho una passione particolare per la programmazione di sistemi cloud e siti web e per la manutenzione dei computer. Gestisco server e reti con un fascino sempre vivo. Semplificare e rendere efficiente - questo è il mio credo! 💪🚀"
+      },
+      "ContentSectionTextTeam3": {
+       "value": "Siamo un’agenzia pubblicitaria creativa 🎨 nell’affascinante città di Villach. Insieme a Florian Herbert Kleber IT lavoriamo per creare presenze online moderne, eleganti ed efficaci."
+      },
+      "MapSectionHeading": {
+       "value": "Uffici 📦💼"
+      },
+      "HeroSectionHeading": {
+       "value": "Lasciati <br/>consigliare da me"
+      },
+      "HeroSectionText": {
+       "value": "Scopri con me il mondo dei servizi IT. 💻🚀 Come consulente IT professionista ti aiuto a superare le tue sfide tecniche. 🎯 Le mie specialità sono la sicurezza e il cloud computing. ⛅🔒 <br/><br/>Cerchi un modo per ottimizzare il tuo sistema?<br/><br/>Lasciati consigliare da me! 🤝 Esperienza, passione e know-how tecnico dall’Austria. E sì, trovo sempre una soluzione (ma ti consiglio di non risolvere il problema da solo 😉)."
+      },
+      "FooterTitleLine1": {
+       "value": "Grazie per la tua visita!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Austria <br><br>E-mail: office@fhkit.at<br>Tel.: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Link"
+      },
+      "FooterLinkImpressum": {
+       "value": "Note legali"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partner"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Progettato da"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /it/imprint/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "FooterTitleLine1": {
+       "value": "Grazie per la tua visita!"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>Austria <br><br>E-mail: office@fhkit.at<br>Tel.: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "Link"
+      },
+      "FooterLinkImpressum": {
+       "value": "Note legali"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "Partner"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "Progettato da"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /ja/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "ContentSectionHeading": {
+       "value": "ようこそ！🙌"
+      },
+      "ContentSectionText": {
+       "value": "自分の会社を経営し、テクノロジーを自在に操ることは、ずっと私の情熱でした。今日はそのことについてお話ししたいと思います。始まりから現在の姿、そして私たちが今まさに形づくっている未来まで。🚀<br/><br/>情報技術という魅力的な世界への私の旅は、2020年7月21日の Florian Herbert Kleber IT の創業とともに始まりました。情熱✨に突き動かされ、高品質でオーダーメイドの IT サービスへのニーズに応えたいと考えました。そこでこの会社をフィラッハで創業しましたが、まもなく本社をウィーンに移す予定です。📦💼<br/><br/>私が常に重視しているのは、サイバーセキュリティ 🔒、クラウドサービス ☁️、ソフトウェア開発 🎨 です。お客様に最善のソリューションを提供することを常に心がけています。🙌 この職業のおかげで、さまざまな業界のために仕事をすることができ、一社一社にとって最適な IT ソリューションを常に追い求めています。<br/><br/>この素晴らしい旅の中で、私のネットワークでも屈指の専門家たちとともに、信じられないようなプロジェクトを実現する機会に恵まれました。🌐 特に気に入っているプロジェクトのひとつは、パートナーの一人と協力して「Jaen」という成功した ERP システムを開発したことです。😎<br/><br/>とはいえ、これまでの成果に満足して立ち止まるつもりはありません。私の会社は常に成長し、サービスを磨き続けることに努めています。そこで、今後の取り組みについて少しだけご紹介できることを嬉しく思います… 😉<br/><br/>エンタープライズソフトウェアの開発を手がける新しい会社の設立を計画しています！わくわくする時期であり、新たなマイルストーンを打ち立てる準備はできています。💡🎯<br/><br/>Florian Herbert Kleber IT がここまで成長したことに驚くとともに、これから訪れるものを楽しみにしています。仕事は私たちの情熱であり、IT の世界に私たちの最高のものを届けるため、常に全力を尽くしています。<br/><br/>このわくわくする旅にご一緒いただき、ありがとうございます。次に何が待っているのか、お見せできる日が待ちきれません！🚀<br/><br/>ぜひ今後の最新情報にご注目ください。それまで、安全に、そしてデジタルにお過ごしください！😉<br/><br/>- Florian"
+      },
+      "ContentSectionHeadingTeam": {
+       "value": "パートナー 🤝"
+      },
+      "ContentSectionTextTeam": {
+       "value": "私の幅広いネットワークに属する専門家の支援を受けながら、業界を問わずお客様へのコンサルティングとサポートを提供しています。パートナーと協力し、幅広いサービスをお約束します。私の目標は、あなたと一緒にあらゆる技術的な課題を乗り越えることです。💪🚀"
+      },
+      "ContentSectionTextTeam1": {
+       "value": "JavaScript のグランドマスター🎯でありオープンソースのベテラン⚡として、サイバーセキュリティの確かな基礎🔒を持ち、Web 開発と効果の高い ERP システムの構築⚙️を専門としています。Florian Herbert Kleber IT と共同で「Jaen」✨という ERP システムの開発に成功したことは、主体的かつ解決志向で行動できる私の力を示しています。技術の魔法使い🧙‍♂️💻として、問題が起こる前に対処する準備を常に整え、スムーズなテクノロジー体験を生み出します。"
+      },
+      "ContentSectionTextTeam2": {
+       "value": "電気工学⚡️と情報技術📡の修士課程での学びを、あらゆる技術への献身的な取り組みと組み合わせています。特に情熱を注いでいるのは、クラウドシステムや Web サイトのプログラミング、そしてコンピューターのメンテナンスです。尽きることのない魅力を感じながら、サーバーとネットワークを運用しています。シンプルに、そして効率的に - それが私のモットーです！💪🚀"
+      },
+      "ContentSectionTextTeam3": {
+       "value": "私たちは、魅力あふれる街フィラッハにあるクリエイティブ🎨な広告代理店です。Florian Herbert Kleber IT とともに、モダンでスタイリッシュ、そして効果的なオンラインプレゼンスづくりに取り組んでいます。"
+      },
+      "MapSectionHeading": {
+       "value": "オフィス 📦💼"
+      },
+      "HeroSectionHeading": {
+       "value": "私に<br/>ご相談ください"
+      },
+      "HeroSectionText": {
+       "value": "IT サービスの世界を私と一緒に探ってみませんか。💻🚀 プロの IT コンサルタントとして、あなたが技術的な課題を乗り越えられるようお手伝いします。🎯 専門分野はセキュリティとクラウドコンピューティングです。⛅🔒 <br/><br/>システムの最適化をお考えですか？<br/><br/>ぜひ私にご相談ください！🤝 オーストリア発の経験、情熱、そして技術的なノウハウ。そう、解決策はいつでも見つけます（ただし、問題をご自身で解決しようとはしないことをおすすめします 😉）。"
+      },
+      "FooterTitleLine1": {
+       "value": "ご訪問ありがとうございます！"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>オーストリア <br><br>メール: office@fhkit.at<br>電話: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "リンク"
+      },
+      "FooterLinkImpressum": {
+       "value": "法的表示"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "パートナー"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "デザイン"
+      }
+     }
+    }
+   },
+   {
+    "id": "JaenPage /ja/imprint/",
+    "sections": [],
+    "childPages": [],
+    "childPagesOrder": [],
+    "jaenFields": {
+     "IMA:TextField": {
+      "FooterTitleLine1": {
+       "value": "ご訪問ありがとうございます！"
+      },
+      "FooterTextNew": {
+       "value": "Löwengasse 14 / Lokal 2 <br>1030 Wien <br>オーストリア <br><br>メール: office@fhkit.at<br>電話: +43 650 824 88 11"
+      },
+      "FooterLinkTitleLinks": {
+       "value": "リンク"
+      },
+      "FooterLinkImpressum": {
+       "value": "法的表示"
+      },
+      "FooterLinkTitlePartner": {
+       "value": "パートナー"
+      },
+      "FooterLinkTitleGestaltet von": {
+       "value": "デザイン"
+      }
+     }
+    }
+   }
+  ],
+  "widgets": []
+ }
+}
