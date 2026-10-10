@@ -6,8 +6,9 @@ import { RouteComponentProps } from "@reach/router";
 import {
   ContactFormValues,
   ContactModal,
+  ContactSendResult,
 } from "../components/ContactModal/ContactModal";
-import { useAuth, useNotificationsContext } from "jaen";
+import { useAuth } from "jaen";
 import { useQueryRouter } from "../hooks/use-query-router";
 
 /**
@@ -122,6 +123,38 @@ const confirmationText = (intl: ReturnType<typeof useIntl>) => ({
   })
 });
 
+/**
+ * A mail to {@link CONTACT_EMAIL} with the enquiry already written out,
+ * labelled in the language the form was filled in.
+ *
+ * The dialog links it when a send fails, so emailwerk being out of reach never
+ * makes the form a dead end. It is what the form opened for every enquiry
+ * before fhkit had its own template.
+ */
+const enquiryMailto = (
+  data: ContactFormValues,
+  text: ReturnType<typeof confirmationText>
+) => {
+  const name = `${data.firstName} ${data.lastName}`.trim();
+
+  const lines = [
+    `${text.t_labelName} ${name}`,
+    `${text.t_labelEmail} ${data.email}`
+  ];
+
+  if (data.phone) lines.push(`${text.t_labelPhone} ${data.phone}`);
+
+  lines.push('', text.t_labelMessage, data.message.replace(/\r?\n/g, '\r\n'));
+
+  // RFC 6068 asks for CRLF line breaks in a mailto body, the visitor's own
+  // ones in the message included.
+  return (
+    `mailto:${CONTACT_EMAIL}` +
+    `?subject=${encodeURIComponent(`${text.t_heading}: ${name}`)}` +
+    `&body=${encodeURIComponent(lines.join('\r\n'))}`
+  );
+};
+
 export interface ContactModalContextProps {
   onOpen: (args?: { meta?: Record<string, any> }) => void;
   onClose: () => void;
@@ -167,11 +200,6 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
     }
   }, [isCalled]);
 
-  // v3 dropped useToast for a store whose create() reads `type`, not `status`.
-  // jaen's notifications context wraps that store back up in v2's option shape
-  // and is already mounted above every page, so the two calls below keep the
-  // placement, timing and close button they had.
-  const { toast } = useNotificationsContext();
   const intl = useIntl();
 
   const authentication = useAuth();
@@ -191,7 +219,17 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
     setIsOpen(false);
   };
 
-  const onSubmit = async (data: ContactFormValues): Promise<void> => {
+  /**
+   * Sends the enquiry and tells the dialog how it went. The dialog shows the
+   * outcome itself, in the page's language, where a toast used to say "Fehler"
+   * or "Erfolg" for five seconds. A failure keeps the dialog open with what
+   * the visitor typed and offers the same enquiry as a mail.
+   */
+  const onSubmit = async (
+    data: ContactFormValues
+  ): Promise<ContactSendResult> => {
+    const text = confirmationText(intl);
+
     // The "fhkit Contact" template on emailwerk, flagged isPublic, so this
     // posts anonymously when there is no CMS session and emailwerk takes its
     // public branch. Recipients come from the template's stored envelope
@@ -213,41 +251,19 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
         // set when a button opened the dialog, so the address is read here as
         // well rather than left empty.
         invokedOnUrl: meta?.url ?? window.location.href,
-        ...confirmationText(intl)
+        ...text
       }
     });
 
-    if (!result.ok) {
-      toast({
-        title: intl.formatMessage({
-          id: 'ContactToastErrorTitle',
-          defaultMessage: 'Fehler'
-        }),
-        description: intl.formatMessage({
-          id: 'ContactToastErrorDescription',
-          defaultMessage: 'Es ist ein Fehler aufgetreten.'
-        }),
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: intl.formatMessage({
-          id: 'ContactToastSuccessTitle',
-          defaultMessage: 'Erfolg'
-        }),
-        description: intl.formatMessage({
-          id: 'ContactToastSuccessDescription',
-          defaultMessage: 'Ihre Nachricht wurde erfolgreich versendet.'
-        }),
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-
-      onClose();
+    if (result.ok) {
+      return { ok: true };
     }
+
+    return {
+      ok: false,
+      mailbox: CONTACT_EMAIL,
+      mailto: enquiryMailto(data, text)
+    };
   };
 
   const fixedValues = useMemo(() => {

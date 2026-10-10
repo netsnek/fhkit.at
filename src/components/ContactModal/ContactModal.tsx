@@ -1,7 +1,9 @@
-import { Button,
+import { Alert,
+  Button,
   Heading,
   HStack,
   Input,
+  Link,
   Stack,
   Text,
   Textarea,
@@ -25,11 +27,22 @@ import { Button,
     agreeToTerms: boolean
   }
   
+  /**
+   * What became of a send, for the dialog to show.
+   *
+   * A failed send names the office mailbox and carries a mailto link with the
+   * enquiry already written out, so the visitor can still reach the office
+   * without typing the message a second time.
+   */
+  export type ContactSendResult =
+    | {ok: true}
+    | {ok: false; mailbox: string; mailto: string}
+
   export interface ContactModalProps {
     isOpen: boolean
     onClose: () => void
   
-    onSubmit: (data: ContactFormValues) => Promise<void>
+    onSubmit: (data: ContactFormValues) => Promise<ContactSendResult>
   
     fixedValues?: {
       firstName?: string
@@ -70,6 +83,36 @@ import { Button,
       }
     }, [isOpen])
   
+    const [result, setResult] = React.useState<ContactSendResult | null>(null)
+    // One send per press. The button is disabled while a send runs, and this
+    // also stops a second submit that arrives before the button re-renders.
+    const sending = React.useRef(false)
+    const successRef = React.useRef<HTMLDivElement>(null)
+    const errorRef = React.useRef<HTMLDivElement>(null)
+
+    // The Send button is disabled while it sends, and the browser drops the
+    // focus of a disabled button to the page. So the focus goes to the notice
+    // that tells how the send went: screen readers read it, it is scrolled
+    // into view on a phone, and Tab continues from there.
+    React.useEffect(() => {
+      if (result?.ok) {
+        successRef.current?.focus()
+      } else if (result) {
+        errorRef.current?.focus()
+      }
+    }, [result])
+
+    const submit = handleSubmit(async data => {
+      if (sending.current) return
+      sending.current = true
+      setResult(null)
+      try {
+        setResult(await onSubmit(data))
+      } finally {
+        sending.current = false
+      }
+    })
+
     return (
       <Dialog.Root
         open={isOpen}
@@ -84,16 +127,68 @@ import { Button,
           if (!e.open) {
             onClose();
           }
-        }}>
+        }}
+        // Only once the dialog has faded out, so a closing dialog does not
+        // flip back from the thank-you message to the empty form.
+        onExitComplete={() => setResult(null)}>
         <Portal>
 
           <Dialog.Backdrop />
 
           <Dialog.Positioner>
             <Dialog.Content>
+              {result?.ok ? (
+                <>
+                  <DialogCloseButton />
+                  <Dialog.Body
+                    p={{
+                      base: 4,
+                      md: 8,
+                      lg: 12,
+                      xl: 16
+                    }}>
+                    <Alert.Root
+                      ref={successRef}
+                      status="success"
+                      role="status"
+                      tabIndex={-1}
+                      outline="none"
+                      // The theme's green.fg reads 3.45:1 on green.subtle in
+                      // light mode, too faint for body text. green.800 reads
+                      // 6.53:1. The dark pair already reads 10.7:1.
+                      color={{base: 'green.800', _dark: 'green.fg'}}
+                      flexDirection="column"
+                      alignItems="center"
+                      textAlign="center"
+                      gap="3"
+                      py="8">
+                      <Alert.Indicator boxSize="10" />
+                      <Alert.Title fontSize="lg">
+                        {intl.formatMessage({
+                          id: 'ContactSuccessTitle',
+                          defaultMessage: 'Ihre Nachricht wurde gesendet'
+                        })}
+                      </Alert.Title>
+                      <Alert.Description>
+                        {intl.formatMessage({
+                          id: 'ContactSuccessText',
+                          defaultMessage:
+                            'Vielen Dank! Wir melden uns schnellstmöglich bei Ihnen.'
+                        })}
+                      </Alert.Description>
+                    </Alert.Root>
+                  </Dialog.Body>
+
+                  <Dialog.Footer borderTop="1px solid" borderColor="gray.200">
+                    <Button onClick={onClose}>
+                      {intl.formatMessage({id: 'ContactClose', defaultMessage: 'Schließen'})}
+                    </Button>
+                  </Dialog.Footer>
+                </>
+              ) : (
               <form
                 onSubmit={event => {
-                  void handleSubmit(onSubmit)(event)
+                  void submit(event)
                 }}>
                 <DialogCloseButton />
                 <Dialog.Body
@@ -120,6 +215,51 @@ import { Button,
                           'Wir freuen uns über Ihre Nachricht und werden uns schnellstmöglich bei Ihnen melden.'
                       })}
                     </Text>
+
+                    {result && !result.ok && (
+                      // At the top of the form rather than next to the
+                      // Send button: on a phone the dialog is taller than
+                      // the screen, and until jaen's cookie banner is
+                      // answered it covers the bottom of the dialog. The
+                      // form keeps what the visitor typed, so trying again
+                      // is one more press.
+                      <Alert.Root
+                        ref={errorRef}
+                        status="error"
+                        role="alert"
+                        tabIndex={-1}
+                        outline="none">
+                        <Alert.Indicator />
+                        <Alert.Content>
+                          <Alert.Title>
+                            {intl.formatMessage({
+                              id: 'ContactErrorTitle',
+                              defaultMessage:
+                                'Ihre Nachricht konnte nicht gesendet werden'
+                            })}
+                          </Alert.Title>
+                          <Alert.Description>
+                            {intl.formatMessage(
+                              {
+                                id: 'ContactErrorText',
+                                defaultMessage:
+                                  'Bitte versuchen Sie es noch einmal oder schreiben Sie uns direkt an {email}.'
+                              },
+                              {
+                                email: (
+                                  <Link
+                                    key="email"
+                                    href={result.mailto}
+                                    variant="underline">
+                                    {result.mailbox}
+                                  </Link>
+                                )
+                              }
+                            )}
+                          </Alert.Description>
+                        </Alert.Content>
+                      </Alert.Root>
+                    )}
       
                     <HStack>
                       <Field.Root required invalid={!!errors.firstName}>
@@ -260,6 +400,7 @@ import { Button,
                   </Button>
                 </Dialog.Footer>
               </form>
+              )}
             </Dialog.Content>
           </Dialog.Positioner>
 

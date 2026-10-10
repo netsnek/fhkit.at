@@ -3,8 +3,9 @@
  *
  * Flat PascalCase keys, one catalog per locale. The German catalog is the
  * source of truth and collects the hardcoded strings of the site: navigation,
- * the contact dialog and its toasts, the theme and language choosers, the
- * per-page metadata defaults, and the text of the confirmation mail.
+ * the contact dialog and what it shows after a send, the theme and language
+ * choosers, the per-page metadata defaults, and the text of the confirmation
+ * mail.
  *
  * Jaen CMS fields keep their field names; the catalog only carries their
  * `defaultValue`, so an unedited locale renders in its own language while every
@@ -61,11 +62,15 @@ export const messagesDe = {
     'Bitte bestätigen Sie die Bedingungen zur Kontaktaufnahme',
   ContactSubmit: 'Senden',
 
-  // Contact toasts (src/services/contact.tsx)
-  ContactToastErrorTitle: 'Fehler',
-  ContactToastErrorDescription: 'Es ist ein Fehler aufgetreten.',
-  ContactToastSuccessTitle: 'Erfolg',
-  ContactToastSuccessDescription: 'Ihre Nachricht wurde erfolgreich versendet.',
+  // What the contact dialog shows after Send, in place of the toasts it had
+  // (src/components/ContactModal/ContactModal.tsx). {email} is the office
+  // mailbox, linked with the enquiry already written out.
+  ContactSuccessTitle: 'Ihre Nachricht wurde gesendet',
+  ContactSuccessText: 'Vielen Dank! Wir melden uns schnellstmöglich bei Ihnen.',
+  ContactErrorTitle: 'Ihre Nachricht konnte nicht gesendet werden',
+  ContactErrorText:
+    'Bitte versuchen Sie es noch einmal oder schreiben Sie uns direkt an {email}.',
+  ContactClose: 'Schließen',
 
   /**
    * The confirmation mail, sent as `values` on the contact mutation.
@@ -216,10 +221,11 @@ export const messagesEn: MessageCatalog = {
   ContactConsentRequired: 'Please accept the terms for getting in touch',
   ContactSubmit: 'Send',
 
-  ContactToastErrorTitle: 'Error',
-  ContactToastErrorDescription: 'Something went wrong.',
-  ContactToastSuccessTitle: 'Sent',
-  ContactToastSuccessDescription: 'Your message has been sent.',
+  ContactSuccessTitle: 'Your message has been sent',
+  ContactSuccessText: 'Thank you! We will get back to you as soon as we can.',
+  ContactErrorTitle: 'Your message could not be sent',
+  ContactErrorText: 'Please try again, or write to us directly at {email}.',
+  ContactClose: 'Close',
 
   MailConfirmSubject: 'Your enquiry on fhkit.at',
   MailConfirmTitle: 'Your enquiry',
@@ -332,10 +338,11 @@ export const messagesSl: MessageCatalog = {
   ContactConsentRequired: 'Prosimo, potrdite pogoje za vzpostavitev stika',
   ContactSubmit: 'Pošlji',
 
-  ContactToastErrorTitle: 'Napaka',
-  ContactToastErrorDescription: 'Prišlo je do napake.',
-  ContactToastSuccessTitle: 'Poslano',
-  ContactToastSuccessDescription: 'Vaše sporočilo je bilo uspešno poslano.',
+  ContactSuccessTitle: 'Vaše sporočilo je bilo poslano',
+  ContactSuccessText: 'Hvala! Javili se vam bomo v najkrajšem možnem času.',
+  ContactErrorTitle: 'Vašega sporočila ni bilo mogoče poslati',
+  ContactErrorText: 'Poskusite znova ali nam pišite neposredno na {email}.',
+  ContactClose: 'Zapri',
 
   MailConfirmSubject: 'Vaše povpraševanje na fhkit.at',
   MailConfirmTitle: 'Vaše povpraševanje',
@@ -451,10 +458,11 @@ export const messagesIt: MessageCatalog = {
   ContactConsentRequired: 'Conferma le condizioni per essere ricontattato',
   ContactSubmit: 'Invia',
 
-  ContactToastErrorTitle: 'Errore',
-  ContactToastErrorDescription: 'Si è verificato un errore.',
-  ContactToastSuccessTitle: 'Inviato',
-  ContactToastSuccessDescription: 'Il tuo messaggio è stato inviato.',
+  ContactSuccessTitle: 'Il tuo messaggio è stato inviato',
+  ContactSuccessText: 'Grazie! Ti risponderemo al più presto.',
+  ContactErrorTitle: 'Non è stato possibile inviare il tuo messaggio',
+  ContactErrorText: 'Riprova oppure scrivici direttamente a {email}.',
+  ContactClose: 'Chiudi',
 
   MailConfirmSubject: 'La tua richiesta su fhkit.at',
   MailConfirmTitle: 'La tua richiesta',
@@ -568,10 +576,12 @@ export const messagesJa: MessageCatalog = {
   ContactConsentRequired: 'お問い合わせの条件に同意してください',
   ContactSubmit: '送信',
 
-  ContactToastErrorTitle: 'エラー',
-  ContactToastErrorDescription: 'エラーが発生しました。',
-  ContactToastSuccessTitle: '送信しました',
-  ContactToastSuccessDescription: 'メッセージを送信しました。',
+  ContactSuccessTitle: 'メッセージを送信しました',
+  ContactSuccessText: 'ありがとうございます。できるかぎり早くご返信いたします。',
+  ContactErrorTitle: 'メッセージを送信できませんでした',
+  ContactErrorText:
+    'お手数ですが、もう一度お試しいただくか、{email} まで直接メールでお送りください。',
+  ContactClose: '閉じる',
 
   MailConfirmSubject: 'fhkit.at へのお問い合わせ',
   MailConfirmTitle: 'お問い合わせ内容',
