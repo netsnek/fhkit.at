@@ -7,7 +7,7 @@ import { useAuth, useCMSManagementContext } from 'jaen';
 import { useLocation } from '@reach/router';
 import { MenuStructureContext } from '../../contexts/menu-structure';
 import { createPageTree } from '../../utils/navigation';
-import Footer from './Footer';
+import Footer from '../sections/Footer';
 import { GridPattern } from '../GridPattern';
 
 interface AppLayoutProps {
