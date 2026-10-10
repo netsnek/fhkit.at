@@ -7,7 +7,6 @@ import {
   getExpandedMenuItemIndices
 } from '../../../utils/navigation';
 import { NavMenuItem, NavMenuSection } from '../../../utils/navigation/types';
-import TbUsers from '../../icons/tabler/TbUsers';
 import { generateMenuItem } from './utils/pageDirectory';
 
 interface PageDirectoryProps {
@@ -50,17 +49,6 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   };
 
   const baseMenuItems: NavMenuSection[] = [
-    {
-      name: 'Blog',
-      icon: <TbUsers />,
-      items: [
-        {
-          name: 'Posts',
-          href: '/experiments',
-          isActive: path?.startsWith('/experiments')
-        }
-      ]
-    },
     {
       name: 'More',
       icon: <FaLink />,

@@ -25,7 +25,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@/clients': path.resolve(__dirname, 'src/clients'),
         /**
          * jaen and its plugins arrive as `link:` dependencies, so each one
          * resolves these from its own node_modules unless they are pinned

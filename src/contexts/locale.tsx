@@ -58,10 +58,9 @@ export const useLocalizeHref = (): ((href: string) => string) => {
  * language it is being served in.
  *
  * The layout chain decides what to render by comparing the pathname against
- * literals: `path === '/'` picks the home page's own top bar, and
- * `['/experiments', '/experiments/'].includes(path)` picks the community
- * layout. Both are exact, so `/en/` and `/ja/experiments/` matched neither and
- * every non-German page rendered the wrong chrome.
+ * literals: `path === '/'` picks the home page's own top bar. The test is
+ * exact, so `/en/` did not match and every non-German home page rendered the
+ * wrong chrome.
  */
 export const stripLocalePrefix = (path: string, prefix: string): string => {
   if (!prefix) return path;

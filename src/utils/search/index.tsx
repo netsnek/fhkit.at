@@ -1,5 +1,3 @@
-import { sq } from '@/clients/social';
-import { FaFlask } from '@react-icons/all-files/fa/FaFlask';
 import { UseSearchResult, SearchIndex } from '../../hooks/use-search';
 import {
   TSearchMetadata,
@@ -164,51 +162,4 @@ export function getDefaultSearchDocs(
     });
   });
   return results;
-}
-
-/**
- * Search the experiments for the given query.
- * @param query The query to search for
- * @returns  The search results
- */
-export async function searchSocialPosts(
-  query?: string
-): Promise<TSearchResultSection[]> {
-  const [posts, postsError] = await sq.query(q => {
-    const posts =
-      query && query.length > 0
-        ? q.allPost({
-            query,
-            pagination: {
-              first: 10
-            }
-          })
-        : q.allTrendingPost({
-            pagination: {
-              first: 10
-            }
-          });
-
-    const sections: TSearchResultSection[] = [];
-    posts.nodes.map(pn => {
-      const username = pn.user().profile?.userName ?? '';
-      sections.push({
-        title: pn.title,
-        results: [
-          {
-            description:
-              pn.matchingQuery({ query: query || '' }) ??
-              pn.summary ??
-              pn.title,
-            to: `/experiments/${pn.slug}`,
-            title: `${username}/${pn.title}`
-          }
-        ]
-      });
-    });
-
-    return sections;
-  });
-
-  return !postsError || postsError?.length === 0 ? posts : [];
 }

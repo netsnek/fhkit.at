@@ -7,7 +7,6 @@ import { useAuth, useCMSManagementContext } from 'jaen';
 import { useLocation } from '@reach/router';
 import { MenuStructureContext } from '../../contexts/menu-structure';
 import { createPageTree } from '../../utils/navigation';
-import CommunityLayout from './CommunityLayout';
 import DocsLayout from './DocsLayout';
 import Footer from './Footer';
 import { GridPattern } from '../GridPattern';
@@ -40,16 +39,8 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path, footer }) => {
 
   let childrenElmnt: ReactNode = null;
 
-  const isCommunity = ['/experiments', '/experiments/'].includes(path);
-
   if (isDocs) {
-    childrenElmnt = (
-      <DocsLayout path={path} isCommunity={isCommunity}>
-        {children}
-      </DocsLayout>
-    );
-  } else if (isCommunity) {
-    childrenElmnt = <CommunityLayout>{children}</CommunityLayout>;
+    childrenElmnt = <DocsLayout path={path}>{children}</DocsLayout>;
   } else {
     childrenElmnt = children;
   }

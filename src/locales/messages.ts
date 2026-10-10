@@ -4,8 +4,8 @@
  * Flat PascalCase keys, one catalog per locale. The German catalog is the
  * source of truth and collects the hardcoded strings of the site: navigation,
  * the contact dialog and its toasts, the search overlay, the theme and language
- * choosers, the blog headings, the per-page metadata defaults, and the text of
- * the confirmation mail.
+ * choosers, the per-page metadata defaults, and the text of the confirmation
+ * mail.
  *
  * Jaen CMS fields keep their field names; the catalog only carries their
  * `defaultValue`, so an unedited locale renders in its own language while every
@@ -32,8 +32,6 @@ export const messagesDe = {
     'Leitfäden und Referenzen zu unseren Diensten und Projekten.',
   PageTitleImprint: 'Impressum',
   PageDescriptionImprint: 'Impressum und Offenlegung nach österreichischem Recht.',
-  PageTitleExperiments: 'Blog',
-  PageDescriptionExperiments: 'Beiträge und Notizen aus der täglichen Arbeit.',
 
   // The home page's top bar (src/components/navigation/AltTopNav.tsx)
   NavContact: 'Kontakt',
@@ -103,9 +101,6 @@ export const messagesDe = {
   // Language switcher (src/components/LanguageSwitcher.tsx)
   LanguageSwitcherLabel: 'Sprache',
 
-  // Blog (src/pages/experiments/index.tsx)
-  BlogFeatured: 'Ausgewählte Beiträge',
-  BlogLatest: 'Neueste Beiträge',
 
   // Docs (src/templates/DocPage.tsx)
   DocsOnThisPage: 'Auf dieser Seite',
@@ -135,8 +130,6 @@ export const messagesEn: MessageCatalog = {
   PageDescriptionDocs: 'Guides and references for our services and projects.',
   PageTitleImprint: 'Legal notice',
   PageDescriptionImprint: 'Legal notice and disclosure under Austrian law.',
-  PageTitleExperiments: 'Blog',
-  PageDescriptionExperiments: 'Posts and notes from the day-to-day work.',
 
   NavContact: 'Contact',
   NavContactCta: 'Get in touch',
@@ -189,8 +182,6 @@ export const messagesEn: MessageCatalog = {
 
   LanguageSwitcherLabel: 'Language',
 
-  BlogFeatured: 'Featured posts',
-  BlogLatest: 'Latest posts',
 
   DocsOnThisPage: 'On this page',
 
@@ -209,8 +200,6 @@ export const messagesSl: MessageCatalog = {
   PageDescriptionDocs: 'Vodniki in reference za naše storitve in projekte.',
   PageTitleImprint: 'Impresum',
   PageDescriptionImprint: 'Impresum in razkritje po avstrijskem pravu.',
-  PageTitleExperiments: 'Blog',
-  PageDescriptionExperiments: 'Prispevki in zapiski iz vsakdanjega dela.',
 
   NavContact: 'Kontakt',
   NavContactCta: 'Pišite nam',
@@ -264,8 +253,6 @@ export const messagesSl: MessageCatalog = {
 
   LanguageSwitcherLabel: 'Jezik',
 
-  BlogFeatured: 'Izbrani prispevki',
-  BlogLatest: 'Najnovejši prispevki',
 
   DocsOnThisPage: 'Na tej strani',
 
@@ -286,8 +273,6 @@ export const messagesIt: MessageCatalog = {
   PageTitleImprint: 'Note legali',
   PageDescriptionImprint:
     'Note legali e informazioni obbligatorie secondo il diritto austriaco.',
-  PageTitleExperiments: 'Blog',
-  PageDescriptionExperiments: 'Articoli e appunti dal lavoro quotidiano.',
 
   NavContact: 'Contatti',
   NavContactCta: 'Richiedi ora',
@@ -341,8 +326,6 @@ export const messagesIt: MessageCatalog = {
 
   LanguageSwitcherLabel: 'Lingua',
 
-  BlogFeatured: 'Articoli in evidenza',
-  BlogLatest: 'Ultimi articoli',
 
   DocsOnThisPage: 'In questa pagina',
 
@@ -361,8 +344,6 @@ export const messagesJa: MessageCatalog = {
   PageDescriptionDocs: 'サービスとプロジェクトのガイドおよびリファレンス。',
   PageTitleImprint: '法的表示',
   PageDescriptionImprint: 'オーストリア法に基づく法的表示および開示。',
-  PageTitleExperiments: 'ブログ',
-  PageDescriptionExperiments: '日々の業務からの記事とメモ。',
 
   NavContact: 'お問い合わせ',
   NavContactCta: 'お問い合わせはこちら',
@@ -415,8 +396,6 @@ export const messagesJa: MessageCatalog = {
 
   LanguageSwitcherLabel: '言語',
 
-  BlogFeatured: '注目の記事',
-  BlogLatest: '最新の記事',
 
   DocsOnThisPage: 'このページの内容',
 

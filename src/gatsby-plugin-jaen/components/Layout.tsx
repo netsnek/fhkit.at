@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children, pageProps }) => {
   // non-German page down the marketing branch.
   const route = stripLocalePrefix(path, prefix);
 
-  const docsPaths = ['/docs', '/experiments'];
+  const docsPaths = ['/docs'];
 
   const isDocs = docsPaths.some(docsPath => route.startsWith(docsPath));
 

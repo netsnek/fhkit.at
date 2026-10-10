@@ -18,12 +18,6 @@ import {
 } from 'react';
 import { FaFlask } from '@react-icons/all-files/fa/FaFlask';
 
-import {
-  fetchDefaultSearchresult,
-  searchDocs,
-  searchSocialPosts,
-  searchUser
-} from '../../utils/search';
 import useSearch from '../../hooks/use-search';
 import {
   SearchResultSection,
