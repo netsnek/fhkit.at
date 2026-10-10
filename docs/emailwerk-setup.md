@@ -4,21 +4,27 @@ Everything in this file happens **outside this repository**, in emailwerk and
 in its deployment. The site reads exactly one value from here: the template id
 that goes into `CONTACT_TEMPLATE_ID` at the top of `src/services/contact.tsx`.
 
-## Where things stand (checked 2026-10-10)
+## Where things stand (2026-10-10, 13:35 UTC)
 
-- emailwerk has **no fhkit template**. The tenant `netsnek` holds 122
-  templates, and none of them belongs to fhkit.
-- emailwerk answers the CORS preflight from `https://fhkit.at` with 401 and no
-  `Access-Control-Allow-Origin`, so a browser on fhkit.at cannot post to it at
-  all. The preflights from netsnek.com, nadine-hauswirth.com, booklimo.at and
-  limosen.at get 204.
-- Until both are fixed the site does not use emailwerk. `CONTACT_TEMPLATE_ID`
-  is `null`, and the form opens a prefilled mail to office@fhkit.at instead.
-  It used to carry netsnek.com's template, which would have delivered every
-  fhkit enquiry to netsnek's inbox the moment the origin was allowed.
+The templates exist and the origin is allowed. The site does not use them yet.
 
-Three steps fix it, in this order: create the templates, allow the origin,
-put the id into the site and deploy it.
+- emailwerk holds fhkit's two templates in the tenant `netsnek` (124
+  templates now, 122 before). The script below created them at 13:29 UTC.
+  `fhkit Contact` is `cmv2fl2cu14ebps2p05nwpoev`, the id the site needs, and
+  `fhkit Contact Confirmation` is `cmv2fl2pd14ekps2peogq6lq1`, linked to it as
+  its child. Both are public, their stored content is byte-identical to the
+  files in `emailwerk/`, and both rendered cleanly through emailwerk's own
+  `templatePreview`.
+- `https://fhkit.at` is in `EMAILWERK_CORS_ORIGINS`. Its preflight answers 204
+  with the origin echoed, the eleven origins listed before still get 204,
+  and an unlisted origin still gets 401.
+- `www.fhkit.at` no longer answers 522. A Cloudflare zone redirect rule sends
+  every request to `https://fhkit.at` with 301 and keeps the path and query.
+- Still open is the site itself. `CONTACT_TEMPLATE_ID` is still `null`, so the
+  form opens a prefilled mail to office@fhkit.at until the site carries the id
+  and is deployed. It used to carry netsnek.com's template, which would have
+  delivered every fhkit enquiry to netsnek's inbox the moment the origin was
+  allowed.
 
 ## How the send works, so the templates make sense
 
@@ -76,6 +82,12 @@ Notes on the values:
   `|raw`. The subject is always rendered with Liquid, whatever the engine.
 - Both files were rendered offline with emailwerk's own `twig` and `liquidjs`,
   with and without the `t_` values, before they were committed.
+- **Editing them later.** The build running on the netcup node (image of
+  2026-08-27) is older than emailwerk `3ca79e1`. On that build a
+  `templateUpdate` that names only some envelope fields resets the others, so
+  sending `{subject}` alone empties `to`, and the public send then refuses
+  every enquiry with `PUBLIC_SEND_NO_STORED_RECIPIENT`. Until the build is
+  replaced, send the whole envelope with any envelope change, or none.
 
 Create both, the link between them included, with:
 
@@ -83,22 +95,26 @@ Create both, the link between them included, with:
 EMAILWERK_BASIC='admin:<password>' docs/emailwerk/create-templates.sh
 ```
 
-It prints the id of `fhkit Contact` and refuses to run a second time.
+It prints the id of `fhkit Contact` and refuses to run a second time. It ran
+once against production on 2026-10-10, so a second run now stops at its check.
 
 ## 2. Allow the origin
 
 `EMAILWERK_CORS_ORIGINS` in the ConfigMap `emailwerk-config` (namespace
 `emailwerk`, `deploy/k8s/emailwerk/20-app.yaml` in the emailwerk repository)
 needs `https://fhkit.at`. The entry is matched verbatim against the `Origin`
-header. As of 2026-10-10 the line reads, with fhkit.at appended:
+header. Since 2026-10-10 the live ConfigMap and the line in the emailwerk
+repository (commit `de53e7c`) both read:
 
 ```yaml
 EMAILWERK_CORS_ORIGINS: "https://netsnek.com,https://www.netsnek.com,https://nadine-hauswirth.com,https://www.nadine-hauswirth.com,https://walther.exp.univie.ac.at,https://limosen.at,https://www.limosen.at,https://new.limosen.at,https://new.booklimo.at,https://booklimo.at,https://www.booklimo.at,https://fhkit.at"
 ```
 
 The list is read when the process starts, so the deployment needs a restart
-after the ConfigMap changes. `www.fhkit.at` answers with Cloudflare error 522
-today, so it stays off the list until that host serves the site.
+after the ConfigMap changes. The deployment uses the `Recreate` strategy, so a
+restart means emailwerk is down for about half a minute (24 s on 2026-10-10).
+`www.fhkit.at` redirects to `https://fhkit.at` at the Cloudflare edge and
+never serves the form, so it stays off the list.
 
 The preflight from an allowed origin already reaches the application and gets
 204, so no Cloudflare Access rule stands in front of `/graphql`.
@@ -106,8 +122,8 @@ The preflight from an allowed origin already reaches the application and gets
 ## 3. Put the id into the site
 
 Set `CONTACT_TEMPLATE_ID` in `src/services/contact.tsx` to the id the script
-printed and delete the TODO above it. The id is not a secret and not an
-authorization. Then build and deploy the site.
+printed, `cmv2fl2cu14ebps2p05nwpoev`, and delete the TODO above it. The id is
+not a secret and not an authorization. Then build and deploy the site.
 
 ## Verifying
 
@@ -120,9 +136,13 @@ authorization. Then build and deploy the site.
      https://emailwerk.com/graphql
    ```
 
-2. Without sending a mail: an anonymous `sendTemplateMail` with the new id and
-   a deliberately invalid `replyTo` fails with `PUBLIC_SEND_INVALID_REPLY_TO`
-   instead of `TEMPLATE_NOT_FOUND` once the template is public.
+2. Without sending a mail, read the template through the Basic door:
+   `template(args: {id: "cmv2fl2cu14ebps2p05nwpoev"}) { isPublic envelope { to } }`
+   gives `isPublic: true` and `to: ["office@fhkit.at"]`. The anonymous
+   mutation cannot show this. It rejects an invalid `replyTo` with
+   `PUBLIC_SEND_INVALID_REPLY_TO` before it looks the template up, so that
+   error comes back for any id, even one that does not exist (checked on
+   2026-10-10).
 3. One real message from the deployed site, in a language other than German:
    the enquiry arrives at office@fhkit.at with `Reply-To` set to the visitor,
    and exactly one confirmation arrives at the visitor, in that language.
