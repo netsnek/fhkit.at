@@ -16,10 +16,21 @@ interface Props {
   children: React.ReactNode;
 }
 
+/**
+ * One card of the row. Side by side the cards share the row equally:
+ * without a flex basis each took the width of its own text, so the longest
+ * text got the widest card and the Kanbon card, which has the shortest,
+ * was squeezed to about 165px with one or two words per line. `minW` lets a
+ * card shrink below its longest word instead of pushing the row wider.
+ */
 export const Testimonial = (props: Props) => {
   const {children} = props
 
-  return <Box>{children}</Box>
+  return (
+    <Box flex={{base: 'initial', md: '1'}} minW="0">
+      {children}
+    </Box>
+  )
 }
 
 export const TestimonialContent = (props: Props) => {
