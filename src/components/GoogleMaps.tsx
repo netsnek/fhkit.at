@@ -1,6 +1,7 @@
 import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } from '@chakra-ui/react';
   import {useCookieConsentContext} from 'jaen'
   import {useEffect, useState} from 'react'
+  import {useIntl} from 'react-intl'
   // import {useCookieConsent} from '@jaenjs/jaen'
   
   export interface GoogleMapsProps extends BoxProps {
@@ -11,6 +12,7 @@ import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } fr
     const [isMounted, setIsMounted] = useState(false)
   
     const cc = useCookieConsentContext()
+    const intl = useIntl()
   
     useEffect(() => {
       setIsMounted(true)
@@ -52,14 +54,30 @@ import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } fr
           alignItems="center"
           justifyContent="center"
           textAlign="center">
-          <Spinner />
-          <Alert.Title mt={4} mb={1} fontSize="lg">
-            Google Maps is nicht verfügbar
+          {/* The texts come from the catalog, which has carried all three
+              in five languages all along. The hard-coded German here said
+              "Google Maps is nicht verfügbar" on every locale. */}
+          <Alert.Title mb={1} fontSize="lg">
+            {intl.formatMessage({
+              id: 'MapsUnavailable',
+              defaultMessage: 'Google Maps ist nicht verfügbar.'
+            })}
           </Alert.Title>
           <Alert.Description maxWidth="sm">
-            Bitte aktivieren Sie Cookies, um Google Maps anzuzeigen.{' '}
-            <Link onClick={handleAccept} variant="link">
-              Analyse Cookies aktivieren
+            {intl.formatMessage({
+              id: 'MapsEnableCookies',
+              defaultMessage:
+                'Bitte aktivieren Sie Cookies, um Google Maps anzuzeigen.'
+            })}{' '}
+            {/* A button, because it acts rather than navigates and an anchor
+                without an href is unreachable by keyboard. `link` is no
+                variant in v3, so it rendered as plain text; `underline`
+                shows that it can be clicked. */}
+            <Link as="button" onClick={handleAccept} variant="underline">
+              {intl.formatMessage({
+                id: 'MapsEnableAnalytics',
+                defaultMessage: 'Analyse-Cookies aktivieren'
+              })}
             </Link>
           </Alert.Description>
         </Alert.Root>
