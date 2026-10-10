@@ -91,7 +91,7 @@ const confirmationText = (intl: ReturnType<typeof useIntl>) => ({
     },
     {
       mail: mailLink('mailto:office@fhkit.at', 'office@fhkit.at'),
-      phone: mailLink('tel:+436642503731', '+43 664 250 37 31')
+      phone: mailLink('tel:+436508248811', '+43 650 824 88 11')
     }
   ),
   t_rights: intl.formatMessage(
