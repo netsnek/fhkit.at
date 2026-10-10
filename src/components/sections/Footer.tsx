@@ -136,7 +136,15 @@ const Footer: FC = () => {
             );
           }
           return (
-            <Link key={i} href={link.href} variant="hover-theme" opacity={0.7}>
+            // White on hover. The variant's hover colour is the near-black
+            // brand, which made a hovered link vanish into the black footer.
+            <Link
+              key={i}
+              href={link.href}
+              variant="hover-theme"
+              opacity={0.7}
+              _hover={{ color: 'white', opacity: 1 }}
+            >
               <Field.Text
                 name={'FooterLink' + link.label}
                 defaultValue={link.label}
@@ -286,7 +294,7 @@ const Footer: FC = () => {
                 display="flex"
                 transition="color 0.2s"
                 _hover={{
-                  color: 'brand.500'
+                  color: 'gray.400'
                 }}
               >
                 <LinkOverlay
@@ -301,7 +309,7 @@ const Footer: FC = () => {
                 display="flex"
                 transition="color 0.2s"
                 _hover={{
-                  color: 'brand.500'
+                  color: 'gray.400'
                 }}
               >
                 <LinkOverlay
@@ -316,7 +324,7 @@ const Footer: FC = () => {
                 display="flex"
                 transition="color 0.2s"
                 _hover={{
-                  color: 'brand.500'
+                  color: 'gray.400'
                 }}
               >
                 <LinkOverlay
@@ -331,7 +339,7 @@ const Footer: FC = () => {
                 display="flex"
                 transition="color 0.2s"
                 _hover={{
-                  color: 'brand.500'
+                  color: 'gray.400'
                 }}
               >
                 <LinkOverlay
