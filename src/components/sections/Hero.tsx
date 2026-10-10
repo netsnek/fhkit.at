@@ -170,46 +170,42 @@ const HeroSection = () => {
               //mx="-12px"
               flexWrap={'wrap'}
               asChild><LinkBox>
+                {/* The link attributes sit on the anchor itself. v2's
+                    isExternal is gone in v3, so these five opened in the same
+                    tab, unlike every other outside link on the site. The
+                    Netsnek icon pointed at netsnek.com/kleberbaum, which
+                    answers 404; it goes to netsnek.com, like the Netsnek
+                    button in the bar and the phone menu. */}
                 <IconButton
                   size="lg"
                   variant={'ghost'}
                   color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Netsnek"
-                  href="https://netsnek.com/kleberbaum"
-                  isExternal
-                  asChild><LinkOverlay><Netsnek w={'25px'} h={'25px'} /></LinkOverlay></IconButton>
+                  asChild><LinkOverlay href="https://netsnek.com" target="_blank" rel="noopener noreferrer"><Netsnek w={'25px'} h={'25px'} /></LinkOverlay></IconButton>
                 <IconButton
                   size="lg"
                   variant={'ghost'}
                   color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Github"
-                  href="https://github.com/kleberbaum/"
-                  isExternal
-                  asChild><LinkOverlay><FaGithub /></LinkOverlay></IconButton>
+                  asChild><LinkOverlay href="https://github.com/kleberbaum/" target="_blank" rel="noopener noreferrer"><FaGithub /></LinkOverlay></IconButton>
                 <IconButton
                   size="lg"
                   variant={'ghost'}
                   color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Linkedin"
-                  href="https://www.linkedin.com/in/kleberbaum/"
-                  isExternal
-                  asChild><LinkOverlay><FaLinkedin /></LinkOverlay></IconButton>
+                  asChild><LinkOverlay href="https://www.linkedin.com/in/kleberbaum/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></LinkOverlay></IconButton>
                 <IconButton
                   size="lg"
                   variant={'ghost'}
                   color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Instagram"
-                  href="https://www.instagram.com/kleberbaum/"
-                  isExternal
-                  asChild><LinkOverlay><FaInstagram /></LinkOverlay></IconButton>
+                  asChild><LinkOverlay href="https://www.instagram.com/kleberbaum/" target="_blank" rel="noopener noreferrer"><FaInstagram /></LinkOverlay></IconButton>
                 <IconButton
                   size="lg"
                   variant={'ghost'}
                   color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Telegram"
-                  href="https://t.me/kleberbaum"
-                  isExternal
-                  asChild><LinkOverlay><FaTelegram /></LinkOverlay></IconButton>
+                  asChild><LinkOverlay href="https://t.me/kleberbaum" target="_blank" rel="noopener noreferrer"><FaTelegram /></LinkOverlay></IconButton>
                 {/*<IconButton
               as={LinkOverlay}
               size="lg"
