@@ -519,7 +519,7 @@ export const messagesIt: MessageCatalog = {
     'Come gran maestro di JavaScript🎯 e veterano dell’open source⚡, con solide basi di cyber security🔒, la mia competenza è nello sviluppo web e nella realizzazione di sistemi ERP altamente efficaci ⚙️. Lo sviluppo di successo di un sistema ERP comune chiamato "Jaen"✨, insieme a Florian Herbert Kleber IT, sottolinea la mia capacità di agire in modo proattivo e orientato alle soluzioni. Come mago della tecnologia🧙\u200d♂️💻 sono sempre pronto ad affrontare i problemi prima che si presentino, creando così un’esperienza tecnologica senza intoppi.',
   PartnerElectricalHeading: 'Ingegneria elettrica',
   ContentSectionTextTeam2:
-    'Unisco il mio corso di laurea magistrale in ingegneria elettrica⚡️ e tecnologia dell’informazione📡 a un lavoro appassionato sulla tecnologia di ogni genere. Ho una passione particolare per la programmazione di sistemi cloud e siti web e per la manutenzione dei computer. Gestisco server e reti con un fascino sempre vivo. Semplificare e rendere efficiente - questo è il mio credo! 💪🚀',
+    'Unisco il mio corso di laurea magistrale in ingegneria elettrica⚡️ e tecnologia dell’informazione📡 a un lavoro appassionato sulla tecnologia di ogni genere. Ho una passione particolare per la programmazione di sistemi cloud e siti web e per la manutenzione dei computer. Gestisco server e reti, che non smettono mai di affascinarmi. Semplificare e rendere efficiente - questo è il mio credo! 💪🚀',
   PartnerDesignHeading: 'Design e marketing',
   ContentSectionTextTeam3:
     'Siamo un’agenzia pubblicitaria creativa 🎨 nell’affascinante città di Villach. Insieme a Florian Herbert Kleber IT lavoriamo per creare presenze online moderne, eleganti ed efficaci.',
