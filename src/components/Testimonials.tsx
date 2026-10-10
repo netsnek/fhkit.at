@@ -65,11 +65,20 @@ export const TestimonialHeading = (props: Props) => {
   )
 }
 
+/**
+ * A div, not a paragraph. Its children are CMS text fields, and a Field.Text
+ * renders its own <p>. A <p> inside a <p> is invalid HTML, so the browser's
+ * parser closed the outer one early and split the server markup into three
+ * siblings. React then found a different tree than it had rendered, threw
+ * hydration errors #418 and #423 on every home page and re-rendered the whole
+ * page in the browser.
+ */
 export const TestimonialText = (props: Props) => {
   const {children} = props
 
   return (
     <Text
+      as="div"
       //textAlign={'center'}
       color={useColorModeValue('gray.600', 'gray.400')}
       fontSize={'sm'}>
