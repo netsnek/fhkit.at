@@ -183,10 +183,12 @@ const Footer: FC = () => {
                 />
               </Box>
             </Flex>
+            {/* The business address as the legal notice gives it: Florian
+                Herbert Kleber IT is now Netsnek e.U., which sits in Vienna. */}
             <Field.Text
               name="FooterTextNew"
-              defaultValue="Dreilach 16 <br>
-              9184, St. Jakob i.R. <br>
+              defaultValue="Löwengasse 14 / Lokal 2 <br>
+              1030 Wien <br>
               Austria <br>
               <br>
               Email: office@fhkit.at<br>
