@@ -13,7 +13,9 @@ first free one from 9351 on, and the server stops with the probe.
 Nothing leaves the machine. Every request to another host is aborted and
 recorded: the notebook checks that the site asks for nothing but the partner
 photos on osg.snek.at, and that the sign-in link reaches for
-accounts.netsnek.com without anything being sent there. Chromium is the
+accounts.netsnek.com without anything being sent there. The contact form's
+POST to emailwerk is written down and then answered inside the browser
+(aborted, refused or accepted), so pressing Send sends no mail. Chromium is the
 system one (this machine is aarch64, Playwright ships no build for it), with a
 throwaway profile and background networking off.
 """
@@ -26,6 +28,7 @@ import shutil
 import socket
 import sys
 import threading
+import time
 import urllib.parse
 from pathlib import Path
 
@@ -37,6 +40,23 @@ LOCALES = {'de': '', 'en': 'en/', 'sl': 'sl/', 'it': 'it/', 'ja': 'ja/'}
 SIGN_IN = {'de': 'Anmelden', 'en': 'Sign in', 'sl': 'Prijava', 'it': 'Accedi', 'ja': 'ログイン'}
 CONTACT = {'de': 'Jetzt anfragen', 'en': 'Get in touch', 'sl': 'Pišite nam', 'it': 'Richiedi ora',
            'ja': 'お問い合わせはこちら'}
+# The hero's button, which phones show where the bar has no room for CONTACT.
+CONTACT_ME = {'de': 'Kontaktiere mich', 'en': 'Contact me', 'sl': 'Kontaktiraj me', 'it': 'Contattami',
+              'ja': 'お問い合わせ'}
+CLOSE = {'de': 'Schließen', 'en': 'Close', 'sl': 'Zapri', 'it': 'Chiudi', 'ja': '閉じる'}
+
+EMAILWERK = 'https://emailwerk.com/graphql'
+# What the probe types into the contact form. The address is on a domain
+# reserved for examples, and nothing typed here leaves the machine.
+FORM = {'firstName': 'Erika', 'lastName': 'Musterfrau', 'email': 'erika.musterfrau@example.org',
+        'phone': '+43 1 234 56 78', 'message': 'Zeile eins\nZeile <b>zwei</b>'}
+# How emailwerk answers, as the probe plays it: a refusal is an error with a
+# code, an accepted send is the queued message.
+ANSWER = {
+    'refuse': {'data': None, 'errors': [{'message': 'Zu viele Anfragen.',
+                                         'extensions': {'code': 'PUBLIC_SEND_RATE_LIMITED'}}]},
+    'accept': {'data': {'sendTemplateMail': {'__typename': 'Message', 'id': 'probe', 'status': 'QUEUED'}}},
+}
 
 CHROMIUM = next((c for c in ['/usr/bin/chromium-browser', '/usr/bin/chromium', '/usr/bin/google-chrome']
                  if Path(c).exists()), None) or shutil.which('chromium') or shutil.which('chromium-browser')
@@ -226,6 +246,28 @@ PAGE_JS = """() => ({
 })"""
 
 
+# The contact dialog as the visitor sees it after Send: the notice that tells
+# how the send went, whether it holds the focus, where it sits next to jaen's
+# cookie banner, what the fields still hold and which buttons are labelled.
+DIALOG_JS = """() => {
+  const dialog = [...document.querySelectorAll('[role=dialog]')]
+    .find(d => d.querySelector('#firstName, [role=status]'));
+  if (!dialog) return null;
+  const notice = dialog.querySelector('[role=alert], [role=status]');
+  const box = e => { const r = e.getBoundingClientRect(); return {top: Math.round(r.top), bottom: Math.round(r.bottom)}; };
+  const banner = document.querySelector('[data-jaen-cc-banner] #cm');
+  return {
+    notice: notice && {role: notice.getAttribute('role'), text: notice.innerText.replace(/\\s+/g, ' ').trim(),
+                       mailto: (notice.querySelector('a[href^="mailto:"]') || {}).href || null,
+                       focused: notice === document.activeElement, box: box(notice)},
+    banner: banner && banner.getBoundingClientRect().height > 0 ? box(banner) : null,
+    fields: Object.fromEntries(['firstName', 'lastName', 'email', 'phone', 'message']
+      .map(i => [i, dialog.querySelector('#' + i) ? dialog.querySelector('#' + i).value : null])),
+    buttons: [...dialog.querySelectorAll('button')].map(b => b.innerText.trim()).filter(Boolean),
+  };
+}"""
+
+
 def attempt(step, entry, name):
     """Run one interaction, and record instead of raising if it fails: a
     regression should show up as failed checks, not as a probe that died."""
@@ -240,14 +282,15 @@ def main():
     srv, base = serve()
     sitemap = (PUBLIC / 'sitemap.xml').read_text(encoding='utf8')
     paths = sorted(re.sub(r'^https://fhkit\.at', '', l) for l in re.findall(r'<loc>([^<]+)</loc>', sitemap))
-    out = {'base': base, 'pages': [], 'not_found': [], 'sign_in': {}, 'drawer': {}, 'maps': {}, 'cards': {}}
+    out = {'base': base, 'pages': [], 'not_found': [], 'sign_in': {}, 'drawer': {}, 'maps': {}, 'cards': {},
+           'contact': []}
 
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=CHROMIUM, headless=True, args=[
             '--disable-background-networking', '--disable-sync', '--disable-component-update',
             '--no-first-run', '--no-default-browser-check', '--mute-audio'])
 
-        def context(width=1440, mobile=False, dark=False):
+        def context(width=1440, mobile=False, dark=False, emailwerk=None):
             ctx = browser.new_context(viewport={'width': 390 if mobile else width, 'height': 844 if mobile else 1000},
                                       is_mobile=mobile, has_touch=mobile, device_scale_factor=1,
                                       color_scheme='dark' if dark else 'light', locale='de-AT')
@@ -260,6 +303,8 @@ def main():
             def route(r):
                 if urllib.parse.urlsplit(r.request.url).netloc == base.split('//')[1]:
                     r.continue_()
+                elif emailwerk and r.request.url.startswith(EMAILWERK):
+                    emailwerk(r)
                 else:
                     outside.append(r.request.url)
                     r.abort()
@@ -396,6 +441,93 @@ def main():
                 .filter(h => h.closest('.chakra-stack'))
                 .map(h => [h.textContent.trim(), Math.round(h.closest('.chakra-stack').getBoundingClientRect().width)])""")
             ctx.close()
+
+        # Send, in every language. Every POST to emailwerk is written down and
+        # then answered here: aborted as if the network failed, refused the way
+        # emailwerk refuses, or accepted the way it queues a mail. None of them
+        # leaves the browser, so no mail is sent.
+        def send_form(loc, answer, mobile=False, dark=False, consent=True, double=False, delay=0.0,
+                      close=False):
+            posts = []
+            cors = {'Access-Control-Allow-Origin': base}
+
+            def emailwerk(r):
+                req = r.request
+                if req.method == 'OPTIONS':
+                    # Playwright answers CORS preflights itself while routing
+                    # is on. This only makes sure none could go out.
+                    return r.fulfill(status=204, headers={**cors, 'Access-Control-Allow-Headers': 'content-type'})
+                posts.append({'at': time.monotonic(), 'method': req.method, 'url': req.url, 'body': req.post_data,
+                              'headers': {k: v for k, v in req.headers.items()
+                                          if k in ('content-type', 'authorization', 'cookie', 'origin')}})
+                if delay:
+                    time.sleep(delay)
+                if answer == 'abort':
+                    return r.abort()
+                return r.fulfill(status=200, headers={**cors, 'Content-Type': 'application/json'},
+                                 body=json.dumps(ANSWER[answer]))
+
+            ctx, outside = context(mobile=mobile, dark=dark, emailwerk=emailwerk)
+            page, status, errors, _ = opened(ctx, f'/{LOCALES[loc]}')
+            entry = {'locale': loc, 'answer': answer, 'viewport': 'phone' if mobile else 'desktop',
+                     'mode': 'dark' if dark else 'light', 'consent': consent, 'double': double, 'page_url': page.url}
+            opener = (CONTACT_ME if mobile else CONTACT)[loc]
+            attempt(lambda: page.get_by_role('button', name=opener).first.click(timeout=5000), entry,
+                    'contact button')
+            page.wait_for_timeout(900)
+            form = page.locator('form:has(#firstName)')
+
+            def fill():
+                for field, value in FORM.items():
+                    form.locator('#' + field).fill(value, timeout=5000)
+                if consent:
+                    form.locator('label:has(input[type=checkbox])').first.click(timeout=5000)
+
+            attempt(fill, entry, 'fill in the form')
+            pressed = time.monotonic()
+
+            def press():
+                submit = form.locator('button[type=submit]')
+                (submit.dblclick if double else submit.click)(timeout=5000)
+
+            attempt(press, entry, 'press Send')
+            if consent:
+                attempt(lambda: page.wait_for_selector('[role=dialog] [role=alert], [role=dialog] [role=status]',
+                                                       timeout=20000), entry, 'wait for the outcome')
+            # gqty has given up retrying once the notice is up. The pause makes
+            # sure no late request is missed all the same.
+            page.wait_for_timeout(1500)
+            entry['dialog'] = page.evaluate(DIALOG_JS)
+            contrast = page.evaluate(CONTRAST_JS)
+            shown = ((entry['dialog'] or {}).get('notice') or {}).get('text') or ''
+            entry['low_contrast'] = [c for c in contrast if c['ratio'] < 3 and not c['image']]
+            entry['notice_contrast'] = [c for c in contrast if shown and c['kind'] == 'text' and c['text']
+                                        and c['text'] in shown]
+            if close:
+                attempt(lambda: page.locator('[role=dialog] button', has_text=CLOSE[loc]).first.click(timeout=5000),
+                        entry, 'close')
+                page.wait_for_timeout(900)
+                entry['after_close'] = page.evaluate(DIALOG_JS)
+                attempt(lambda: page.get_by_role('button', name=opener).first.click(timeout=5000), entry, 'reopen')
+                page.wait_for_timeout(900)
+                entry['reopened'] = page.evaluate(DIALOG_JS)
+            entry.update({'posts': [{**p, 'at': round(p['at'] - pressed, 2)} for p in posts],
+                          'errors': errors, 'outside': sorted(set(outside))})
+            out['contact'].append(entry)
+            ctx.close()
+
+        for loc in LOCALES:
+            send_form(loc, 'abort')
+        for loc in LOCALES:
+            send_form(loc, 'accept', close=True)
+        send_form('de', 'refuse')
+        send_form('de', 'refuse', mobile=True)
+        send_form('de', 'refuse', dark=True)
+        send_form('de', 'accept', dark=True)
+        send_form('ja', 'accept', mobile=True, dark=True)
+        send_form('de', 'accept', consent=False)
+        # A double click while emailwerk takes its time to answer.
+        send_form('de', 'accept', double=True, delay=0.8)
 
         browser.close()
     srv.shutdown()
