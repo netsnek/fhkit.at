@@ -115,7 +115,9 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = props => {
       px={{ base: 0, lg: 3 }}
       borderRadius="xl"
       filter="drop-shadow(1px 2px 2px rgb(0 0 0 / 0.1))"
-      color="white"
+      // The solid button's own text colour, white on the near-black light
+      // button and dark on the light one of dark mode.
+      color="colorPalette.contrast"
       aria-label={`${controlLabel}: ${labels[currentBase] ?? currentBase}`}
       onClick={onClick}
       {...props}
@@ -256,7 +258,7 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = props => {
           px={3}
           borderRadius="xl"
           filter="drop-shadow(1px 2px 2px rgb(0 0 0 / 0.1))"
-          color="white"
+          color="colorPalette.contrast"
           aria-label={`${controlLabel}: ${labels[currentBase] ?? currentBase}`}
           // v2 spaced the chevron with iconSpacing on the rightIcon wrapper.
           // The icon is a plain child now, so the same 1.5 has to come from

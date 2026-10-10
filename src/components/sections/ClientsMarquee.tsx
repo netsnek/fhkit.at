@@ -70,7 +70,10 @@ const ClientsMarquee: FC<ClientsMarqueeProps> = ({...props}) => {
               height={boxSize}
               p="2"
               mx="16"
-              overflow="hidden">
+              overflow="hidden"
+              // The client logos are dark marks drawn for a white page. On
+              // the dark page they sit on a light tile instead of fading out.
+              _dark={{bg: 'gray.100', borderRadius: 'xl', p: '6'}}>
               <LinkOverlay href={client.href} target='_blank' rel='noopener noreferrer'>
                 <Image
                   src={client.logo}

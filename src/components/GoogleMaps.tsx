@@ -38,7 +38,7 @@ import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } fr
   
     if (!isMounted) {
       return (
-        <Center boxSize="full" bg="gray.200">
+        <Center boxSize="full" bg={{base: 'gray.200', _dark: 'gray.700'}}>
           <Spinner />
         </Center>
       )
@@ -85,7 +85,7 @@ import { Alert, Box, BoxProps, Center, Heading, Link, Spinner, Text, chakra } fr
     }
   
     return (
-      <Box {...props} bg="gray.200" overflow={"hidden"}>
+      <Box {...props} bg={{base: 'gray.200', _dark: 'gray.700'}} overflow={"hidden"}>
         <chakra.iframe
           src={src}
           w="calc(100% + 4px)"

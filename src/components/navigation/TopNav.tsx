@@ -190,7 +190,8 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
     };
     linkProps = {
       ...linkProps,
-      opacity: 0.4,
+      // 0.4 put the labels below a readable contrast on the dark bar.
+      opacity: 0.7,
       _hover: {
         opacity: 1
       }

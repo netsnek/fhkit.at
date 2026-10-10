@@ -114,16 +114,17 @@ const AltTopNav: FC<IAltTopNavProps> = () => {
                   onClick={handleOnContactClick}
                   fontSize="sm"
                   fontWeight="semibold"
-                  color="white"
                   display={{ base: 'none', md: 'block' }}
                 >
                   {intl.formatMessage({id: 'NavContactCta', defaultMessage: 'Jetzt anfragen'})}
                 </Button>
+                {/* `fg` follows the colour mode. White made the chevron
+                    invisible on the white bar of light mode. */}
                 <LanguageSwitcher
                   ml={4}
                   size="sm"
                   variant="ghost-hover"
-                  color="white"
+                  color="fg"
                 />
                 <Tooltip content={intl.formatMessage({id: 'NavContact', defaultMessage: 'Kontakt'})}>
                   <IconButton

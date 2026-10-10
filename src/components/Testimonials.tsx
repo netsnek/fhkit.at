@@ -38,7 +38,9 @@ export const TestimonialContent = (props: Props) => {
 
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      // gray.700 in dark mode: gray.800 is the page itself, so the card had no
+      // edge but its shadow.
+      bg={useColorModeValue('white', 'gray.700')}
       boxShadow={'lg'}
       mt="5"
       p={8}
@@ -55,7 +57,7 @@ export const TestimonialContent = (props: Props) => {
         borderRightWidth: 16,
         borderTop: 'solid',
         borderTopWidth: 16,
-        borderTopColor: useColorModeValue('white', 'gray.800'),
+        borderTopColor: useColorModeValue('white', 'gray.700'),
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',

@@ -74,7 +74,8 @@ const HeroSection = () => {
             lineHeight={1}
             fontWeight="bold"
             textAlign="left"
-            color="#000000"
+            // Black on white as before, but no longer black on the dark page.
+            color={{base: 'black', _dark: 'whiteAlpha.900'}}
             name="HeroSectionHeading"
             defaultValue="Lass dich von <br/>
             mir beraten"
@@ -100,7 +101,6 @@ const HeroSection = () => {
               w={{base: '100%', sm: 'auto'}}
               h={12}
               px={6}
-              color="white"
               size="lg"
               rounded="md"
               mb={{base: 2, sm: 0}}
@@ -167,7 +167,7 @@ const HeroSection = () => {
                 <IconButton
                   size="lg"
                   variant={'ghost'}
-                  color="brand.500"
+                  color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Netsnek"
                   href="https://netsnek.com/kleberbaum"
                   isExternal
@@ -175,7 +175,7 @@ const HeroSection = () => {
                 <IconButton
                   size="lg"
                   variant={'ghost'}
-                  color="brand.500"
+                  color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Github"
                   href="https://github.com/kleberbaum/"
                   isExternal
@@ -183,7 +183,7 @@ const HeroSection = () => {
                 <IconButton
                   size="lg"
                   variant={'ghost'}
-                  color="brand.500"
+                  color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Linkedin"
                   href="https://www.linkedin.com/in/kleberbaum/"
                   isExternal
@@ -191,7 +191,7 @@ const HeroSection = () => {
                 <IconButton
                   size="lg"
                   variant={'ghost'}
-                  color="brand.500"
+                  color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Instagram"
                   href="https://www.instagram.com/kleberbaum/"
                   isExternal
@@ -199,7 +199,7 @@ const HeroSection = () => {
                 <IconButton
                   size="lg"
                   variant={'ghost'}
-                  color="brand.500"
+                  color={{base: 'brand.500', _dark: 'whiteAlpha.900'}}
                   aria-label="Telegram"
                   href="https://t.me/kleberbaum"
                   isExternal
