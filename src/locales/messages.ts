@@ -35,15 +35,9 @@ export const messagesDe = {
   PageTitleExperiments: 'Blog',
   PageDescriptionExperiments: 'Beiträge und Notizen aus der täglichen Arbeit.',
 
-  // TopNav and AltTopNav (src/components/navigation/*)
-  NavServices: 'Unsere Services',
-  NavDocs: 'Dokumentation',
-  NavPortfolio: 'Unser Portfolio',
-  NavBlog: 'Blog',
+  // The home page's top bar (src/components/navigation/AltTopNav.tsx)
   NavContact: 'Kontakt',
   NavContactCta: 'Jetzt anfragen',
-  NavOpenMenu: 'Menü öffnen',
-  NavCloseMenu: 'Menü schließen',
 
   // Contact dialog (src/components/ContactModal/ContactModal.tsx)
   ContactHeading: 'Kontaktieren Sie uns',
@@ -144,14 +138,8 @@ export const messagesEn: MessageCatalog = {
   PageTitleExperiments: 'Blog',
   PageDescriptionExperiments: 'Posts and notes from the day-to-day work.',
 
-  NavServices: 'Our services',
-  NavDocs: 'Documentation',
-  NavPortfolio: 'Our portfolio',
-  NavBlog: 'Blog',
   NavContact: 'Contact',
   NavContactCta: 'Get in touch',
-  NavOpenMenu: 'Open menu',
-  NavCloseMenu: 'Close menu',
 
   ContactHeading: 'Get in touch',
   ContactIntro:
@@ -224,14 +212,8 @@ export const messagesSl: MessageCatalog = {
   PageTitleExperiments: 'Blog',
   PageDescriptionExperiments: 'Prispevki in zapiski iz vsakdanjega dela.',
 
-  NavServices: 'Naše storitve',
-  NavDocs: 'Dokumentacija',
-  NavPortfolio: 'Naš portfelj',
-  NavBlog: 'Blog',
   NavContact: 'Kontakt',
   NavContactCta: 'Pišite nam',
-  NavOpenMenu: 'Odpri meni',
-  NavCloseMenu: 'Zapri meni',
 
   ContactHeading: 'Stopite v stik z nami',
   ContactIntro:
@@ -307,14 +289,8 @@ export const messagesIt: MessageCatalog = {
   PageTitleExperiments: 'Blog',
   PageDescriptionExperiments: 'Articoli e appunti dal lavoro quotidiano.',
 
-  NavServices: 'I nostri servizi',
-  NavDocs: 'Documentazione',
-  NavPortfolio: 'Il nostro portfolio',
-  NavBlog: 'Blog',
   NavContact: 'Contatti',
   NavContactCta: 'Richiedi ora',
-  NavOpenMenu: 'Apri il menu',
-  NavCloseMenu: 'Chiudi il menu',
 
   ContactHeading: 'Contattaci',
   ContactIntro:
@@ -388,14 +364,8 @@ export const messagesJa: MessageCatalog = {
   PageTitleExperiments: 'ブログ',
   PageDescriptionExperiments: '日々の業務からの記事とメモ。',
 
-  NavServices: 'サービス',
-  NavDocs: 'ドキュメント',
-  NavPortfolio: 'ポートフォリオ',
-  NavBlog: 'ブログ',
   NavContact: 'お問い合わせ',
   NavContactCta: 'お問い合わせはこちら',
-  NavOpenMenu: 'メニューを開く',
-  NavCloseMenu: 'メニューを閉じる',
 
   ContactHeading: 'お問い合わせ',
   ContactIntro:
