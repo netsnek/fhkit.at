@@ -14,7 +14,8 @@ import { Box,
   Separator,
 } from '@chakra-ui/react';
 import { useColorModeValue } from 'jaen';
-import { FC, ReactNode } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { Link } from 'gatsby-plugin-jaen';
 import { Field } from 'jaen';
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
@@ -24,13 +25,39 @@ import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import Logo from '../../gatsby-plugin-jaen/components/Logo';
 import { useLocalizeHref } from '../../contexts/locale';
 
-const year = new Date().getFullYear();
+/**
+ * The year the copyright line names.
+ *
+ * The static HTML carries the year of the build, so the server render and the
+ * browser's first render agree and hydration stays clean. After mount the
+ * browser moves it on to the current year, so a page built in one year still
+ * reads right in the next one without a rebuild. A year written into the text
+ * itself is how the line came to say 2024 for good.
+ */
+const useCopyrightYear = (): number => {
+  const data = useStaticQuery<{ site: { buildTime: string } }>(graphql`
+    query FooterCopyrightYear {
+      site {
+        buildTime(formatString: "YYYY")
+      }
+    }
+  `);
+
+  const [year, setYear] = useState(() => Number(data.site.buildTime));
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
+  return year;
+};
 
 /**
  * Footer component.
  */
 const Footer: FC = () => {
   const localizeHref = useLocalizeHref();
+  const year = useCopyrightYear();
 
   const links = [
     [
@@ -314,9 +341,11 @@ const Footer: FC = () => {
               </LinkBox>
             </LinkBox></HStack>
           <Separator mt={8} opacity={0.2} />
-          <Field.Text
-            name="FooterBottomText"
-            defaultValue="Copyright © 2024 Netsnek, Florian Herbert Kleber IT & Werbeagentur Nico Schett. All rights reserved."
+          {/* Plain text rather than the CMS field it used to be: a value
+              stored in the CMS would freeze the year again. The credit is
+              Netsnek alone, the way netsnek.com's own contact mail words it,
+              instead of the three businesses the template fork carried over. */}
+          <Text
             mt={5}
             color="white"
             opacity={0.2}
@@ -325,7 +354,9 @@ const Footer: FC = () => {
             }}
             cursor="default"
             transition="opacity 0.2s ease-in-out"
-          />
+          >
+            {`Copyright © ${year} Netsnek. All rights reserved.`}
+          </Text>
         </Container>
       </Box>
     </>
