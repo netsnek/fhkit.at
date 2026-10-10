@@ -1,6 +1,12 @@
 import React, { createContext, useContext } from 'react';
+import { useIntl } from 'react-intl';
 
-import { defaultLocale, locales } from '../locales/messages';
+import {
+  defaultLocale,
+  locales,
+  messagesDe,
+  type MessageKey
+} from '../locales/messages';
 
 /**
  * A sibling translation of the current page, as emitted by
@@ -50,6 +56,29 @@ export const useLocalizeHref = (): ((href: string) => string) => {
     if (!prefix || locale === defaultLocale) return href;
 
     return `/${prefix}${href.startsWith('/') ? href : `/${href}`}`;
+  };
+};
+
+/**
+ * The default text of a CMS field, in the page's language.
+ *
+ * A Field.Text shows its `defaultValue` until an editor stores a value for
+ * that page, and every locale is its own page. With German defaults written
+ * into the components, /en/, /sl/, /it/ and /ja/ showed the German texts
+ * under translated menus. The defaults live in the catalog now, and the
+ * localized pages additionally carry the same translations as stored CMS
+ * content (jaen-data/build-patch-i18n.mjs).
+ *
+ * The raw catalog string, not formatMessage: these texts carry markup such as
+ * `<br/>`, which ICU message syntax would read as a tag.
+ */
+export const useFieldText = (): ((key: MessageKey) => string) => {
+  const intl = useIntl();
+
+  return (key: MessageKey): string => {
+    const value = intl.messages[key];
+
+    return typeof value === 'string' ? value : messagesDe[key];
   };
 };
 

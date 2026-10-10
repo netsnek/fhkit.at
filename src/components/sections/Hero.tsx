@@ -23,8 +23,12 @@ import {FaTelegram} from '@react-icons/all-files/fa/FaTelegram'
 import {FaInstagram} from '@react-icons/all-files/fa/FaInstagram'
 import {FaTwitter} from '@react-icons/all-files/fa/FaTwitter'
 import Netsnek from '../Netsnek'
+import {useIntl} from 'react-intl'
+import {useFieldText} from '../../contexts/locale'
 
 const HeroSection = () => {
+  const intl = useIntl()
+  const fieldText = useFieldText()
   const contactModal = useContactModal()
   const onContactClick = () => {
     contactModal.onOpen({
@@ -60,11 +64,15 @@ const HeroSection = () => {
                 rounded="full"
                 color="white"
                 bgColor="brand.500">
-                Für dich
+                {intl.formatMessage({id: 'HeroBadgeTag', defaultMessage: 'Für dich'})}
               </Box>
               <HStack gap={1} alignItems="center" justifyContent="center">
-                <Text lineHeight={1} mr={2} asChild><LinkOverlay>Kostenlose Erstberatung
-                                </LinkOverlay></Text>
+                <Text lineHeight={1} mr={2} asChild><LinkOverlay>
+                  {intl.formatMessage({
+                    id: 'HeroBadgeText',
+                    defaultMessage: 'Kostenlose Erstberatung'
+                  })}
+                </LinkOverlay></Text>
                 {/* <Icon as={GoChevronRight} w={4} h={4} /> */}
               </HStack>
             </LinkBox></HStack>
@@ -77,8 +85,7 @@ const HeroSection = () => {
             // Black on white as before, but no longer black on the dark page.
             color={{base: 'black', _dark: 'whiteAlpha.900'}}
             name="HeroSectionHeading"
-            defaultValue="Lass dich von <br/>
-            mir beraten"
+            defaultValue={fieldText('HeroSectionHeading')}
           />
           <Field.Text
             fontSize="1.2rem"
@@ -87,11 +94,7 @@ const HeroSection = () => {
             fontWeight="400"
             color="gray.500"
             name="HeroSectionText"
-            defaultValue="Entdecke mit mir die Welt der IT-Dienstleistungen. 💻🚀 Als professioneller IT-Berater helfe ich dir dabei, deine technischen Herausforderungen zu meistern. 🎯 Meine Spezialgebiete sind Security und Cloudcomputing. ⛅🔒 <br/>
-            <br/>
-            Auf der Suche nach einer Optimierung deines Systems?<br/>
-            <br/>
-            Lass dich von mir beraten! 🤝 Erfahrung, Leidenschaft und technisches Know-how aus Österreich. Und ja, ich finde immer eine Lösung (aber ich empfehle, das Problem nicht selbst zu lösen 😉)."
+            defaultValue={fieldText('HeroSectionText')}
           />
           <HStack
             gap={{base: 0, sm: 2}}
@@ -107,7 +110,10 @@ const HeroSection = () => {
               zIndex={1}
               lineHeight={1}
               onClick={onContactClick}>
-              Kontaktiere mich
+              {intl.formatMessage({
+                id: 'HeroContactButton',
+                defaultMessage: 'Kontaktiere mich'
+              })}
               {/* <Icon as={MdBolt} h={4} w={4} ml={1} /> */}
             </Button>
             <Flex

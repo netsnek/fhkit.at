@@ -23,7 +23,7 @@ import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
 import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import Logo from '../../gatsby-plugin-jaen/components/Logo';
-import { useLocalizeHref } from '../../contexts/locale';
+import { useFieldText, useLocalizeHref } from '../../contexts/locale';
 
 /**
  * The year the copyright line names.
@@ -57,12 +57,21 @@ const useCopyrightYear = (): number => {
  */
 const Footer: FC = () => {
   const localizeHref = useLocalizeHref();
+  const fieldText = useFieldText();
   const year = useCopyrightYear();
 
-  const links = [
+  /**
+   * `label` names the CMS field (FooterLinkTitle<label>, FooterLink<label>)
+   * and is its default where the text is a name. `text` is the default where
+   * the text is a word, from the catalog in the page's language.
+   */
+  const links: Array<
+    Array<{ label: string; text?: string; href?: string; isTitle?: boolean }>
+  > = [
     [
       {
         label: 'Links',
+        text: fieldText('FooterLinkTitleLinks'),
         isTitle: true
       },
       {
@@ -86,12 +95,14 @@ const Footer: FC = () => {
         // /impressum target does not exist, and with no 404 page the link
         // quietly showed the home page instead of the legal notice.
         label: 'Impressum',
+        text: fieldText('FooterLinkImpressum'),
         href: localizeHref('/imprint/')
       }
     ],
     [
       {
         label: 'Partner',
+        text: fieldText('FooterLinkTitlePartner'),
         isTitle: true
       },
       {
@@ -110,6 +121,7 @@ const Footer: FC = () => {
     [
       {
         label: 'Gestaltet von',
+        text: fieldText('FooterLinkTitleDesignedBy'),
         isTitle: true
       },
       {
@@ -125,12 +137,12 @@ const Footer: FC = () => {
     linkElmnts.push(
       <VStack gap={3} alignItems="start" wrap="wrap" key={i}>
         {linkGroup.map((link, i) => {
-          if ('isTitle' in link) {
+          if (link.isTitle) {
             return (
               <Field.Text
                 key={i}
                 name={'FooterLinkTitle' + link.label}
-                defaultValue={link.label}
+                defaultValue={link.text ?? link.label}
                 fontWeight="500"
               />
             );
@@ -147,7 +159,7 @@ const Footer: FC = () => {
             >
               <Field.Text
                 name={'FooterLink' + link.label}
-                defaultValue={link.label}
+                defaultValue={link.text ?? link.label}
               />
             </Link>
           );
@@ -182,7 +194,7 @@ const Footer: FC = () => {
               >
                 <Field.Text
                   name="FooterTitleLine1"
-                  defaultValue="Danke für deinen Besuch!"
+                  defaultValue={fieldText('FooterTitleLine1')}
                   fontSize="4xl"
                   fontWeight="500"
                   w={{ base: 'full', lg: 'fit-content' }}
@@ -195,12 +207,7 @@ const Footer: FC = () => {
                 Herbert Kleber IT is now Netsnek e.U., which sits in Vienna. */}
             <Field.Text
               name="FooterTextNew"
-              defaultValue="Löwengasse 14 / Lokal 2 <br>
-              1030 Wien <br>
-              Austria <br>
-              <br>
-              Email: office@fhkit.at<br>
-              Tel: +43 650 824 88 11"
+              defaultValue={fieldText('FooterTextNew')}
               mt={10}
               maxW={{ base: 'full', lg: '50%' }}
               fontSize="1.1rem"
