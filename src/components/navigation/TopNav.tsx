@@ -1,4 +1,3 @@
-import { useAuth } from 'jaen';
 import { DarkMode, LightMode, useColorMode } from 'jaen';
 import { Box,
   BoxProps,
@@ -55,7 +54,6 @@ interface ITopNavProps {
  */
 const TopNav: FC<ITopNavProps> = ({ path, children }) => {
   const [hamburgerClass, setHamburgerClass] = useState('');
-  const { signinRedirect } = useAuth();
   const { open: isOpen, onOpen, onClose } = useDisclosure();
 
   const location = useLocation();
@@ -97,20 +95,10 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
         href: '/login/',
         reload: true,
         matchMethod: 'exact'
-      },
-      {
-        name: 'Sign Up',
-        matchMethod: 'exact',
-        onClick: () => signinRedirect({ prompt: 'create' }),
-        style: {
-          border: '1px solid',
-          borderColor: 'topNav.input.borderColor',
-          borderRadius: 'lg',
-          h: 9,
-          px: 2,
-          lineHeight: 9
-        }
       }
+      // No Sign Up. fhkit.at has no visitor accounts: signing in only serves
+      // the owner's CMS, through the NETSNEK organization, and the entry
+      // asked Zitadel for a registration nobody here can use.
     ]
   };
 
