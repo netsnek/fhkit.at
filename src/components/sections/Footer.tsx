@@ -67,7 +67,7 @@ const Footer: FC = () => {
       },
       {
         label: 'GitHub',
-        href: 'https://github.com/in/kleberbaum/'
+        href: 'https://github.com/kleberbaum'
       },
       {
         label: 'LinkedIn',
@@ -114,7 +114,7 @@ const Footer: FC = () => {
       },
       {
         label: 'Florian H. Kleber',
-        href: 'https://github.com/in/kleberbaum/'
+        href: 'https://github.com/kleberbaum'
       }
     ]
   ]
