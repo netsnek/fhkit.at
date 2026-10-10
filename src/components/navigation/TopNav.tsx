@@ -15,6 +15,7 @@ import { Box,
 import { useLocation } from '@reach/router';
 import { Link } from 'gatsby-plugin-jaen';
 import { FC, useEffect, useMemo, useState } from 'react';
+import { useIntl } from 'react-intl';
 import Logo from '../../gatsby-plugin-jaen/components/Logo';
 import useWindowSize from '../../hooks/use-current-window-size';
 import useScrollPosition from '../../hooks/use-scroll-position';
@@ -22,6 +23,7 @@ import HamburgerMenuIcon from '../HamburgerMenuIcon';
 import Links from '../Links';
 import { TLinkData } from '../types';
 import MobileNavDrawer from './MobileNavDrawer';
+import { useLocalizeHref } from '../../contexts/locale';
 
 const navLinkProps = {
   display: { base: 'none', md: 'initial' },
@@ -57,12 +59,25 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
 
   const location = useLocation();
   const windowSize = useWindowSize();
+  const intl = useIntl();
+  const localizeHref = useLocalizeHref();
 
+  // Labels and targets follow the page's language. They were English on
+  // every locale, and Home and the logo led every visitor to the German home
+  // page.
   const links: { left: TTopNavLinkData[]; right: TTopNavLinkData[] } = {
     left: [
       {
-        name: 'Home',
-        href: '/',
+        name: intl.formatMessage({ id: 'NavHome', defaultMessage: 'Startseite' }),
+        href: localizeHref('/'),
+        matchMethod: 'exact'
+      },
+      {
+        name: intl.formatMessage({
+          id: 'PageTitleImprint',
+          defaultMessage: 'Impressum'
+        }),
+        href: localizeHref('/imprint/'),
         matchMethod: 'exact'
       }
     ],
@@ -80,7 +95,8 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
        * accounts.netsnek.com form.
        */
       {
-        name: 'Sign In',
+        name: intl.formatMessage({ id: 'NavSignIn', defaultMessage: 'Anmelden' }),
+        // jaen's system pages exist once, unlocalized.
         href: '/login/',
         reload: true,
         matchMethod: 'exact'
@@ -213,7 +229,11 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
           <Flex w="full" maxW="7xl">
             <Link
               h="60px"
-              to="/"
+              to={localizeHref('/')}
+              aria-label={intl.formatMessage({
+                id: 'NavHome',
+                defaultMessage: 'Startseite'
+              })}
               w="150px"
               _hover={{
                 transform: 'scale(1.1)'
@@ -250,6 +270,11 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
                   variant="ghost-hover"
                   size="sm"
                   display={{ base: 'initial', md: 'none' }}
+                  aria-label={intl.formatMessage({
+                    id: 'NavMenu',
+                    defaultMessage: 'Menü'
+                  })}
+                  aria-expanded={isOpen}
                   onClick={toggleMobileMenu}
                   {...(colorMode === 'dark'
                     ? {

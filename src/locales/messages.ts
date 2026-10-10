@@ -33,6 +33,14 @@ export const messagesDe = {
   NavContact: 'Kontakt',
   NavContactCta: 'Jetzt anfragen',
 
+  // The top bar of every other page and its phone menu
+  // (src/components/navigation/TopNav.tsx, page-directory/PageDirectory.tsx)
+  NavHome: 'Startseite',
+  NavSignIn: 'Anmelden',
+  NavMenu: 'Menü',
+  NavSectionNavigation: 'Navigation',
+  NavSectionMore: 'Mehr',
+
   // Contact dialog (src/components/ContactModal/ContactModal.tsx)
   ContactHeading: 'Kontaktieren Sie uns',
   ContactIntro:
@@ -121,6 +129,11 @@ export const messagesEn: MessageCatalog = {
 
   NavContact: 'Contact',
   NavContactCta: 'Get in touch',
+  NavHome: 'Home',
+  NavSignIn: 'Sign in',
+  NavMenu: 'Menu',
+  NavSectionNavigation: 'Navigation',
+  NavSectionMore: 'More',
 
   ContactHeading: 'Get in touch',
   ContactIntro:
@@ -185,6 +198,11 @@ export const messagesSl: MessageCatalog = {
 
   NavContact: 'Kontakt',
   NavContactCta: 'Pišite nam',
+  NavHome: 'Domov',
+  NavSignIn: 'Prijava',
+  NavMenu: 'Meni',
+  NavSectionNavigation: 'Navigacija',
+  NavSectionMore: 'Več',
 
   ContactHeading: 'Stopite v stik z nami',
   ContactIntro:
@@ -252,6 +270,11 @@ export const messagesIt: MessageCatalog = {
 
   NavContact: 'Contatti',
   NavContactCta: 'Richiedi ora',
+  NavHome: 'Home',
+  NavSignIn: 'Accedi',
+  NavMenu: 'Menu',
+  NavSectionNavigation: 'Navigazione',
+  NavSectionMore: 'Altro',
 
   ContactHeading: 'Contattaci',
   ContactIntro:
@@ -317,6 +340,11 @@ export const messagesJa: MessageCatalog = {
 
   NavContact: 'お問い合わせ',
   NavContactCta: 'お問い合わせはこちら',
+  NavHome: 'ホーム',
+  NavSignIn: 'ログイン',
+  NavMenu: 'メニュー',
+  NavSectionNavigation: 'ナビゲーション',
+  NavSectionMore: 'その他',
 
   ContactHeading: 'お問い合わせ',
   ContactIntro:

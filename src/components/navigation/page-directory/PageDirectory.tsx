@@ -2,6 +2,8 @@ import { useAuth } from 'jaen';
 import { Accordion, Box, HStack, Text, useBreakpointValue } from '@chakra-ui/react';
 import { FaLink } from '@react-icons/all-files/fa/FaLink';
 import { FC, Fragment, useMemo, useState } from 'react';
+import { useIntl } from 'react-intl';
+import { useLocalizeHref } from '../../../contexts/locale';
 import {
   createPageTree,
   getExpandedMenuItemIndices
@@ -17,7 +19,8 @@ interface PageDirectoryProps {
   path?: string;
 }
 /**
- * The page directory component that shows the documentation structure.
+ * The menu of the phone drawer. It was built for the docs tree, which is gone;
+ * `data` is now always empty and the base sections below are the menu.
  */
 const PageDirectory: FC<PageDirectoryProps> = ({
   data,
@@ -48,38 +51,63 @@ const PageDirectory: FC<PageDirectoryProps> = ({
     if (!isIncluded) setExpandedIdx([...expandedIdx, idx]);
   };
 
-  const baseMenuItems: NavMenuSection[] = [
+  const intl = useIntl();
+  const localizeHref = useLocalizeHref();
+
+  /**
+   * The phone menu: the site's own pages, then Netsnek. It used to list Sign
+   * In alone under "Navigation", and "Netsnek" under "More" pointed at "/",
+   * which on this site is fhkit's own home page.
+   */
+  const homeHref = localizeHref('/');
+  const imprintHref = localizeHref('/imprint/');
+
+  const navigationItems: NavMenuItem[] = [
     {
-      name: 'More',
-      icon: <FaLink />,
-      items: [
-        {
-          name: 'Netsnek',
-          href: '/'
-        }
-      ]
+      name: intl.formatMessage({ id: 'NavHome', defaultMessage: 'Startseite' }),
+      href: homeHref,
+      isActive: path === homeHref
+    },
+    {
+      name: intl.formatMessage({
+        id: 'PageTitleImprint',
+        defaultMessage: 'Impressum'
+      }),
+      href: imprintHref,
+      isActive: path === imprintHref
     }
   ];
 
   if (isSmallScreen && !isAuthenticated) {
     // The same full page load as the top bar's entry, for the same reason:
     // signinRedirect throws outside jaen's sign-in routes.
-    const item = {
-      name: 'Sign In',
+    navigationItems.push({
+      name: intl.formatMessage({ id: 'NavSignIn', defaultMessage: 'Anmelden' }),
       href: '/login/',
       reload: true
-    };
-    const section = baseMenuItems.find(bmi => bmi.name === 'Navigation');
-
-    if (section) {
-      section.items.unshift(item);
-    } else {
-      baseMenuItems.unshift({
-        name: 'Navigation',
-        items: [item]
-      });
-    }
+    });
   }
+
+  const baseMenuItems: NavMenuSection[] = [
+    {
+      name: intl.formatMessage({
+        id: 'NavSectionNavigation',
+        defaultMessage: 'Navigation'
+      }),
+      items: navigationItems
+    },
+    {
+      name: intl.formatMessage({ id: 'NavSectionMore', defaultMessage: 'Mehr' }),
+      icon: <FaLink />,
+      items: [
+        {
+          name: 'Netsnek',
+          href: 'https://netsnek.com',
+          isExternal: true
+        }
+      ]
+    }
+  ];
 
   let menuRootExpandedIdx = 0;
 

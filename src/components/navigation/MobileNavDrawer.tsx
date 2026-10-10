@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import PageDirectory from './page-directory/PageDirectory';
 import NavbarControls from './NavbarControls';
 import { Global } from '@emotion/react';
-import useNavOffset from '../../hooks/use-nav-offset';
 import { useMenuStructureContext } from '../../contexts/menu-structure';
 import { useLocation } from '@reach/router';
 
@@ -23,7 +22,6 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
   onClose
 }) => {
   const { menuStructure } = useMenuStructureContext();
-  const navOffset = useNavOffset();
   const { pathname } = useLocation();
 
   return (
@@ -41,7 +39,10 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
             <Flex
               direction="column"
               w="100vw"
-              h={`calc(100vh - ${navOffset})`}
+              // The drawer hangs from the 64px bar, so it is the viewport minus
+              // 64px. The 85px nav offset it subtracted left a 21px strip of
+              // the page showing through at the bottom.
+              h="calc(100dvh - 64px)"
               bg="shared.body.bgColor"
               pt={9}
               px={9}
