@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import PageDirectory from './page-directory/PageDirectory';
 import NavbarControls from './NavbarControls';
 import { Global } from '@emotion/react';
-import SearchMenu from '../search-menu';
 import useNavOffset from '../../hooks/use-nav-offset';
 import { useMenuStructureContext } from '../../contexts/menu-structure';
 import { useLocation } from '@reach/router';
@@ -16,7 +15,7 @@ interface MobileNavDrawerProps {
 
 /**
  * The mobile navigation drawer.
- * This is used for mobile devices and contains all core menus and search functionalities.
+ * This is used for mobile devices and contains the site's menu.
  */
 const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
   isOpen,
@@ -48,8 +47,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
               px={9}
               overflowY="scroll"
             >
-              <SearchMenu />
-              <Box mt={5}>
+              <Box>
                 <PageDirectory
                   isMobile
                   closeMobileDrawer={onClose}

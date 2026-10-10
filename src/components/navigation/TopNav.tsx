@@ -1,4 +1,4 @@
-import { DarkMode, LightMode, useColorMode } from 'jaen';
+import { useColorMode } from 'jaen';
 import { Box,
   BoxProps,
   Button,
@@ -20,7 +20,6 @@ import useWindowSize from '../../hooks/use-current-window-size';
 import useScrollPosition from '../../hooks/use-scroll-position';
 import HamburgerMenuIcon from '../HamburgerMenuIcon';
 import Links from '../Links';
-import SearchMenu from '../search-menu';
 import { TLinkData } from '../types';
 import MobileNavDrawer from './MobileNavDrawer';
 
@@ -194,22 +193,6 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
     };
   }
 
-  const search = (() => {
-    if (!colorMode) return <SearchMenu />;
-    if (colorMode === 'dark')
-      return (
-        <DarkMode>
-          <SearchMenu />
-        </DarkMode>
-      );
-    if (colorMode === 'light')
-      return (
-        <LightMode>
-          <SearchMenu />
-        </LightMode>
-      );
-  })();
-
   return (
     <>
       <Center
@@ -263,7 +246,6 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
             <Spacer />
             <Center>
               <HStack gap={4}>
-                <Box display={{ base: 'none', md: 'initial' }}>{search}</Box>
                 <Button
                   variant="ghost-hover"
                   size="sm"

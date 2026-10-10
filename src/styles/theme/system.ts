@@ -1,15 +1,13 @@
 /**
- * fhkit.at's Chakra v3 system, in two flavours.
+ * fhkit.at's Chakra v3 system.
  *
  * `system` is what the site's own routes mount, through the branch in
  * gatsby-plugin-jaen's Layout. It carries the site's global styles.
  *
- * `chromeSystem` is the same tokens with no globals, and it exists for
- * SearchMenu, which is mounted through the Toolbar shadow INSIDE jaen's frame
- * and therefore also renders on CMS routes. v2 gave it a bare <ThemeProvider>,
- * which re-provided variables and nothing else. In v3 a provider is also the
- * global-style emitter, so handing SearchMenu the full `system` would push the
- * site's html and body rules onto every CMS route, which v2 never did.
+ * There used to be a second flavour, `chromeSystem`: the same tokens without
+ * the globals, for the search overlay that jaen's frame mounted through the
+ * Toolbar shadow on CMS routes too. The search is gone and the flavour with
+ * it, so nothing here reaches into jaen's frame any more.
  *
  * ONE THING CHANGES BEHAVIOUR HERE, and it is deliberate. In v2 this theme was
  * only ever mounted by SearchMenu's own <ThemeProvider>. The theme the rest of
@@ -376,5 +374,3 @@ export const system = createSystem(
   })
 );
 
-/** The v3 spelling of v2's bare <ThemeProvider>: tokens, no globals. */
-export const chromeSystem = createSystem(base, siteConfig);

@@ -3,9 +3,8 @@
  *
  * Flat PascalCase keys, one catalog per locale. The German catalog is the
  * source of truth and collects the hardcoded strings of the site: navigation,
- * the contact dialog and its toasts, the search overlay, the theme and language
- * choosers, the per-page metadata defaults, and the text of the confirmation
- * mail.
+ * the contact dialog and its toasts, the theme and language choosers, the
+ * per-page metadata defaults, and the text of the confirmation mail.
  *
  * Jaen CMS fields keep their field names; the catalog only carries their
  * `defaultValue`, so an unedited locale renders in its own language while every
@@ -85,10 +84,6 @@ export const messagesDe = {
   MailConfirmWebsite: 'Webseite',
   MailConfirmImprint: 'Impressum',
 
-  // Search overlay (src/components/search-menu/*)
-  SearchPlaceholder: 'Suchen',
-  SearchNoResults: 'Keine Ergebnisse für "{query}"',
-  SearchLabel: 'Suche',
 
   // Theme chooser (src/components/ThemeChooser.tsx)
   ThemeLight: 'Hell',
@@ -165,9 +160,6 @@ export const messagesEn: MessageCatalog = {
   MailConfirmWebsite: 'Website',
   MailConfirmImprint: 'Legal notice',
 
-  SearchPlaceholder: 'Search',
-  SearchNoResults: 'No results for "{query}"',
-  SearchLabel: 'Search',
 
   ThemeLight: 'Light',
   ThemeDark: 'Dark',
@@ -233,9 +225,6 @@ export const messagesSl: MessageCatalog = {
   MailConfirmWebsite: 'Spletna stran',
   MailConfirmImprint: 'Impresum',
 
-  SearchPlaceholder: 'Iskanje',
-  SearchNoResults: 'Ni zadetkov za "{query}"',
-  SearchLabel: 'Iskanje',
 
   ThemeLight: 'Svetla',
   ThemeDark: 'Temna',
@@ -303,9 +292,6 @@ export const messagesIt: MessageCatalog = {
   MailConfirmWebsite: 'Sito web',
   MailConfirmImprint: 'Note legali',
 
-  SearchPlaceholder: 'Cerca',
-  SearchNoResults: 'Nessun risultato per "{query}"',
-  SearchLabel: 'Ricerca',
 
   ThemeLight: 'Chiaro',
   ThemeDark: 'Scuro',
@@ -370,9 +356,6 @@ export const messagesJa: MessageCatalog = {
   MailConfirmWebsite: 'ウェブサイト',
   MailConfirmImprint: '法的表示',
 
-  SearchPlaceholder: '検索',
-  SearchNoResults: '「{query}」の検索結果はありません',
-  SearchLabel: '検索',
 
   ThemeLight: 'ライト',
   ThemeDark: 'ダーク',
