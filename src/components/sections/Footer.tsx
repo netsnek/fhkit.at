@@ -344,9 +344,10 @@ const Footer: FC = () => {
             </LinkBox></HStack>
           <Separator mt={8} opacity={0.2} />
           {/* Plain text rather than the CMS field it used to be: a value
-              stored in the CMS would freeze the year again. The credit is
-              Netsnek alone, the way netsnek.com's own contact mail words it,
-              instead of the three businesses the template fork carried over. */}
+              stored in the CMS would freeze the year again. The credit names
+              the legal entity, Netsnek e.U., the way nadine-hauswirth.com's
+              footer does, instead of the three businesses the template fork
+              carried over. The line is the same in every locale. */}
           <Text
             mt={5}
             color="white"
@@ -357,7 +358,7 @@ const Footer: FC = () => {
             cursor="default"
             transition="opacity 0.2s ease-in-out"
           >
-            {`Copyright © ${year} Netsnek. All rights reserved.`}
+            {`Copyright © ${year} Netsnek e.U. All rights reserved.`}
           </Text>
         </Container>
       </Box>
