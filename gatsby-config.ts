@@ -59,11 +59,11 @@ const config: GatsbyConfig = {
          * be placeholders, which Zitadel answered with a raw
          * `Errors.App.NotFound` page.
          *
-         * Zitadel only redirects to addresses registered on the client, so
-         * https://fhkit.at has to be added to the redirect URIs (and the post
-         * logout redirect URIs) of the CMS application before the sign-in
-         * completes. Until then the hand-off ends in Zitadel's "redirect_uri
-         * is missing in the client configuration" message instead.
+         * Zitadel only redirects to addresses registered on the client.
+         * https://fhkit.at is among the redirect URIs and the post logout
+         * redirect URIs of the CMS application since 2026-10-10, so the
+         * hand-off reaches the NETSNEK login form. Before that it ended in
+         * Zitadel's "redirect_uri is missing in the client configuration".
          */
         zitadelGql: process.env.JAEN_MOCK_OIDC
           ? {
