@@ -6,6 +6,8 @@ export type NavMenuItem = {
   href?: string;
   onClick?: () => void;
   isExternal?: boolean;
+  /** Follow the link with a full page load, see TLinkData['reload']. */
+  reload?: boolean;
   isActive?: boolean;
   hasActiveChild?: boolean;
   children?: NavMenuItem[];

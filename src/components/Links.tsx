@@ -16,7 +16,9 @@ const Links: FC<LinksProps> = ({ links, props, activeProps }) => {
         return (
           <Link
             key={i}
-            to={link.href}
+            // `href` instead of `to` renders a plain anchor, which the browser
+            // follows with a full page load.
+            {...(link.reload ? { href: link.href } : { to: link.href })}
             onClick={link.onClick}
             {...props}
             {...link.style}

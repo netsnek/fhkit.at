@@ -173,7 +173,8 @@ export const generateMenuItem = (
         {...(item.isActive ? activeMenuItemProps : inactiveMenuItemProps)}
         {...styleProps}
         key={item.href + item.name}
-        to={item.href}
+        // A plain anchor for links that must leave the app with a full load.
+        {...(item.reload ? { href: item.href } : { to: item.href })}
         isExternal={item.isExternal}
         display="block"
         py={1.5}

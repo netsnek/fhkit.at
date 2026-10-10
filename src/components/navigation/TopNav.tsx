@@ -80,10 +80,23 @@ const TopNav: FC<ITopNavProps> = ({ path, children }) => {
       }
     ],
     right: [
+      /**
+       * A plain link to /login/, followed with a full page load.
+       *
+       * The bar used to call signinRedirect itself. jaen only loads its OIDC
+       * runtime on the sign-in routes, so everywhere else that call threw
+       * "the OIDC runtime is not loaded on this route" and the click did
+       * nothing. A client-side navigation to /login/ is no way out either:
+       * jaen decides once, on the first load of a page, whether to load the
+       * runtime, so the login page would wait for it forever. A full load of
+       * /login/ is exactly a direct visit, and that has always reached the
+       * accounts.netsnek.com form.
+       */
       {
         name: 'Sign In',
-        matchMethod: 'exact',
-        onClick: signinRedirect
+        href: '/login/',
+        reload: true,
+        matchMethod: 'exact'
       },
       {
         name: 'Sign Up',

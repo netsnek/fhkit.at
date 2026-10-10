@@ -34,7 +34,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
 
   // Keep track of the items that have been expanded by the user
   const [expandedIdx, setExpandedIdx] = useState<number[]>(defaultExpandedIdx);
-  const { isAuthenticated, signinRedirect } = useAuth();
+  const { isAuthenticated } = useAuth();
   const isSmallScreen = useBreakpointValue(
     { base: true, md: false },
     { fallback: 'false' }
@@ -86,9 +86,12 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   }
 
   if (isSmallScreen && !isAuthenticated) {
+    // The same full page load as the top bar's entry, for the same reason:
+    // signinRedirect throws outside jaen's sign-in routes.
     const item = {
       name: 'Sign In',
-      onClick: signinRedirect
+      href: '/login/',
+      reload: true
     };
     const section = baseMenuItems.find(bmi => bmi.name === 'Navigation');
 
