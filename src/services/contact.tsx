@@ -11,20 +11,20 @@ import { useAuth, useNotificationsContext } from "jaen";
 import { useQueryRouter } from "../hooks/use-query-router";
 
 /**
- * The emailwerk template the form posts to, or null while fhkit.at has none.
+ * fhkit's own "fhkit Contact" template in emailwerk, the one the form posts to.
  *
- * TODO: set to the id of fhkit's own "fhkit Contact" template once it has
- * been created in emailwerk (docs/emailwerk-setup.md lists both templates and
- * the CORS entry that go with it).
+ * It is public and delivers to office@fhkit.at, the inbox stored on the
+ * template. Its child "fhkit Contact Confirmation" (cmv2fl2pd14ekps2peogq6lq1)
+ * is what emailwerk sends to the visitor. Both were created on 2026-10-10, and
+ * https://fhkit.at has been an allowed origin since then. The details are in
+ * docs/emailwerk-setup.md.
  *
- * This used to carry netsnek.com's Contact template, so the day emailwerk
- * accepted this origin every fhkit enquiry would have gone to netsnek's inbox
- * with netsnek's branding on the confirmation. Until fhkit's own template
- * exists the form falls back to a prefilled mail to {@link CONTACT_EMAIL}
- * instead, the way adlerhorst does, so it is never a dead end and never
- * delivers to the wrong business.
+ * The id is neither a secret nor an authorization. It used to be netsnek.com's
+ * Contact template, which would have delivered every fhkit enquiry to netsnek's
+ * inbox, so the form opened a prefilled mail to {@link CONTACT_EMAIL} until
+ * fhkit's own template existed.
  */
-const CONTACT_TEMPLATE_ID: string | null = null;
+const CONTACT_TEMPLATE_ID = 'cmv2fl2cu14ebps2p05nwpoev';
 
 /** The site's own mailbox, as the footer and the legal notice give it. */
 const CONTACT_EMAIL = 'office@fhkit.at';
@@ -192,39 +192,13 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
   };
 
   const onSubmit = async (data: ContactFormValues): Promise<void> => {
-    // The fallback, taken while fhkit has no emailwerk template. It opens the
-    // visitor's own mail client with the enquiry already written out, labelled
-    // in the language the form was filled in.
-    if (!CONTACT_TEMPLATE_ID) {
-      const text = confirmationText(intl);
-      const name = `${data.firstName} ${data.lastName}`.trim();
-
-      const lines = [
-        `${text.t_labelName} ${name}`,
-        `${text.t_labelEmail} ${data.email}`
-      ];
-
-      if (data.phone) lines.push(`${text.t_labelPhone} ${data.phone}`);
-
-      lines.push('', `${text.t_labelMessage}`, data.message);
-
-      window.location.href =
-        `mailto:${CONTACT_EMAIL}` +
-        `?subject=${encodeURIComponent(`${text.t_heading}: ${name}`)}` +
-        `&body=${encodeURIComponent(lines.join('\n'))}`;
-
-      onClose();
-
-      return;
-    }
-
-    // The "Contact" template on emailwerk, flagged isPublic, so this posts
-    // anonymously when there is no CMS session and emailwerk takes its public
-    // branch. Recipients come from the template's stored envelope server-side
-    // and cannot be passed from here at all; `replyTo` is the only override an
-    // anonymous caller is allowed, and it is also the address emailwerk
-    // delivers the linked confirmation template to. Sending that confirmation
-    // from here would deliver it twice.
+    // The "fhkit Contact" template on emailwerk, flagged isPublic, so this
+    // posts anonymously when there is no CMS session and emailwerk takes its
+    // public branch. Recipients come from the template's stored envelope
+    // server-side and cannot be passed from here at all. `replyTo` is the only
+    // override an anonymous caller is allowed, and it is also the address
+    // emailwerk delivers the linked confirmation template to. Sending that
+    // confirmation from here would deliver it twice.
     const result = await sendTemplateMail(CONTACT_TEMPLATE_ID, {
       envelope: {
         replyTo: data.email
@@ -235,7 +209,10 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
         email: data.email,
         phone: data.phone || '',
         message: data.message,
-        invokedOnUrl: meta?.url,
+        // The office mail links the page the enquiry came from. `meta` is only
+        // set when a button opened the dialog, so the address is read here as
+        // well rather than left empty.
+        invokedOnUrl: meta?.url ?? window.location.href,
         ...confirmationText(intl)
       }
     });
