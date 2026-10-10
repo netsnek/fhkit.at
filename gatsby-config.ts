@@ -51,11 +51,19 @@ const config: GatsbyConfig = {
          *
          * and log in with admin / jaen.
          *
-         * TODO: organizationId, clientId and projectIds below are placeholders.
-         * fhkit.at is moving off accounts.cronit.io onto the Zitadel that
-         * netsnek.com uses, and the three ids only exist once the fhkit
-         * organisation and its CMS application have been created there. The
-         * authority and redirectUri are already correct.
+         * In production fhkit.at signs in the way adlerhorst does: through
+         * netsnek.com's own organization, CMS client and project on
+         * accounts.netsnek.com. Florian Herbert Kleber IT is the former name
+         * of Netsnek e.U., the editors are the same people, and a separate
+         * organization would only mean a second account each. The ids used to
+         * be placeholders, which Zitadel answered with a raw
+         * `Errors.App.NotFound` page.
+         *
+         * Zitadel only redirects to addresses registered on the client, so
+         * https://fhkit.at has to be added to the redirect URIs (and the post
+         * logout redirect URIs) of the CMS application before the sign-in
+         * completes. Until then the hand-off ends in Zitadel's "redirect_uri
+         * is missing in the client configuration" message instead.
          */
         zitadelGql: process.env.JAEN_MOCK_OIDC
           ? {
@@ -66,14 +74,14 @@ const config: GatsbyConfig = {
               rolesClaim: 'roles'
             }
           : {
-              organizationId: 'TODO_FHKIT_ORGANIZATION_ID',
-              clientId: 'TODO_FHKIT_CLIENT_ID@cms',
+              organizationId: '268210807970535009',
+              clientId: '268283382465631862@cms',
               authority: 'https://accounts.netsnek.com',
               redirectUri:
                 process.env.NODE_ENV === 'production'
                   ? 'https://fhkit.at'
                   : 'http://localhost:8000',
-              projectIds: ['TODO_FHKIT_PROJECT_ID']
+              projectIds: ['268283277977065078']
             }
         // No googleAnalytics here on purpose. The id this config carried,
         // G-M58K75M9PG, is PhotonQ's property and came along with the
