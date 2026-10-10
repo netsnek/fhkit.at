@@ -15,7 +15,12 @@ import { FC } from 'react';
 
 // Insertable custom components (via Jaen)
 
-import { useAuth, useContentManagement, usePageContext } from 'jaen';
+import {
+  checkUserRoles,
+  useAuth,
+  useContentManagement,
+  usePageContext
+} from 'jaen';
 import { MdxField, MdxFieldProps } from 'jaen-fields-mdx';
 import { Link } from 'gatsby-plugin-jaen';
 import Heading from '../main-content/heading/components/Heading';
@@ -89,7 +94,10 @@ const MdxEditor: FC<IMdxEditorProps> = ({ hideHeadingHash }) => {
   const { isEditing, toggleIsEditing } = useContentManagement();
   const { jaenPage } = usePageContext();
 
-  const canEdit = true;
+  // Editors only, the check netsnek.com and nadine-hauswirth.com use. It was
+  // hard-coded to true, so every visitor of a docs page saw Edit and Page
+  // Settings.
+  const canEdit = isAuthenticated && checkUserRoles(user, ['jaen:admin']);
 
   return (
     <Stack
