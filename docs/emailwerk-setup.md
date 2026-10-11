@@ -4,10 +4,10 @@ Everything in this file happens **outside this repository**, in emailwerk and
 in its deployment. The site reads exactly one value from here: the template id
 that goes into `CONTACT_TEMPLATE_ID` at the top of `src/services/contact.tsx`.
 
-## Where things stand (2026-10-11, 00:45 UTC)
+## Where things stand (2026-10-11, 02:15 UTC)
 
 The templates exist, the origin is allowed and the site carries the id. The
-build with the id is not deployed yet.
+build with the id is live, and one real enquiry went through it.
 
 - emailwerk holds fhkit's two templates in the tenant `netsnek` (124
   templates now, 122 before). The script below created them at 13:29 UTC.
@@ -25,17 +25,22 @@ build with the id is not deployed yet.
   the prefilled mail it opened until then is gone. The dialog shows the
   outcome in the page's language: a thank-you when emailwerk accepted the
   enquiry, or a notice that it was not sent, with the enquiry offered as a
-  prepared mail to office@fhkit.at. The live site (Pages deployment
-  `51e0ce34`, built from `be8afbd`) still opens the prefilled mail until the
-  new build is deployed. The id used to be netsnek.com's template, which would
-  have delivered every fhkit enquiry to netsnek's inbox the moment the origin
-  was allowed.
+  prepared mail to office@fhkit.at. The id used to be netsnek.com's template,
+  which would have delivered every fhkit enquiry to netsnek's inbox the moment
+  the origin was allowed.
 - Since `fad51d0` the form posts the mutation itself, once per press. Before,
   it went through jaen's `sendTemplateMail`, which repeated a send that failed
   in the network up to three times (see below). A refused anonymous send in
   that exact shape, to a template id that does not exist, passed emailwerk's
   anonymous gate and was answered `TEMPLATE_NOT_FOUND` on 2026-10-11 at
-  00:39 UTC, so no mail went out. This build is not deployed either.
+  00:39 UTC, so no mail went out.
+- Pages deployment `7b23cc09` serves the build of `e310f3d` as production
+  since 2026-10-11 at 01:49 UTC. One real enquiry, sent in German from
+  https://fhkit.at at 02:10 UTC, was answered `QUEUED` (message
+  `cmv36r8lb0001v52p475zjneh`). emailwerk sent both mails over SMTP within six
+  seconds, each on its first attempt: the enquiry to office@fhkit.at and
+  exactly one confirmation (`cmv36r8lu0007v52pigikji6b`) to the visitor's
+  address. The other four languages are covered by the browser test only.
 
 ## How the send works, so the templates make sense
 
@@ -99,9 +104,9 @@ Notes on the values:
 
 - **Recipient office@fhkit.at.** It is the site's own documented mailbox (the
   footer, the legal notice and the confirmation text give it), and fhkit.at's
-  Cloudflare Email Routing has an enabled catch-all forward, so mail to it is
-  delivered. Use the owner's kleber@snek.at instead if office@fhkit.at should
-  not receive enquiries any more.
+  Cloudflare Email Routing has an enabled catch-all forward to office@snek.at,
+  so mail to it is delivered. Use the owner's kleber@snek.at instead if
+  office@fhkit.at should not receive enquiries any more.
 - **Sender** `cmsmhy0ag004drb2pzezqi0v2` is office@snek.at, "Netsnek Office",
   the sender netsnek.com's pair uses.
 - **Engine.** The body is Twig, like netsnek's, and escapes visitor input with
@@ -151,7 +156,7 @@ The preflight from an allowed origin already reaches the application and gets
 Done on 2026-10-10 in `82d7096`: `CONTACT_TEMPLATE_ID` in
 `src/services/contact.tsx` is the id the script printed,
 `cmv2fl2cu14ebps2p05nwpoev`. The id is not a secret and not an authorization.
-What is left is to build and deploy the site.
+The build that carries it is live since 2026-10-11 (see the top of this file).
 
 ## Verifying
 
