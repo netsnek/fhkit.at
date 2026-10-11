@@ -1,4 +1,3 @@
-import { sendTemplateMail } from "gatsby-jaen-emailwerk";
 import React, { useMemo } from "react";
 import { useIntl } from "react-intl";
 import { RouteComponentProps } from "@reach/router";
@@ -29,6 +28,77 @@ const CONTACT_TEMPLATE_ID = 'cmv2fl2cu14ebps2p05nwpoev';
 
 /** The site's own mailbox, as the footer and the legal notice give it. */
 const CONTACT_EMAIL = 'office@fhkit.at';
+
+/**
+ * The GraphQL endpoint of emailwerk. The jaen emailwerk plugin gets the same
+ * address in gatsby-config.ts for the CMS pages, so the two change together.
+ */
+const EMAILWERK_URL = 'https://emailwerk.com/graphql';
+
+/**
+ * The mutation the form posts, and nothing beside it.
+ *
+ * Without credentials, emailwerk runs a request only when its root selects
+ * `sendTemplateMail` alone (the anonymous gate, src/auth/anonymous.ts in the
+ * emailwerk repository). Any other field next to it, `__typename` included,
+ * turns the answer into a 401.
+ */
+const SEND_TEMPLATE_MAIL =
+  'mutation SendTemplateMail($args: SendTemplateMailArgsInput!) ' +
+  '{ sendTemplateMail(args: $args) { id status } }';
+
+/** What the public branch of `sendTemplateMail` accepts, and all of it. */
+interface PublicSendArgs {
+  templateId: string;
+  envelopeOverride: { replyTo: string };
+  values: Record<string, string>;
+}
+
+/**
+ * Posts one send to emailwerk and says whether emailwerk queued it.
+ *
+ * This is a plain fetch on purpose. The `sendTemplateMail` helper in jaen
+ * resolves through gqty, whose default retry policy sends a request that
+ * failed in the network up to three more times, one second apart. The network can fail
+ * after emailwerk has accepted the send, when only the answer is lost, and
+ * then every repeat delivers the enquiry and the visitor's confirmation once
+ * more. Here one press of Send is one POST. When it fails, the dialog says
+ * so, keeps the form and offers the prepared mail, and trying again is the
+ * visitor's decision.
+ *
+ * It never sends credentials. The jaen helper attaches the session token of a
+ * signed-in editor, and with a token emailwerk takes its authenticated branch,
+ * which refuses an editor without an emailwerk role and chains the
+ * confirmation to the office inbox instead of the visitor. The form is how
+ * visitors reach the office, so it always takes the public branch.
+ *
+ * Only an answer that carries the queued message counts as sent. A refusal,
+ * which is a GraphQL error with a code, an HTTP error status, an answer that
+ * is not JSON and a fetch that rejects because the connection broke or the
+ * browser blocked the answer all count as not sent.
+ */
+const sendOnce = async (args: PublicSendArgs): Promise<boolean> => {
+  try {
+    const response = await fetch(EMAILWERK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'omit',
+      body: JSON.stringify({
+        query: SEND_TEMPLATE_MAIL,
+        operationName: 'SendTemplateMail',
+        variables: { args }
+      })
+    });
+
+    if (!response.ok) return false;
+
+    const result = await response.json();
+
+    return !result?.errors?.length && Boolean(result?.data?.sendTemplateMail?.id);
+  } catch {
+    return false;
+  }
+};
 
 /**
  * The inline style the confirmation template gives its links.
@@ -230,15 +300,16 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
   ): Promise<ContactSendResult> => {
     const text = confirmationText(intl);
 
-    // The "fhkit Contact" template on emailwerk, flagged isPublic, so this
-    // posts anonymously when there is no CMS session and emailwerk takes its
-    // public branch. Recipients come from the template's stored envelope
-    // server-side and cannot be passed from here at all. `replyTo` is the only
-    // override an anonymous caller is allowed, and it is also the address
-    // emailwerk delivers the linked confirmation template to. Sending that
-    // confirmation from here would deliver it twice.
-    const result = await sendTemplateMail(CONTACT_TEMPLATE_ID, {
-      envelope: {
+    // The "fhkit Contact" template on emailwerk, flagged isPublic, and posted
+    // without credentials, so emailwerk takes its public branch. Recipients
+    // come from the template's stored envelope server-side and cannot be
+    // passed from here at all. `replyTo` is the only override an anonymous
+    // caller is allowed, and it is also the address emailwerk delivers the
+    // linked confirmation template to. Sending that confirmation from here
+    // would deliver it twice.
+    const sent = await sendOnce({
+      templateId: CONTACT_TEMPLATE_ID,
+      envelopeOverride: {
         replyTo: data.email
       },
       values: {
@@ -255,7 +326,7 @@ export const ContactModalProvider: React.FC<ContactModalDrawerProps> = ({
       }
     });
 
-    if (result.ok) {
+    if (sent) {
       return { ok: true };
     }
 

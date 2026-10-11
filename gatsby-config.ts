@@ -92,6 +92,9 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-jaen-emailwerk`,
       options: {
+        // For the CMS's emailwerk pages. The contact form posts to the same
+        // address itself, EMAILWERK_URL in src/services/contact.tsx, so the
+        // two change together.
         url: 'https://emailwerk.com/graphql'
       }
     }
