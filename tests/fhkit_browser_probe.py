@@ -15,9 +15,9 @@ recorded: the notebook checks that the site asks for nothing but the partner
 photos on osg.snek.at, and that the sign-in link reaches for
 accounts.netsnek.com without anything being sent there. The contact form's
 POST to emailwerk is written down and then answered inside the browser
-(aborted, refused or accepted), so pressing Send sends no mail. Chromium is the
-system one (this machine is aarch64, Playwright ships no build for it), with a
-throwaway profile and background networking off.
+(aborted, refused, failed or accepted), so pressing Send sends no mail.
+Chromium is the system one (this machine is aarch64, Playwright ships no build
+for it), with a throwaway profile and background networking off.
 """
 
 import http.server
@@ -50,12 +50,20 @@ EMAILWERK = 'https://emailwerk.com/graphql'
 # reserved for examples, and nothing typed here leaves the machine.
 FORM = {'firstName': 'Erika', 'lastName': 'Musterfrau', 'email': 'erika.musterfrau@example.org',
         'phone': '+43 1 234 56 78', 'message': 'Zeile eins\nZeile <b>zwei</b>'}
-# How emailwerk answers, as the probe plays it: a refusal is an error with a
-# code, an accepted send is the queued message.
+# How emailwerk answers, as the probe plays it, with status, type and body: a
+# refusal is an error with a code, an accepted send is the queued message.
+# The 'unauthorized' answer is what emailwerk's own auth gives a request it
+# will not run without credentials, and 'fail' is the server failing. Both
+# carry the CORS header, as emailwerk's answers to an allowed origin do, so the
+# page can read the status.
 ANSWER = {
-    'refuse': {'data': None, 'errors': [{'message': 'Zu viele Anfragen.',
-                                         'extensions': {'code': 'PUBLIC_SEND_RATE_LIMITED'}}]},
-    'accept': {'data': {'sendTemplateMail': {'__typename': 'Message', 'id': 'probe', 'status': 'QUEUED'}}},
+    'refuse': (200, 'application/json', json.dumps(
+        {'data': None, 'errors': [{'message': 'Zu viele Anfragen.',
+                                   'extensions': {'code': 'PUBLIC_SEND_RATE_LIMITED'}}]})),
+    'accept': (200, 'application/json', json.dumps(
+        {'data': {'sendTemplateMail': {'__typename': 'Message', 'id': 'probe', 'status': 'QUEUED'}}})),
+    'unauthorized': (401, 'text/plain; charset=UTF-8', 'Unauthorized'),
+    'fail': (500, 'application/json', json.dumps({'errors': [{'message': 'Unexpected error.'}]})),
 }
 
 CHROMIUM = next((c for c in ['/usr/bin/chromium-browser', '/usr/bin/chromium', '/usr/bin/google-chrome']
@@ -444,8 +452,8 @@ def main():
 
         # Send, in every language. Every POST to emailwerk is written down and
         # then answered here: aborted as if the network failed, refused the way
-        # emailwerk refuses, or accepted the way it queues a mail. None of them
-        # leaves the browser, so no mail is sent.
+        # emailwerk refuses, failed with an HTTP error, or accepted the way it
+        # queues a mail. None of them leaves the browser, so no mail is sent.
         def send_form(loc, answer, mobile=False, dark=False, consent=True, double=False, delay=0.0,
                       close=False):
             posts = []
@@ -464,8 +472,8 @@ def main():
                     time.sleep(delay)
                 if answer == 'abort':
                     return r.abort()
-                return r.fulfill(status=200, headers={**cors, 'Content-Type': 'application/json'},
-                                 body=json.dumps(ANSWER[answer]))
+                status, ctype, body = ANSWER[answer]
+                return r.fulfill(status=status, headers={**cors, 'Content-Type': ctype}, body=body)
 
             ctx, outside = context(mobile=mobile, dark=dark, emailwerk=emailwerk)
             page, status, errors, _ = opened(ctx, f'/{LOCALES[loc]}')
@@ -494,8 +502,10 @@ def main():
             if consent:
                 attempt(lambda: page.wait_for_selector('[role=dialog] [role=alert], [role=dialog] [role=status]',
                                                        timeout=20000), entry, 'wait for the outcome')
-            # gqty has given up retrying once the notice is up. The pause makes
-            # sure no late request is missed all the same.
+            # The form posts once and never repeats a send. The pause gives a
+            # late repeat the time to show up in the count all the same: gqty,
+            # which the form used to send through, repeated a network failure
+            # one second apart.
             page.wait_for_timeout(1500)
             entry['dialog'] = page.evaluate(DIALOG_JS)
             contrast = page.evaluate(CONTRAST_JS)
@@ -518,11 +528,15 @@ def main():
 
         for loc in LOCALES:
             send_form(loc, 'abort')
+        # The phone dialog, opened from the hero's button.
+        send_form('ja', 'abort', mobile=True)
         for loc in LOCALES:
             send_form(loc, 'accept', close=True)
         send_form('de', 'refuse')
         send_form('de', 'refuse', mobile=True)
         send_form('de', 'refuse', dark=True)
+        send_form('de', 'unauthorized')
+        send_form('en', 'fail')
         send_form('de', 'accept', dark=True)
         send_form('ja', 'accept', mobile=True, dark=True)
         send_form('de', 'accept', consent=False)
