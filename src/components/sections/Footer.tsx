@@ -16,6 +16,7 @@ import { Box,
 import { useColorModeValue } from 'jaen';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FC, ReactNode, useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 import { Link } from 'gatsby-plugin-jaen';
 import { Field } from 'jaen';
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
@@ -59,6 +60,7 @@ const Footer: FC = () => {
   const localizeHref = useLocalizeHref();
   const fieldText = useFieldText();
   const year = useCopyrightYear();
+  const intl = useIntl();
 
   /**
    * `label` names the CMS field (FooterLinkTitle<label>, FooterLink<label>)
@@ -358,11 +360,11 @@ const Footer: FC = () => {
               </LinkBox>
             </LinkBox></HStack>
           <Separator mt={8} opacity={0.2} />
-          {/* Plain text rather than the CMS field it used to be: a value
+          {/* A message rather than the CMS field it used to be: a value
               stored in the CMS would freeze the year again. The credit names
               the legal entity, Netsnek e.U., the way nadine-hauswirth.com's
               footer does, instead of the three businesses the template fork
-              carried over. The line is the same in every locale. */}
+              carried over, in the language of the page. */}
           <Text
             mt={5}
             color="white"
@@ -373,7 +375,13 @@ const Footer: FC = () => {
             cursor="default"
             transition="opacity 0.2s ease-in-out"
           >
-            {`Copyright © ${year} Netsnek e.U. All rights reserved.`}
+            {intl.formatMessage(
+              {
+                id: 'FooterCopyright',
+                defaultMessage: 'Copyright © {year} Netsnek e.U. Alle Rechte vorbehalten.'
+              },
+              { year }
+            )}
           </Text>
         </Container>
       </Box>
