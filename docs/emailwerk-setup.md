@@ -4,7 +4,7 @@ Everything in this file happens **outside this repository**, in emailwerk and
 in its deployment. The site reads exactly one value from here: the template id
 that goes into `CONTACT_TEMPLATE_ID` at the top of `src/services/contact.tsx`.
 
-## Where things stand (2026-10-10, 23:30 UTC)
+## Where things stand (2026-10-11, 00:45 UTC)
 
 The templates exist, the origin is allowed and the site carries the id. The
 build with the id is not deployed yet.
@@ -30,11 +30,18 @@ build with the id is not deployed yet.
   new build is deployed. The id used to be netsnek.com's template, which would
   have delivered every fhkit enquiry to netsnek's inbox the moment the origin
   was allowed.
+- Since `fad51d0` the form posts the mutation itself, once per press. Before,
+  it went through jaen's `sendTemplateMail`, which repeated a send that failed
+  in the network up to three times (see below). A refused anonymous send in
+  that exact shape, to a template id that does not exist, passed emailwerk's
+  anonymous gate and was answered `TEMPLATE_NOT_FOUND` on 2026-10-11 at
+  00:39 UTC, so no mail went out. This build is not deployed either.
 
 ## How the send works, so the templates make sense
 
-The form calls `sendTemplateMail` from `gatsby-jaen-emailwerk`. Without a CMS
-session it carries no credentials, and emailwerk takes its **public branch**
+The form posts the `sendTemplateMail` mutation itself, with one plain fetch
+(`sendOnce` in `src/services/contact.tsx`). It never carries credentials, not
+even for a signed-in editor, so emailwerk always takes its **public branch**
 (`src/public/send.ts` in the emailwerk repository):
 
 - The template must be flagged `isPublic`. An id alone authorizes nothing.
@@ -45,12 +52,21 @@ session it carries no credentials, and emailwerk takes its **public branch**
 - A template with `verifyReplyTo` or `requiresSignature` set is not publicly
   sendable. Both stay off.
 - Sends are rate limited per client IP and globally.
-- A send that fails on the network (the connection breaks, or the browser
-  blocks the answer because the preflight was refused) is repeated by the
-  plugin's GraphQL client, gqty, three times one second apart before the
-  dialog reports it. A refusal from emailwerk is an answer and is
-  not repeated. gqty's default policy does this, and `sendTemplateMail` in
-  jaen does not switch it off.
+- The mutation selects `sendTemplateMail` and nothing beside it. Nothing else
+  runs without credentials, and emailwerk answers anything else with 401.
+- One press of Send is one POST, and a send is never repeated. A send that
+  fails on the network (the connection breaks, or the browser blocks the
+  answer because the preflight was refused) is reported in the dialog at
+  once, like a refusal or an HTTP error, with the form kept and the prepared
+  mail offered. The form does not use `sendTemplateMail` from
+  `gatsby-jaen-emailwerk` for this reason. That helper resolves through gqty,
+  whose default policy repeats a network failure three times one second
+  apart, and when only the answer was lost after emailwerk had accepted the
+  send, every repeat delivered the enquiry and the confirmation once more.
+- With a CMS session, jaen's helper would also attach the editor's token,
+  and emailwerk would take its authenticated branch. That branch refuses an
+  editor without an emailwerk role and chains the confirmation to the
+  template's recipient, office@fhkit.at, instead of the visitor.
 
 The confirmation to the visitor is **not** sent by the site. emailwerk enqueues
 every public template whose `parentId` is the contact template, addressed to
@@ -141,11 +157,12 @@ What is left is to build and deploy the site.
 
 Before a deploy, `tests/fhkit-browser.ipynb` presses Send in every language on
 the local build. It answers the request inside the browser, so no mail goes
-out. It checks that one press makes one POST to `https://emailwerk.com/graphql`
-(repeated only by gqty, after a network failure) with this template id, the
-form fields as typed, the visitor as `replyTo` only and the confirmation's
-twelve `t_` texts in the page's language, and that the dialog shows the
-outcome in that language.
+out. It checks that one press makes exactly one POST to
+`https://emailwerk.com/graphql`, whether emailwerk accepts, refuses or fails
+and also when the network fails, with `sendTemplateMail` alone at the root,
+this template id, the form fields as typed, the visitor as `replyTo` only and
+the confirmation's twelve `t_` texts in the page's language, and that the
+dialog shows the outcome in that language.
 
 1. The preflight answers 204 with the origin echoed:
 
