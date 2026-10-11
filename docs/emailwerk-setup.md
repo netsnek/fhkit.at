@@ -75,9 +75,12 @@ even for a signed-in editor, so emailwerk always takes its **public branch**
 
 The confirmation to the visitor is **not** sent by the site. emailwerk enqueues
 every public template whose `parentId` is the contact template, addressed to
-the `replyTo` of the send, and renders it from the same `values`. That is why
-the site sends the confirmation's text as `t_` values in the visitor's
-language, and why every `t_` placeholder keeps a German default.
+the `replyTo` of the send, and renders it from the same `values`. An
+anonymous caller chooses that address, so the confirmation takes nothing but
+`locale` from the values: its texts and its subject are fixed in the template
+in the five languages of the site and picked by `locale`, German when it is
+missing or unknown (since 2026-10-11). `t_` values a build still sends are
+ignored.
 
 ## 1. The templates
 
@@ -97,7 +100,7 @@ as "Sie", like the site does. The sources are in this folder:
 | `verifyReplyTo`, `requiresSignature` | false | false |
 | Sender | `cmsmhy0ag004drb2pzezqi0v2` | `cmsmhy0ag004drb2pzezqi0v2` |
 | Envelope `to` | `office@fhkit.at` | empty, the server uses `replyTo` |
-| Envelope subject | `Neue Anfrage auf fhkit.at` | `{{ t_subject \| default: 'Ihre Anfrage auf fhkit.at' }}` |
+| Envelope subject | `Neue Anfrage auf fhkit.at` | per language, chosen by `locale` (see `create-templates.sh`) |
 | `parentId` | none | the id of `fhkit Contact` |
 
 Notes on the values:
@@ -110,10 +113,15 @@ Notes on the values:
 - **Sender** `cmsmhy0ag004drb2pzezqi0v2` is office@snek.at, "Netsnek Office",
   the sender netsnek.com's pair uses.
 - **Engine.** The body is Twig, like netsnek's, and escapes visitor input with
-  `|escape` and `|nl2br`. `t_questions` carries the two links and is rendered
-  `|raw`. The subject is always rendered with Liquid, whatever the engine.
-- Both files were rendered offline with emailwerk's own `twig` and `liquidjs`,
-  with and without the `t_` values, before they were committed.
+  `|escape` and `|nl2br` (twig.js escapes before it inserts the line breaks).
+  The confirmation's texts, the two links of the questions line among them,
+  are fixed in the template per language, so nothing is rendered `|raw`. The
+  contact template links the page the form was sent from only when it is an
+  http(s) URL, and "fhkit.at" in its first sentence links the site itself. The
+  subject is always rendered with Liquid, whatever the engine.
+- Both files were rendered offline with emailwerk's own `twig` and `liquidjs`
+  and through emailwerk's `templatePreview`, with the site's values and with
+  hostile ones, before they were committed (2026-10-11).
 - **Editing them later.** The build running on the netcup node (image of
   2026-08-27) is older than emailwerk `3ca79e1`. On that build a
   `templateUpdate` that names only some envelope fields resets the others, so
