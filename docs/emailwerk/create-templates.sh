@@ -96,7 +96,7 @@ CONTACT_ID="$(post "$WORK/contact.json" | field templateCreate.id)"
 #    public child to the replyTo of every send of its parent.
 body "$WORK/confirmation.json" \
   'mutation Create($args: TemplateCreateInput!) { templateCreate(args: $args) { id } }' \
-  "{\"args\":{\"description\":\"fhkit Contact Confirmation\",\"engine\":\"TWIG\",\"senderId\":\"$SENDER_ID\",\"verifyReplyTo\":false,\"requiresSignature\":false,\"isPublic\":true,\"variables\":$VARS_CONFIRMATION,\"envelope\":{\"to\":[],\"subject\":\"{{ t_subject | default: 'Ihre Anfrage auf fhkit.at' }}\"}}}" \
+  "{\"args\":{\"description\":\"fhkit Contact Confirmation\",\"engine\":\"TWIG\",\"senderId\":\"$SENDER_ID\",\"verifyReplyTo\":false,\"requiresSignature\":false,\"isPublic\":true,\"variables\":$VARS_CONFIRMATION,\"envelope\":{\"to\":[],\"subject\":\"{% assign lang = locale | append: '' | downcase | split: '-' | first | split: '_' | first %}{% case lang %}{% when 'en' %}Your enquiry on fhkit.at{% when 'sl' %}Vaše povpraševanje na fhkit.at{% when 'it' %}La tua richiesta su fhkit.at{% when 'ja' %}fhkit.at へのお問い合わせ{% else %}Ihre Anfrage auf fhkit.at{% endcase %}\"}}}" \
   "content=$HERE/fhkit-contact-confirmation.html"
 CONFIRMATION_ID="$(post "$WORK/confirmation.json" | field templateCreate.id)"
 
