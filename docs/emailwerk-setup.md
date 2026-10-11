@@ -4,7 +4,7 @@ Everything in this file happens **outside this repository**, in emailwerk and
 in its deployment. The site reads exactly one value from here: the template id
 that goes into `CONTACT_TEMPLATE_ID` at the top of `src/services/contact.tsx`.
 
-## Where things stand (2026-10-11, 02:15 UTC)
+## Where things stand (2026-10-11, 09:35 UTC)
 
 The templates exist, the origin is allowed and the site carries the id. The
 build with the id is live, and one real enquiry went through it.
@@ -41,6 +41,12 @@ build with the id is live, and one real enquiry went through it.
   seconds, each on its first attempt: the enquiry to office@fhkit.at and
   exactly one confirmation (`cmv36r8lu0007v52pigikji6b`) to the visitor's
   address. The other four languages are covered by the browser test only.
+- Pages deployment `4f97c3e4` serves the build of `28c5e7f` as production
+  since 2026-10-11 at 09:32 UTC. The form sends the fields, the page address
+  and `locale`, and no `t_` text. Checked live in headless Chromium with the
+  request stopped in the browser, so no mail went out: in en, de and ja one
+  press of Send made exactly one POST to `cmv2fl2cu14ebps2p05nwpoev` with the
+  page's locale.
 
 ## How the send works, so the templates make sense
 
