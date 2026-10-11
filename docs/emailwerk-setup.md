@@ -79,8 +79,9 @@ the `replyTo` of the send, and renders it from the same `values`. An
 anonymous caller chooses that address, so the confirmation takes nothing but
 `locale` from the values: its texts and its subject are fixed in the template
 in the five languages of the site and picked by `locale`, German when it is
-missing or unknown (since 2026-10-11). `t_` values a build still sends are
-ignored.
+missing or unknown (since 2026-10-11). The form sends `locale` and no text of
+the confirmation since the same day. `t_` values an older build still sends
+are ignored.
 
 ## 1. The templates
 
@@ -174,8 +175,8 @@ out. It checks that one press makes exactly one POST to
 `https://emailwerk.com/graphql`, whether emailwerk accepts, refuses or fails
 and also when the network fails, with `sendTemplateMail` alone at the root,
 this template id, the form fields as typed, the visitor as `replyTo` only and
-the confirmation's twelve `t_` texts in the page's language, and that the
-dialog shows the outcome in that language.
+the page's `locale` with no `t_` text beside it, and that the dialog shows the
+outcome in that language.
 
 1. The preflight answers 204 with the origin echoed:
 
