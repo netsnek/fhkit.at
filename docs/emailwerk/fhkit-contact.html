@@ -817,7 +817,7 @@
                                     >
                                       Eine neue Kontaktanfrage wurde über das
                                       Kontaktformular auf der Website
-                                      <a href="{{invokedOnUrl|escape}}"
+                                      <a href="https://fhkit.at/"
                                         >fhkit.at</a
                                       >
                                       erstellt.
@@ -886,9 +886,9 @@
                                     <ul>
                                       <li>
                                         <strong>URL: </strong
-                                        ><a href="{{invokedOnUrl|escape}}"
+                                        >{% if invokedOnUrl starts with 'https://' or invokedOnUrl starts with 'http://' %}<a href="{{invokedOnUrl|escape}}"
                                           >{{invokedOnUrl|escape}}</a
-                                        >
+                                        >{% else %}{{invokedOnUrl|escape}}{% endif %}
                                       </li>
                                       <li>
                                         <strong>Name: </strong>{{firstName|escape}}
