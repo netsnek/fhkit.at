@@ -4,8 +4,8 @@
  * Flat PascalCase keys, one catalog per locale. The German catalog is the
  * source of truth and collects the hardcoded strings of the site: navigation,
  * the contact dialog and what it shows after a send, the theme and language
- * choosers, the per-page metadata defaults, and the text of the confirmation
- * mail.
+ * choosers, the per-page metadata defaults, and the words of the mail the
+ * dialog prepares when a send fails.
  *
  * Jaen CMS fields keep their field names; the catalog only carries their
  * `defaultValue`, so an unedited locale renders in its own language while every
@@ -73,30 +73,21 @@ export const messagesDe = {
   ContactClose: 'Schließen',
 
   /**
-   * The confirmation mail, sent as `values` on the contact mutation.
+   * The mail to office@fhkit.at that the contact dialog prepares when a send
+   * fails (src/services/contact.tsx). Its subject starts with the heading, and
+   * its body labels the fields with these words.
    *
-   * emailwerk renders the confirmation server-side from the same values the
-   * inquiry carried and has no notion of locale, so the only way the visitor's
-   * language reaches that mail is to send the text with it. Every key here
-   * matches a placeholder in the template, and every placeholder keeps the
-   * German original as its own default.
+   * The visitor's confirmation takes none of its words from here. Its subject
+   * and texts are fixed in the "fhkit Contact Confirmation" template on
+   * emailwerk, one set per language, chosen by the locale the form sends.
+   * FooterCopyright is the footer's line on every page.
    */
-  MailConfirmSubject: 'Ihre Anfrage auf fhkit.at',
-  MailConfirmTitle: 'Ihre Anfrage',
   MailConfirmHeading: 'Kontaktanfrage',
-  MailConfirmThanks:
-    'Vielen Dank für Ihre Kontaktanfrage. Ich melde mich so schnell wie möglich bei Ihnen.',
   MailConfirmLabelName: 'Name:',
   MailConfirmLabelEmail: 'E-Mail:',
   MailConfirmLabelPhone: 'Telefonnummer:',
   MailConfirmLabelMessage: 'Nachricht:',
-  MailConfirmQuestions:
-    'Haben Sie noch Fragen? Dann schreiben Sie mir gerne an {mail} oder rufen Sie mich unter {phone} an.',
-  MailConfirmRights:
-    'Alle Rechte vorbehalten. © {year} Florian Herbert Kleber IT',
   FooterCopyright: 'Copyright © {year} Florian Herbert Kleber IT. Alle Rechte vorbehalten.',
-  MailConfirmWebsite: 'Webseite',
-  MailConfirmImprint: 'Impressum',
 
 
   // Theme chooser (src/components/ThemeChooser.tsx)
@@ -228,21 +219,12 @@ export const messagesEn: MessageCatalog = {
   ContactErrorText: 'Please try again, or write to us directly at {email}.',
   ContactClose: 'Close',
 
-  MailConfirmSubject: 'Your enquiry on fhkit.at',
-  MailConfirmTitle: 'Your enquiry',
   MailConfirmHeading: 'Contact enquiry',
-  MailConfirmThanks:
-    'Thank you for your enquiry. I will get back to you as soon as I can.',
   MailConfirmLabelName: 'Name:',
   MailConfirmLabelEmail: 'Email:',
   MailConfirmLabelPhone: 'Phone number:',
   MailConfirmLabelMessage: 'Message:',
-  MailConfirmQuestions:
-    'Any questions left? Write to me at {mail} or call me on {phone}.',
-  MailConfirmRights: 'All rights reserved. © {year} Florian Herbert Kleber IT',
   FooterCopyright: 'Copyright © {year} Florian Herbert Kleber IT. All rights reserved.',
-  MailConfirmWebsite: 'Website',
-  MailConfirmImprint: 'Legal notice',
 
 
   ThemeLight: 'Light',
@@ -346,22 +328,12 @@ export const messagesSl: MessageCatalog = {
   ContactErrorText: 'Poskusite znova ali nam pišite neposredno na {email}.',
   ContactClose: 'Zapri',
 
-  MailConfirmSubject: 'Vaše povpraševanje na fhkit.at',
-  MailConfirmTitle: 'Vaše povpraševanje',
   MailConfirmHeading: 'Povpraševanje',
-  MailConfirmThanks:
-    'Hvala za vaše povpraševanje. Javim se vam v najkrajšem možnem času.',
   MailConfirmLabelName: 'Ime:',
   MailConfirmLabelEmail: 'E-pošta:',
   MailConfirmLabelPhone: 'Telefonska številka:',
   MailConfirmLabelMessage: 'Sporočilo:',
-  MailConfirmQuestions:
-    'Imate še vprašanja? Pišite mi na {mail} ali me pokličite na {phone}.',
-  MailConfirmRights:
-    'Vse pravice pridržane. © {year} Florian Herbert Kleber IT',
   FooterCopyright: 'Copyright © {year} Florian Herbert Kleber IT. Vse pravice pridržane.',
-  MailConfirmWebsite: 'Spletna stran',
-  MailConfirmImprint: 'Impresum',
 
 
   ThemeLight: 'Svetla',
@@ -467,22 +439,12 @@ export const messagesIt: MessageCatalog = {
   ContactErrorText: 'Riprova oppure scrivici direttamente a {email}.',
   ContactClose: 'Chiudi',
 
-  MailConfirmSubject: 'La tua richiesta su fhkit.at',
-  MailConfirmTitle: 'La tua richiesta',
   MailConfirmHeading: 'Richiesta di contatto',
-  MailConfirmThanks:
-    'Grazie per la tua richiesta. Ti risponderò al più presto.',
   MailConfirmLabelName: 'Nome:',
   MailConfirmLabelEmail: 'E-mail:',
   MailConfirmLabelPhone: 'Numero di telefono:',
   MailConfirmLabelMessage: 'Messaggio:',
-  MailConfirmQuestions:
-    'Hai altre domande? Scrivimi a {mail} oppure chiamami al {phone}.',
-  MailConfirmRights:
-    'Tutti i diritti riservati. © {year} Florian Herbert Kleber IT',
   FooterCopyright: 'Copyright © {year} Florian Herbert Kleber IT. Tutti i diritti riservati.',
-  MailConfirmWebsite: 'Sito web',
-  MailConfirmImprint: 'Note legali',
 
 
   ThemeLight: 'Chiaro',
@@ -587,21 +549,12 @@ export const messagesJa: MessageCatalog = {
     'お手数ですが、もう一度お試しいただくか、{email} まで直接メールでお送りください。',
   ContactClose: '閉じる',
 
-  MailConfirmSubject: 'fhkit.at へのお問い合わせ',
-  MailConfirmTitle: 'お問い合わせ内容',
   MailConfirmHeading: 'お問い合わせ',
-  MailConfirmThanks:
-    'お問い合わせいただきありがとうございます。できるかぎり早くご連絡いたします。',
   MailConfirmLabelName: 'お名前:',
   MailConfirmLabelEmail: 'メールアドレス:',
   MailConfirmLabelPhone: '電話番号:',
   MailConfirmLabelMessage: 'メッセージ:',
-  MailConfirmQuestions:
-    'ご不明な点がございましたら、{mail} までメールでご連絡いただくか、{phone} までお電話ください。',
-  MailConfirmRights: '無断転載を禁じます。© {year} Florian Herbert Kleber IT',
   FooterCopyright: 'Copyright © {year} Florian Herbert Kleber IT. 無断転載を禁じます。',
-  MailConfirmWebsite: 'ウェブサイト',
-  MailConfirmImprint: '法的表示',
 
 
   ThemeLight: 'ライト',
