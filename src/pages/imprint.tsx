@@ -10,19 +10,19 @@ import useNavOffset from '../hooks/use-nav-offset';
 /**
  * Who stands behind fhkit.at, as the legal notice states it.
  *
- * Florian Herbert Kleber IT is the former name of Netsnek e.U., so the notice
- * names the business as it is registered today. Owner, address, phone and
- * register court are those of netsnek.com's own notice and of the current
- * Netsnek letterhead. The mailbox is the site's own, office@fhkit.at, the
- * address the footer and the contact confirmation give as well.
+ * Florian Herbert Kleber IT is an unregistered trade of Florian Herbert Kleber
+ * (the owner, 2026-10-11: "unprotokolliertes Gewerbe ergo keine Firmennummer
+ * und keine UID"), so the notice names the trade and its owner and carries no
+ * register number, no register court and no VAT id. Address and phone are
+ * those of the current letterhead. The mailbox is the site's own,
+ * office@fhkit.at, the address the footer and the contact confirmation give
+ * as well.
  *
  * Nothing here is filled in from elsewhere: a value that is not documented is
- * left out rather than guessed. That is why there is no company register
- * number yet.
+ * left out rather than guessed.
  */
 const IMPRINT = {
-  company: 'Netsnek e.U.',
-  formerName: 'Florian Herbert Kleber IT',
+  company: 'Florian Herbert Kleber IT',
   owner: 'Florian Herbert Kleber',
   street: 'Löwengasse 14 / Lokal 2',
   city: '1030 Wien',
@@ -31,8 +31,7 @@ const IMPRINT = {
   phoneHref: 'tel:+436508248811',
   email: 'office@fhkit.at',
   web: 'fhkit.at',
-  webHref: 'https://fhkit.at',
-  court: 'Handelsgericht Wien'
+  webHref: 'https://fhkit.at'
 } as const;
 
 /**
@@ -74,7 +73,6 @@ const ImprintPage: React.FC<PageProps> = () => {
 
           <Box lang="de">
             <Text fontWeight="bold">{IMPRINT.company}</Text>
-            <Text>vormals {IMPRINT.formerName}</Text>
             <Text>Inhaber {IMPRINT.owner}</Text>
             <Text mt={4}>{IMPRINT.street}</Text>
             <Text>{IMPRINT.city}</Text>
@@ -101,8 +99,6 @@ const ImprintPage: React.FC<PageProps> = () => {
               </Link>
             </Text>
           </Box>
-
-          <Text lang="de">{IMPRINT.court}</Text>
 
           <Text lang="de">
             Sämtliche Texte auf der Website wurden sorgfältig geprüft. Dessen
