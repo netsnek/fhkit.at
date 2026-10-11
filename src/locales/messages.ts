@@ -93,7 +93,7 @@ export const messagesDe = {
   MailConfirmQuestions:
     'Haben Sie noch Fragen? Dann schreiben Sie mir gerne an {mail} oder rufen Sie mich unter {phone} an.',
   MailConfirmRights:
-    'Alle Rechte vorbehalten. © {year} Florian Herbert Kleber IT',
+    'Alle Rechte vorbehalten. © {year} Netsnek e.U.',
   MailConfirmWebsite: 'Webseite',
   MailConfirmImprint: 'Impressum',
 
@@ -238,7 +238,7 @@ export const messagesEn: MessageCatalog = {
   MailConfirmLabelMessage: 'Message:',
   MailConfirmQuestions:
     'Any questions left? Write to me at {mail} or call me on {phone}.',
-  MailConfirmRights: 'All rights reserved. © {year} Florian Herbert Kleber IT',
+  MailConfirmRights: 'All rights reserved. © {year} Netsnek e.U.',
   MailConfirmWebsite: 'Website',
   MailConfirmImprint: 'Legal notice',
 
@@ -356,7 +356,7 @@ export const messagesSl: MessageCatalog = {
   MailConfirmQuestions:
     'Imate še vprašanja? Pišite mi na {mail} ali me pokličite na {phone}.',
   MailConfirmRights:
-    'Vse pravice pridržane. © {year} Florian Herbert Kleber IT',
+    'Vse pravice pridržane. © {year} Netsnek e.U.',
   MailConfirmWebsite: 'Spletna stran',
   MailConfirmImprint: 'Impresum',
 
@@ -476,7 +476,7 @@ export const messagesIt: MessageCatalog = {
   MailConfirmQuestions:
     'Hai altre domande? Scrivimi a {mail} oppure chiamami al {phone}.',
   MailConfirmRights:
-    'Tutti i diritti riservati. © {year} Florian Herbert Kleber IT',
+    'Tutti i diritti riservati. © {year} Netsnek e.U.',
   MailConfirmWebsite: 'Sito web',
   MailConfirmImprint: 'Note legali',
 
@@ -594,7 +594,7 @@ export const messagesJa: MessageCatalog = {
   MailConfirmLabelMessage: 'メッセージ:',
   MailConfirmQuestions:
     'ご不明な点がございましたら、{mail} までメールでご連絡いただくか、{phone} までお電話ください。',
-  MailConfirmRights: '無断転載を禁じます。© {year} Florian Herbert Kleber IT',
+  MailConfirmRights: '無断転載を禁じます。© {year} Netsnek e.U.',
   MailConfirmWebsite: 'ウェブサイト',
   MailConfirmImprint: '法的表示',
 
