@@ -177,7 +177,7 @@ const confirmationText = (intl: ReturnType<typeof useIntl>) => ({
     {
       id: 'MailConfirmRights',
       defaultMessage:
-        'Alle Rechte vorbehalten. © {year} Netsnek e.U.'
+        'Alle Rechte vorbehalten. © {year} Florian Herbert Kleber IT'
     },
     // The year belongs inside the string, not around it: English and Japanese
     // both put the symbol first, and only the string knows its own order.

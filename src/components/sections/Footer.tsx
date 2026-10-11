@@ -205,8 +205,7 @@ const Footer: FC = () => {
                 />
               </Box>
             </Flex>
-            {/* The business address as the legal notice gives it: Florian
-                Herbert Kleber IT is now Netsnek e.U., which sits in Vienna. */}
+            {/* The business address as the legal notice gives it. */}
             <Field.Text
               name="FooterTextNew"
               defaultValue={fieldText('FooterTextNew')}
@@ -362,9 +361,9 @@ const Footer: FC = () => {
           <Separator mt={8} opacity={0.2} />
           {/* A message rather than the CMS field it used to be: a value
               stored in the CMS would freeze the year again. The credit names
-              the legal entity, Netsnek e.U., the way nadine-hauswirth.com's
-              footer does, instead of the three businesses the template fork
-              carried over, in the language of the page. */}
+              Florian Herbert Kleber IT, the trade behind the site, instead of
+              the three businesses the template fork carried over, in the
+              language of the page. */}
           <Text
             mt={5}
             color="white"
@@ -378,7 +377,7 @@ const Footer: FC = () => {
             {intl.formatMessage(
               {
                 id: 'FooterCopyright',
-                defaultMessage: 'Copyright © {year} Netsnek e.U. Alle Rechte vorbehalten.'
+                defaultMessage: 'Copyright © {year} Florian Herbert Kleber IT. Alle Rechte vorbehalten.'
               },
               { year }
             )}
