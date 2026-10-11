@@ -1,0 +1,28 @@
+# The blog and experiments pages left the site on 2026-10-11: they were
+# leftovers of the template without content of their own. Cloudflare Pages
+# keeps serving the files of older deployments wherever the current one
+# answers 404, for up to a week, so a removed address would keep showing the
+# old page. A redirect is answered before that lookup. The old footer linked
+# /impressum, the notice lives at /imprint/.
+/docs  /  302
+/docs/*  /  302
+/experiments  /  302
+/experiments/*  /  302
+/en/docs  /en/  302
+/en/docs/*  /en/  302
+/en/experiments  /en/  302
+/en/experiments/*  /en/  302
+/it/docs  /it/  302
+/it/docs/*  /it/  302
+/it/experiments  /it/  302
+/it/experiments/*  /it/  302
+/ja/docs  /ja/  302
+/ja/docs/*  /ja/  302
+/ja/experiments  /ja/  302
+/ja/experiments/*  /ja/  302
+/sl/docs  /sl/  302
+/sl/docs/*  /sl/  302
+/sl/experiments  /sl/  302
+/sl/experiments/*  /sl/  302
+/impressum  /imprint/  301
+/impressum/  /imprint/  301
